@@ -125,6 +125,25 @@ body {
   overflow-x: hidden;
 }
 
+/* =========================================
+   LANGUAGE TOGGLE — show only selected language
+   ========================================= */
+/* Default: show JP only */
+html:not([data-lang]) .en,
+html[data-lang="jp"] .en {
+  display: none !important;
+}
+
+html[data-lang="en"] .jp {
+  display: none !important;
+}
+
+/* Restore proper display for active language elements (was display:block in some places) */
+html[data-lang="jp"] .jp,
+html[data-lang="en"] .en {
+  display: revert;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -244,6 +263,117 @@ button {
   align-items: center;
   gap: 1.25rem;
   font-size: var(--text-base);
+}
+
+/* Language toggle */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--text-base);
+  color: currentColor;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.lang-option {
+  display: inline-block;
+  padding: 0.25rem 0.3rem;
+  opacity: 0.35;
+  font-weight: 500;
+  transition: opacity 0.3s var(--ease-out),
+              transform 0.2s var(--ease-out),
+              border-color 0.3s var(--ease-out);
+  border-bottom: 1.5px solid transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lang-option.active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom-color: currentColor;
+}
+
+.lang-option:hover {
+  opacity: 0.85;
+}
+
+.lang-option:active {
+  transform: scale(0.92);
+  opacity: 1;
+}
+
+/* Subtle flash animation when clicked */
+@keyframes langFlash {
+  0% { background: rgba(0, 0, 0, 0.08); }
+  100% { background: transparent; }
+}
+
+.lang-option.flash {
+  animation: langFlash 0.4s var(--ease-out);
+}
+
+.lang-sep {
+  opacity: 0.3;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Language change toast */
+.lang-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  border-radius: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.lang-toast.show {
+  animation: langToastAnim 1.6s ease-out forwards;
+}
+
+@keyframes langToastAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* When nav is on hero (transparent/white text), lang-toggle uses white */
+.nav:not(.scrolled) .lang-option {
+  border-bottom-color: transparent;
+}
+
+.nav:not(.scrolled) .lang-option.active {
+  border-bottom-color: currentColor;
 }
 
 .nav-toggle {
@@ -454,7 +584,7 @@ button {
    ========================================= */
 .artists-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 2.5rem 1.25rem;
 }
 
@@ -462,6 +592,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  min-width: 0;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
@@ -515,6 +646,7 @@ button {
   gap: 0.3rem;
   font-size: var(--text-base);
   padding-top: 0.25rem;
+  flex-grow: 1;
 }
 
 .artist-role {
@@ -531,13 +663,22 @@ button {
   font-size: 0.9375rem;
 }
 
-.artist-links {
-  margin-top: 0.75rem;
-  padding-top: 0.5rem;
-  display: flex;
-  gap: 1rem;
+.artist-note {
   font-size: var(--text-xs);
-  letter-spacing: 0.12em;
+  color: var(--color-gray-500);
+  letter-spacing: 0.08em;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.artist-links {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
   color: var(--color-gray-700);
 }
 
@@ -547,6 +688,7 @@ button {
   align-items: center;
   gap: 0.35rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .artist-links .arr {
@@ -670,6 +812,12 @@ button {
   width: fit-content;
 }
 
+.footer-columns .footer-static {
+  color: var(--color-black);
+  display: inline-block;
+  width: fit-content;
+}
+
 .footer-bottom {
   margin-top: var(--space-md);
   padding-top: var(--space-md);
@@ -738,6 +886,19 @@ button {
     );
 }
 
+.ig-feed-cta-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.ig-feed-cta-link:hover { opacity: 0.7; }
+
+.ig-feed-cta-link:hover .arr {
+  transform: translateX(4px);
+}
+
 .ig-feed-cta {
   margin-top: 1.5rem;
   display: flex;
@@ -755,6 +916,12 @@ button {
 
 .ig-feed-link:hover .arr {
   transform: translateX(4px);
+}
+
+/* Behold widget custom styling */
+behold-widget {
+  display: block;
+  width: 100%;
 }
 
 @media (max-width: 1024px) {
@@ -782,6 +949,10 @@ button {
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--color-gray-300);
+}
+
+.services-heading-sub {
+  margin-top: 2.5rem;
 }
 
 .price-list {
@@ -945,7 +1116,7 @@ button {
    ========================================= */
 .press-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2.25rem 1.25rem;
 }
 
@@ -956,6 +1127,7 @@ button {
   gap: 0.75rem;
   text-decoration: none;
   color: inherit;
+  min-width: 0;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
@@ -1050,11 +1222,11 @@ button {
    RESPONSIVE
    ========================================= */
 @media (max-width: 1280px) {
-  .artists-grid { grid-template-columns: repeat(5, 1fr); }
+  .artists-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1024px) {
-  .artists-grid { grid-template-columns: repeat(4, 1fr); }
+  .artists-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .press-item {
     grid-template-columns: 80px 1fr 1fr auto;
     gap: 1.5rem;
@@ -1099,7 +1271,7 @@ button {
   .hero-intro { padding-bottom: 1.5rem; }
 
   .artists-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2rem 1rem;
   }
 
@@ -1122,7 +1294,7 @@ button {
 }
 
 @media (max-width: 480px) {
-  .artists-grid { grid-template-columns: repeat(2, 1fr); }
+  .artists-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-columns { grid-template-columns: 1fr; }
 }
 
@@ -1146,9 +1318,9 @@ button {
 <nav class="nav" id="nav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="HACO+"></a>
   <ul class="nav-menu">
-    <li><a href="#" class="current">Tokyo</a></li>
-    <li><a href="https://www.hacogroup.online/london-hair">London</a></li>
-    <li><a href="https://www.hacomanagement.com">Management</a></li>
+    <li><a href="index.html" class="current">Hair</a></li>
+    <li><a href="nails.html">Nail</a></li>
+    <li><a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a></li>
       </ul>
   <div class="nav-right">
     <a href="#booking">Book</a>
@@ -1194,20 +1366,17 @@ button {
         をフォローしてご覧いただけます</span>
       </p>
 
-      <!-- Instagram Feed Widget
-        実運用: SnapWidget または Elfsight の embed コードをここに貼り付け
-        例: <iframe src="https://snapwidget.com/embed/XXXXXX" ...></iframe>
-        プレースホルダー（widgetIdが未設定）の場合は以下のクリッカブルカードが表示されます。
-      -->
-      <a href="https://www.instagram.com/hacohairnailstokyo/" target="_blank" rel="noopener" class="ig-feed-link">
-        <div class="ig-placeholder-grid">
-          <div class="ig-placeholder-tile"></div>
-          <div class="ig-placeholder-tile"></div>
-          <div class="ig-placeholder-tile"></div>
-          <div class="ig-placeholder-tile"></div>
-          <div class="ig-placeholder-tile"></div>
-          <div class="ig-placeholder-tile"></div>
-        </div>
+      <!-- Instagram Feed via Behold.so -->
+      <behold-widget feed-id="Nqnp27CuT4XZd3nDPWtS"></behold-widget>
+      <script>
+        (() => {
+          const d=document,s=d.createElement("script");s.type="module";
+          s.src="https://w.behold.so/widget.js";d.head.append(s);
+        })();
+      </script>
+
+      <!-- View on Instagram CTA -->
+      <a href="https://www.instagram.com/hacohairnailstokyo/" target="_blank" rel="noopener" class="ig-feed-cta-link">
         <div class="ig-feed-cta">
           <span>
             <span class="en">View on Instagram</span>
@@ -1226,8 +1395,8 @@ button {
     <span class="section-label">Artists</span>
     <div>
       <p class="section-intro" style="margin-bottom: 2.5rem;">
-        Fourteen stylists, each with their own vision. Book directly with the artist of your choice.
-        <span class="jp">14名のスタイリスト、それぞれの視点。各アーティストの予約ページから直接ご予約いただけます</span>
+        <span class="en">Book directly with each artist from their booking page.</span>
+        <span class="jp">各アーティストの予約はこちらから</span>
       </p>
 
       <div class="artists-grid" id="artists-grid"></div>
@@ -1258,7 +1427,13 @@ button {
             <div class="price-row"><dt>Head Spa</dt><dd>&yen;6,100</dd></div>
             <div class="price-row"><dt>Design Colour</dt><dd>&yen;3,000 &ndash; 6,000</dd></div>
             <div class="price-row"><dt>Point Colour</dt><dd>&yen;3,000 &ndash; 6,000</dd></div>
-            <div class="price-row"><dt>Long hair fee</dt><dd>&yen;1,000 &ndash; 3,000</dd></div>
+          </dl>
+
+          <h4 class="services-heading services-heading-sub">LENGTH FEE</h4>
+          <dl class="price-list">
+            <div class="price-row"><dt>Medium</dt><dd>+&yen;1,100</dd></div>
+            <div class="price-row"><dt>Long</dt><dd>+&yen;2,200</dd></div>
+            <div class="price-row"><dt>Extra Long</dt><dd>+&yen;3,300</dd></div>
           </dl>
         </div>
 
@@ -1272,15 +1447,10 @@ button {
             <div class="price-row"><dt>Stylist</dt><dd>&mdash;</dd></div>
           </dl>
           <p class="services-note">
-            All prices tax included.
+            <span class="en">All prices tax included. For exact pricing, check each artist's booking page.</span>
+            <span class="jp">全て税込価格です。正確な総額は各アーティストの予約ページでご確認ください。</span>
           </p>
         </div>
-      </div>
-
-      <div class="services-cta">
-        <a href="#artists" class="services-cta-link">
-          See exact pricing by artist <span class="arr">&rarr;</span>
-        </a>
       </div>
     </div>
   </div>
@@ -1485,7 +1655,7 @@ button {
           <span class="booking-item-arrow">→</span>
         </a>
 
-        <a href="https://wa.me/" target="_blank" rel="noopener" class="booking-item">
+        <a href="https://wa.me/819032140850" target="_blank" rel="noopener" class="booking-item">
           <span class="booking-item-number">04</span>
           <span class="booking-item-label">
             International guests
@@ -1521,12 +1691,12 @@ button {
     <div class="footer-columns">
       <div>
         <strong>Tokyo</strong>
-        <a href="https://www.hacogroup.online/tokyo-hair">HACO+ Aoyama</a>
+        <span class="footer-static">HACO+ Omotesando</span>
       </div>
       <div>
-        <strong>London</strong>
-        <a href="https://www.hacogroup.online/london-hair">Shoreditch</a>
-        <a href="https://www.hacogroup.online/london-hair">Hoxton</a>
+        <strong><span class="en">Overseas</span><span class="jp">海外店舗</span></strong>
+        <a href="https://www.hacogroup.online/london-hair" target="_blank" rel="noopener">HACO HAIR+NAILS  SHOREDITCH  |  LONDON</a>
+        <a href="https://www.hacogroup.online/london-hair" target="_blank" rel="noopener">HACO HAIR+NAILS  HOXTON  |  LONDON</a>
       </div>
       <div>
         <strong>Creative</strong>
@@ -1543,22 +1713,22 @@ button {
     <span class="footer-label">Follow</span>
     <div class="footer-content">
       <a href="https://www.instagram.com/hacohairnailstokyo/" target="_blank" rel="noopener">Instagram  @hacohairnailstokyo</a>
-      <a href="#" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.tiktok.com/@hacosalon" target="_blank" rel="noopener">TikTok  @hacosalon</a>
     </div>
   </div>
 
   <div class="footer-bottom">
     <span>© 2026 HACO Group Co Ltd.</span>
     <div class="footer-bottom-links">
-      <a href="#">Recruit</a>
-      <a href="#">Privacy</a>
-      <a href="#">Contact</a>
+      <a href="https://www.hacogroup.online/post/rqruit-アシスタント募集のお知らせ" target="_blank" rel="noopener">Recruit</a>
+      <a href="privacy.html" target="_blank" rel="noopener">Privacy</a>
+      <a href="https://beauty.hotpepper.jp/slnH000690910/" target="_blank" rel="noopener">Contact</a>
     </div>
   </div>
 </footer>
 
 <script>
-// HAIR ARTISTS DATA (12 stylists / assistants)
+// HAIR ARTISTS DATA
 const artists = [
   { name: 'Wataro',    role: 'Art Director',    photo: 'assets/staff/wataro.jpg', booking: 'https://stekina.com/reserve/UCFV-UA5F/menu', instagram: 'https://www.instagram.com/wataro0821/' },
   { name: 'Rena',      role: 'Senior Stylist',  photo: 'assets/staff/rena.jpg',   booking: 'https://stekina.com/reserve/T8E4-HZY4/menu', instagram: 'https://www.instagram.com/haco__rena/' },
@@ -1569,9 +1739,9 @@ const artists = [
   { name: 'Nova',      role: 'Stylist',         photo: 'assets/staff/nova.jpg',   booking: 'https://stekina.com/reserve/6FKL-A2J8/menu', instagram: 'https://www.instagram.com/sawtxnova/' },
   { name: 'Shiho',     role: 'Stylist',         photo: 'assets/staff/shiho.jpg',  booking: 'https://stekina.com/reserve/7XML-A2KU/menu', instagram: 'https://www.instagram.com/siehoh/' },
   { name: 'Miina',     role: 'Jr Stylist',      photo: 'assets/staff/miina.jpg',  booking: 'https://stekina.com/reserve/QGBZ-7ATZ/menu', instagram: 'https://www.instagram.com/miinaer/' },
-  { name: 'Moe',       role: 'Assistant',       photo: 'assets/staff/moe.jpg',    booking: 'https://minimodel.jp/r/9261vSe', instagram: null },
-  { name: 'Yaya',      role: 'Assistant',       photo: 'assets/staff/yaya.jpg',   booking: 'https://minimodel.jp/r/e791vRE/menu', instagram: null },
-  { name: 'Kaito',     role: 'Assistant',       photo: 'assets/staff/kaito.jpg',  booking: null, instagram: 'https://www.instagram.com/ohnishi_kaito/' }
+  { name: 'Moe',       role: 'Assistant',       photo: 'assets/staff/moe.jpg',    booking: 'https://minimodel.jp/r/9261vSe',          instagram: 'https://www.instagram.com/mimg__e/',      bookingLabel: 'MODEL BOOK', lookingForModels: true },
+  { name: 'Yaya',      role: 'Assistant',       photo: 'assets/staff/yaya.jpg',   booking: 'https://minimodel.jp/r/e791vRE/menu',     instagram: 'https://www.instagram.com/xx_888y/',      bookingLabel: 'MODEL BOOK', lookingForModels: true },
+  { name: 'Kaito',     role: 'Assistant',       photo: 'assets/staff/kaito.jpg',  booking: null,                                       instagram: 'https://www.instagram.com/ohnishi_kaito/', dmBooking: true }
 ];
 
 const grid = document.getElementById('artists-grid');
@@ -1582,12 +1752,19 @@ artists.forEach((artist, i) => {
   const imageContent = artist.photo
     ? `<img src="${artist.photo}" alt="${artist.name}" loading="lazy">`
     : `<div class="artist-image-placeholder">${artist.name.charAt(0)}</div>`;
+  const bookLabel = artist.bookingLabel || 'BOOK';
   const bookingLink = artist.booking
-    ? `<a href="${artist.booking}" target="_blank" rel="noopener">BOOK <span class="arr">&rarr;</span></a>`
+    ? `<a href="${artist.booking}" target="_blank" rel="noopener">${bookLabel} <span class="arr">&rarr;</span></a>`
     : '';
   const instagramLink = artist.instagram
     ? `<a href="${artist.instagram}" target="_blank" rel="noopener">INSTAGRAM <span class="arr">&rarr;</span></a>`
     : '';
+  let noteHtml = '';
+  if (artist.lookingForModels) {
+    noteHtml = `<div class="artist-note"><span class="en">Looking for models</span><span class="jp">モデル募集中</span></div>`;
+  } else if (artist.dmBooking) {
+    noteHtml = `<div class="artist-note"><span class="en">Booking via DM</span><span class="jp">ご予約はDMで</span></div>`;
+  }
   el.innerHTML = `
     <div class="artist-image">
       <span class="artist-number">${num}</span>
@@ -1596,6 +1773,7 @@ artists.forEach((artist, i) => {
     <div class="artist-info">
       <span class="artist-role">${artist.role.toUpperCase()}</span>
       <span class="artist-name">${artist.name.toUpperCase()}</span>
+      ${noteHtml}
     </div>
     <div class="artist-links">
       ${bookingLink}
@@ -1630,19 +1808,44 @@ window.addEventListener('scroll', () => {
 const langToggle = document.getElementById('lang-toggle');
 const langOptions = langToggle.querySelectorAll('.lang-option');
 
-function setLanguage(lang) {
+// Toast for language change confirmation
+function showLangToast(lang) {
+  let toast = document.getElementById('lang-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'lang-toast';
+    toast.className = 'lang-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = lang === 'jp' ? '日本語' : 'English';
+  toast.classList.remove('show');
+  // Force reflow to restart animation
+  void toast.offsetWidth;
+  toast.classList.add('show');
+}
+
+function setLanguage(lang, showToast) {
   document.documentElement.setAttribute('data-lang', lang);
   langOptions.forEach(opt => {
-    if (opt.dataset.lang === lang) opt.classList.add('active');
-    else opt.classList.remove('active');
+    if (opt.dataset.lang === lang) {
+      opt.classList.add('active');
+      if (showToast) {
+        opt.classList.remove('flash');
+        void opt.offsetWidth;
+        opt.classList.add('flash');
+      }
+    } else {
+      opt.classList.remove('active');
+    }
   });
   try { localStorage.setItem('haco-lang', lang); } catch(e) {}
+  if (showToast) showLangToast(lang);
 }
 
 langOptions.forEach(opt => {
   opt.addEventListener('click', (e) => {
     e.stopPropagation();
-    setLanguage(opt.dataset.lang);
+    setLanguage(opt.dataset.lang, true);
   });
 });
 
@@ -1650,7 +1853,7 @@ langToggle.addEventListener('click', (e) => {
   // クリックした子要素が option でない場合、現在の逆の言語に切り替え
   if (!e.target.classList.contains('lang-option')) {
     const current = document.documentElement.getAttribute('data-lang') || 'jp';
-    setLanguage(current === 'jp' ? 'en' : 'jp');
+    setLanguage(current === 'jp' ? 'en' : 'jp', true);
   }
 });
 
@@ -1659,10 +1862,10 @@ langToggle.addEventListener('click', (e) => {
   let saved;
   try { saved = localStorage.getItem('haco-lang'); } catch(e) {}
   if (saved === 'en' || saved === 'jp') {
-    setLanguage(saved);
+    setLanguage(saved, false);
   } else {
     const browserLang = (navigator.language || 'ja').toLowerCase();
-    setLanguage(browserLang.startsWith('en') ? 'en' : 'jp');
+    setLanguage(browserLang.startsWith('en') ? 'en' : 'jp', false);
   }
 })();
 

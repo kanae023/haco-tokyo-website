@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HACO+ Tokyo プライバシーポリシー / Privacy Policy. 個人情報の取り扱いについて。">
+<meta name="robots" content="index, follow">
+<title>Privacy Policy | HACO+ Tokyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --color-black: #0a0a0a;
+  --color-white: #ffffff;
+  --color-gray-100: #f5f5f4;
+  --color-gray-300: #d6d3d1;
+  --color-gray-500: #78716c;
+  --color-gray-700: #44403c;
+  --font-sans: 'Barlow', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --line-base: 1.6;
+  --container-pad: 2rem;
+  --container-max: 1280px;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--color-black);
+  background: var(--color-white);
+  font-size: var(--text-base);
+  line-height: var(--line-base);
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+/* Language toggle visibility */
+html:not([data-lang]) .en,
+html[data-lang="jp"] .en { display: none !important; }
+html[data-lang="en"] .jp { display: none !important; }
+html[data-lang="jp"] .jp,
+html[data-lang="en"] .en { display: revert; }
+
+a { color: inherit; text-decoration: none; transition: opacity 0.3s var(--ease-out); }
+a:hover { opacity: 0.5; }
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.25rem var(--container-pad);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.nav-logo img {
+  height: 22px;
+  display: block;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+
+.nav-menu a {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-black);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.nav-menu a:hover, .nav-menu a.current { opacity: 1; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: var(--text-base);
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--text-base);
+  color: currentColor;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.lang-option {
+  display: inline-block;
+  padding: 0.25rem 0.3rem;
+  opacity: 0.35;
+  font-weight: 500;
+  transition: opacity 0.3s var(--ease-out), transform 0.2s var(--ease-out), border-color 0.3s var(--ease-out);
+  border-bottom: 1.5px solid transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lang-option.active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom-color: currentColor;
+}
+
+.lang-option:hover { opacity: 0.85; }
+.lang-option:active { transform: scale(0.92); opacity: 1; }
+
+.lang-sep {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Toast */
+.lang-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.lang-toast.show {
+  animation: langToastAnim 1.6s ease-out forwards;
+}
+
+@keyframes langToastAnim {
+  0% { opacity: 0; transform: translateY(10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+
+/* Main content */
+.privacy-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8rem var(--container-pad) var(--space-xl);
+}
+
+.privacy-section h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.privacy-section .subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+  letter-spacing: 0.15em;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+.privacy-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.privacy-section p {
+  margin-bottom: 1rem;
+  color: var(--color-gray-700);
+  line-height: 1.8;
+}
+
+.privacy-section ul {
+  list-style: none;
+  margin: 0.5rem 0 1rem 1rem;
+}
+
+.privacy-section ul li {
+  padding: 0.3rem 0;
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--color-gray-700);
+  line-height: 1.7;
+}
+
+.privacy-section ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-gray-500);
+}
+
+.privacy-section .effective-date {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-gray-100);
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-md) var(--container-pad);
+  border-top: 1px solid var(--color-gray-100);
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-bottom a {
+  color: var(--color-gray-500);
+  margin-left: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 1rem var(--container-pad); }
+  .nav-menu { gap: 1.25rem; }
+  .privacy-section h1 { font-size: 1.5rem; }
+  .privacy-section { padding: 6rem 1.5rem 3rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="HACO+"></a>
+  <ul class="nav-menu">
+    <li><a href="index.html">Hair</a></li>
+    <li><a href="nails.html">Nail</a></li>
+    <li><a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+      <span class="lang-option lang-jp active" data-lang="jp">JP</span>
+      <span class="lang-sep">/</span>
+      <span class="lang-option lang-en" data-lang="en">EN</span>
+    </button>
+  </div>
+</nav>
+
+<main class="privacy-section">
+
+  <!-- 日本語版 -->
+  <div class="jp">
+    <h1>プライバシーポリシー</h1>
+    <p class="subtitle">Privacy Policy</p>
+
+    <p>
+      HACO Group Co Ltd（以下「当社」）は、HACO+ Tokyo（以下「当サロン」）の運営において、お客様の個人情報を適切に取り扱うことを社会的責務と認識し、以下の方針に基づき個人情報の保護に努めます。
+    </p>
+
+    <h2>1. 個人情報の取得</h2>
+    <p>当サロンでは、以下の場面でお客様の個人情報を取得することがあります。</p>
+    <ul>
+      <li>ご予約フォーム、お問い合わせ、メール、SNS等を通じたご連絡</li>
+      <li>サロンへのご来店およびカウンセリング</li>
+      <li>第三者の予約プラットフォーム（Hot Pepper Beauty、Stekina、LINE 等）を通じたご予約</li>
+      <li>キャンペーン・モデル募集等のご応募</li>
+    </ul>
+
+    <h2>2. 取得する情報の種類</h2>
+    <ul>
+      <li>お名前、ふりがな、生年月日、性別</li>
+      <li>メールアドレス、電話番号、住所</li>
+      <li>髪質・頭皮・施術履歴等の美容関連情報</li>
+      <li>来店履歴、ご利用メニュー、お支払い情報</li>
+      <li>その他、お客様が任意でご提供される情報</li>
+    </ul>
+
+    <h2>3. 個人情報の利用目的</h2>
+    <p>取得した個人情報は、以下の目的のために利用します。</p>
+    <ul>
+      <li>ご予約の受付・確認・変更・キャンセル対応</li>
+      <li>施術内容のご提案、カウンセリング、アフターケア</li>
+      <li>当サロンからのご連絡、新メニュー・キャンペーン等のご案内</li>
+      <li>お問い合わせへの回答、トラブル時の連絡</li>
+      <li>サービス向上のための統計分析（個人を特定しない形で実施）</li>
+      <li>法令に基づく対応</li>
+    </ul>
+
+    <h2>4. 個人情報の第三者提供</h2>
+    <p>当社は、以下の場合を除き、お客様の個人情報を第三者に提供することはありません。</p>
+    <ul>
+      <li>お客様ご本人の同意がある場合</li>
+      <li>法令に基づく場合</li>
+      <li>人の生命、身体または財産の保護のために必要であり、お客様の同意を得ることが困難な場合</li>
+      <li>業務委託先に対し、業務遂行に必要な範囲で提供する場合（守秘義務を課した上で行います）</li>
+    </ul>
+
+    <h2>5. Cookie および分析ツールの使用</h2>
+    <p>当サイトでは、サイトの利用状況把握およびサービス改善のため、Cookie および Google Analytics 等のアクセス解析ツールを使用することがあります。これらにより収集される情報は、個人を特定するものではありません。ブラウザの設定により Cookie の受け入れを拒否することも可能です。</p>
+
+    <h2>6. SNSおよび外部サービスとの連携</h2>
+    <p>当サイトには、Instagram、TikTok 等のSNSコンテンツが埋め込まれており、各サービスのプライバシーポリシーが適用されます。また、ご予約には Hot Pepper Beauty、Stekina、LINE、WhatsApp 等の外部サービスをご利用いただきますが、これらサービス上での個人情報の取り扱いは、各サービスの規約に従います。</p>
+
+    <h2>7. 個人情報の管理</h2>
+    <p>当社は、お客様の個人情報の漏洩、紛失、改ざん等を防ぐため、適切な安全管理措置を講じます。スタッフへの教育、システムへのアクセス制限、適切な保管期間の設定等を実施します。</p>
+
+    <h2>8. 個人情報の開示・訂正・削除</h2>
+    <p>お客様ご本人から、ご自身の個人情報の開示・訂正・削除・利用停止のご請求があった場合、本人確認の上で、合理的な期間内に対応いたします。下記の連絡先までお問い合わせください。</p>
+
+    <h2>9. 未成年の方の個人情報</h2>
+    <p>18歳未満のお客様のご利用および個人情報のご提供にあたっては、保護者の方の同意が必要となります。</p>
+
+    <h2>10. プライバシーポリシーの改定</h2>
+    <p>当社は、必要に応じて本ポリシーを改定することがあります。改定後の内容は当サイトに掲載した時点から適用されます。重要な変更がある場合は、別途お知らせいたします。</p>
+
+    <h2>11. お問い合わせ窓口</h2>
+    <p>
+      HACO+ Tokyo<br>
+      〒107-0062 東京都港区南青山6-13-9 ANISE B1F-B<br>
+      運営：HACO Group Co Ltd<br>
+      お問い合わせは <a href="https://beauty.hotpepper.jp/slnH000690910/" target="_blank" rel="noopener">Hot Pepper Beauty</a> または各SNSのDMよりお願いいたします。
+    </p>
+
+    <p class="effective-date">
+      制定日：2026年6月15日<br>
+      最終改定日：2026年6月15日
+    </p>
+  </div>
+
+  <!-- English version -->
+  <div class="en">
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">プライバシーポリシー</p>
+
+    <p>
+      HACO Group Co Ltd ("we" / "us") recognises the protection of personal information as a fundamental responsibility in the operation of HACO+ Tokyo ("the salon"). This Privacy Policy outlines how we collect, use, and protect your personal information.
+    </p>
+
+    <h2>1. Collection of Personal Information</h2>
+    <p>We may collect personal information from you in the following situations:</p>
+    <ul>
+      <li>When you contact us via booking forms, email, SNS, or other communication channels</li>
+      <li>When you visit the salon and during consultation</li>
+      <li>When you make a booking through third-party platforms (Hot Pepper Beauty, Stekina, LINE, etc.)</li>
+      <li>When you apply for campaigns or model recruitment</li>
+    </ul>
+
+    <h2>2. Types of Information Collected</h2>
+    <ul>
+      <li>Name, date of birth, gender</li>
+      <li>Email address, phone number, postal address</li>
+      <li>Information about your hair, scalp, and service history</li>
+      <li>Visit history, services used, payment information</li>
+      <li>Other information you voluntarily provide</li>
+    </ul>
+
+    <h2>3. Purpose of Use</h2>
+    <p>We use collected personal information for the following purposes:</p>
+    <ul>
+      <li>Booking confirmation, modification, and cancellation</li>
+      <li>Service proposal, consultation, and aftercare</li>
+      <li>Communication from the salon, including new menus and campaigns</li>
+      <li>Responding to inquiries and handling issues</li>
+      <li>Statistical analysis for service improvement (in a non-identifiable form)</li>
+      <li>Compliance with applicable laws</li>
+    </ul>
+
+    <h2>4. Disclosure to Third Parties</h2>
+    <p>We do not disclose your personal information to third parties except in the following cases:</p>
+    <ul>
+      <li>With your consent</li>
+      <li>When required by law</li>
+      <li>When necessary to protect life, health, or property and consent is difficult to obtain</li>
+      <li>When sharing with service providers under confidentiality obligations, only to the extent necessary</li>
+    </ul>
+
+    <h2>5. Use of Cookies and Analytics</h2>
+    <p>This website may use Cookies and analytics tools (such as Google Analytics) to understand site usage and improve our service. Information collected through these tools does not identify individuals. You may decline Cookies via your browser settings.</p>
+
+    <h2>6. Integration with SNS and External Services</h2>
+    <p>This website contains embedded SNS content from Instagram, TikTok, and others, and the respective privacy policies of these services apply. Booking may be made through third-party services such as Hot Pepper Beauty, Stekina, LINE, and WhatsApp, which are governed by their own terms.</p>
+
+    <h2>7. Management of Personal Information</h2>
+    <p>We implement appropriate security measures to prevent leakage, loss, or alteration of your personal information, including staff training, system access restrictions, and appropriate retention periods.</p>
+
+    <h2>8. Right to Access, Correct, and Delete</h2>
+    <p>You have the right to request access to, correction of, or deletion of your personal information, as well as suspension of its use. Upon verifying your identity, we will respond within a reasonable period. Please contact us using the contact details below.</p>
+
+    <h2>9. Minors</h2>
+    <p>Use of our salon and provision of personal information by individuals under 18 require the consent of a parent or guardian.</p>
+
+    <h2>10. Revision of Privacy Policy</h2>
+    <p>We may revise this Privacy Policy as necessary. Any revised content will apply from the time of posting on this website. We will provide separate notice for any material changes.</p>
+
+    <h2>11. Contact</h2>
+    <p>
+      HACO+ Tokyo<br>
+      6-13-9 Minami-Aoyama, Minato-ku, Tokyo 107-0062, Japan<br>
+      Operated by: HACO Group Co Ltd<br>
+      Please contact us via <a href="https://beauty.hotpepper.jp/slnH000690910/" target="_blank" rel="noopener">Hot Pepper Beauty</a> or our SNS DMs.
+    </p>
+
+    <p class="effective-date">
+      Effective Date: 15 June 2026<br>
+      Last Updated: 15 June 2026
+    </p>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <span>&copy; 2026 HACO Group Co Ltd.</span>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="https://www.hacogroup.online/post/rqruit-%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88%E5%8B%9F%E9%9B%86%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" target="_blank" rel="noopener">Recruit</a>
+      <a href="https://beauty.hotpepper.jp/slnH000690910/" target="_blank" rel="noopener">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const langToggle = document.getElementById('lang-toggle');
+const langOptions = langToggle.querySelectorAll('.lang-option');
+
+function showLangToast(lang) {
+  let toast = document.getElementById('lang-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'lang-toast';
+    toast.className = 'lang-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = lang === 'jp' ? '日本語' : 'English';
+  toast.classList.remove('show');
+  void toast.offsetWidth;
+  toast.classList.add('show');
+}
+
+function setLanguage(lang, showToast) {
+  document.documentElement.setAttribute('data-lang', lang);
+  langOptions.forEach(opt => {
+    if (opt.dataset.lang === lang) opt.classList.add('active');
+    else opt.classList.remove('active');
+  });
+  try { localStorage.setItem('haco-lang', lang); } catch(e) {}
+  if (showToast) showLangToast(lang);
+}
+
+langOptions.forEach(opt => {
+  opt.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setLanguage(opt.dataset.lang, true);
+  });
+});
+
+langToggle.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('lang-option')) {
+    const current = document.documentElement.getAttribute('data-lang') || 'jp';
+    setLanguage(current === 'jp' ? 'en' : 'jp', true);
+  }
+});
+
+(function initLang() {
+  let saved;
+  try { saved = localStorage.getItem('haco-lang'); } catch(e) {}
+  if (saved === 'en' || saved === 'jp') {
+    setLanguage(saved, false);
+  } else {
+    const browserLang = (navigator.language || 'ja').toLowerCase();
+    setLanguage(browserLang.startsWith('en') ? 'en' : 'jp', false);
+  }
+})();
+</script>
+
+</body>
+</html>

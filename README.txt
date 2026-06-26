@@ -1,35 +1,61 @@
-HACO+ Tokyo — Website Preview v20
+HACO+ Tokyo — Website v28
 
-【v19 → v20 変更点】
+【v27 → v28 変更点】
 
-1. スタッフ写真 全12名分を統一スタジオ撮影写真で実装
-   - 全員 600x750 (4:5) 統一サイズ
-   - 統一された白い壁・スタジオライティング
+1. プライバシーポリシー専用ページ作成 (privacy.html)
+   - 日本語/英語の両言語対応
+   - ヘア&ネイルサロン向けの一般的なポリシー
+   - 11セクション構成: 取得 / 種類 / 目的 / 第三者提供 /
+     Cookie / SNS連携 / 管理 / 開示・訂正 / 未成年 /
+     改定 / お問い合わせ
+   - 全ページのフッターから privacy.html へリンク
 
-2. スタイリスト構成を最新版に更新
-   - Nago chan 削除 (退職)
-   - Miina: Stylist → Jr Stylist (役職変更)
-   - Kaito: Stylist → Assistant (役職変更、予約リンクなし)
-   - Moe (Assistant) 新規追加 (Minimodel予約)
-   - Yaya (Assistant) 新規追加 (Minimodel予約)
+2. フッター「HACO Group」セクション修正
+   旧: <strong>London</strong>
+   新: <strong>海外店舗 / Overseas</strong>
+   表記は既存サイト準拠:
+   - HACO HAIR+NAILS  SHOREDITCH  |  LONDON
+   - HACO HAIR+NAILS  HOXTON  |  LONDON
 
-3. 予約リンクを全更新
-   - Stekina: stekina.com/reserve/{ID}/menu 形式に統一 (9名)
-   - Minimodel: minimodel.jp/r/{ID} (Moe, Yaya 2名)
-   - Kaito: 予約リンクなし (Instagram のみ)
+3. Nails 予約セクションを Hair と同じ 4 導線に拡張
+   01 First visit / 初めての方 → Hot Pepper Beauty (Nail店舗ID)
+   02 Book by nailist / ネイリスト指名 → 各ネイリスト
+   03 Returning guest / 再来のお客様 → LINE
+   04 International guests / 海外のお客様 → WhatsApp
 
-【最終スタイリスト構成 (12名)】
-1. Wataro    - Art Director
-2. Rena      - Senior Stylist  
-3. Leo       - Top Stylist
-4. Makoto    - Top Stylist
-5. Ibuki     - Top Stylist
-6. Joi       - Top Stylist
-7. Nova      - Stylist
-8. Shiho     - Stylist
-9. Miina     - Jr Stylist
-10. Moe      - Assistant
-11. Yaya     - Assistant
-12. Kaito    - Assistant (BOOKリンクなし)
+4. Nails Hero画像をHairと同じワイドサイズに
+   旧: 2400x1621 (アスペクト比 3:2)
+   新: 2400x1350 (アスペクト比 16:9, Hair画像と同じ)
+   中央クロップで処理、画像はそのまま使用
+
+5. 長さ料金表記を英語に統一
+   旧: 肩 – 鎖骨 / 鎖骨下 / 胸下 (堅い漢字表記)
+   新: Medium / Long / Extra Long (英語表記)
+   メニュー名と統一感が出る
+
+6. アシスタント (Moe/Yaya/Kaito) のリンク位置を統一
+   問題: モデル募集中の表記でカードの高さが変わり、
+        他スタイリストとリンク位置がズレていた
+   修正:
+   - .artist-info に flex-grow: 1
+   - .artist-links に margin-top: auto
+   結果: 全スタイリストカードの BOOK/INSTAGRAM ボタンが
+        下端揃いに
+
+7. Nails ページの言語混在を解消
+   - Reservations are handled... → 多言語化
+   - Book via Hot Pepper Beauty → 多言語化
+   - All prices tax included... → 多言語化
+   - 各 section-intro も多言語化
+
+【現在のファイル構成】
+  index.html      ヘアページ
+  nails.html      ネイルページ
+  privacy.html    プライバシーポリシー (新規)
+  assets/
+    logo.png, hero-hair.jpg, concept-strip.jpg, instanticon.mp4
+    nails/hero-pedicure.jpg (リサイズ済 16:9)
+    press/*.jpg (10枚)
+    staff/*.jpg (Hair 12名 + Nail Kurumi/Karen)
 
 © 2026 HACO Group Co Ltd
