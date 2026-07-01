@@ -396,6 +396,11 @@ button {
   border-radius: 1px;
 }
 
+/* Mobile menu overlay - hidden by default on desktop, shown on mobile via @media */
+.mobile-menu-overlay {
+  display: none;
+}
+
 /* =========================================
    SECTION (shared)
    ========================================= */
@@ -1356,7 +1361,13 @@ behold-widget {
     transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
   }
 
-  .hero { padding-top: 5.5rem; }
+  /* Hero image extends behind nav on mobile, so white nav text reads cleanly */
+  .hero { padding-top: 0; }
+
+  /* Mobile nav: add subtle dark gradient on transparent state for readability */
+  .nav:not(.scrolled) {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 100%);
+  }
 
   /* Hero: ensure visible height on mobile so center logo has room */
   .hero-fullscreen {

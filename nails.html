@@ -379,6 +379,11 @@ button {
   border-radius: 1px;
 }
 
+/* Mobile menu overlay - hidden by default on desktop */
+.mobile-menu-overlay {
+  display: none;
+}
+
 /* =========================================
    SECTION (shared)
    ========================================= */
@@ -1303,7 +1308,12 @@ behold-widget {
     transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
   }
 
-  .hero { padding-top: 5.5rem; }
+  /* Hero image extends behind nav on mobile */
+  .hero { padding-top: 0; }
+
+  .nav:not(.scrolled) {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 100%);
+  }
 
   .hero-fullscreen {
     min-height: 78vh;
@@ -1852,7 +1862,7 @@ behold-widget {
 const artists = [
   { name: 'Kurumi',  role: 'Top Nailist',  photo: 'assets/staff/kurumi.jpg', booking: 'https://beauty.hotpepper.jp/kr/slnH000737495/staff/W001160739/', instagram: 'https://www.instagram.com/nailskuru_nuts/' },
   { name: 'Karen',   role: 'Nailist',       photo: 'assets/staff/karen.jpg',  booking: 'https://beauty.hotpepper.jp/kr/slnH000737495/staff/W001165680/', instagram: 'https://www.instagram.com/karen_nail_1822/' },
-  { name: 'Kaho',    role: 'Nailist',       photo: null,                       booking: 'https://beauty.hotpepper.jp/kr/slnH000737495/staff/W001289077/', instagram: 'https://www.instagram.com/haco__kaho/' }
+  { name: 'Kaho',    role: 'Nailist',       photo: 'assets/nails/kaho.jpg',   booking: 'https://beauty.hotpepper.jp/kr/slnH000737495/staff/W001289077/', instagram: 'https://www.instagram.com/haco__kaho/' }
 ];
 
 const grid = document.getElementById('artists-grid');
