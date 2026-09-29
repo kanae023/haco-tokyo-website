@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MAKOTO｜HACO+ 表参道 カット・パーマ・デザインカラー</title>
+<meta property="og:title" content="MAKOTO｜HACO+ 表参道">
+<meta property="og:description" content="髪まで、ファッションの一部に。メンズもレディースも、MAKOTO指名のご予約はこちら。">
+<meta property="og:image" content="https://hacoplus.jp/makoto/images/n3.jpg">
+<meta property="og:type" content="website">
+<script>
+var PIXEL_ID='1328304228377935';
+if(PIXEL_ID){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',PIXEL_ID);fbq('track','PageView');}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: follows the HACO i recruit site — white page, hard black rules, condensed display caps, mono labels, one green accent; photos framed as LOOK plates; sticky booking bar */
+:root{
+  --paper:#FFFFFF;
+  --stone:#F3F2EE;
+  --ink:#0B0B0B;
+  --text:#3C3C3A;
+  --mute:#7A7975;
+  --line:#0B0B0B;
+  --soft:#DEDCD6;
+  --green:#1F9A63;
+  --green-tint:#E8F3EC;
+  --ground:#E9E8E3;
+  --f-display:"Bebas Neue","Zen Kaku Gothic New",Impact,sans-serif;
+  --f-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --f-jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-jp);font-size:14.5px;line-height:1.9;letter-spacing:.03em;-webkit-font-smoothing:antialiased}
+.page{max-width:480px;margin:0 auto;background:var(--paper);padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));border-inline:1px solid var(--line)}
+.wrap{padding-inline:20px}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
+.disp{font-family:var(--f-display);font-weight:400;line-height:.92;letter-spacing:.01em}
+.g{color:var(--green)}
+section{padding-block:56px}
+section.stone{background:var(--stone);border-block:1px solid var(--line)}
+.head{display:grid;gap:10px;margin-bottom:26px}
+.head .mono{color:var(--mute)}
+.head .disp{font-size:52px}
+.head h2{font-size:14px;font-weight:500;color:var(--text)}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);gap:10px}
+.top img{width:34px;height:34px}
+.top .mono{font-size:9px;letter-spacing:.14em;text-align:center;flex:1;min-width:0}
+.top a{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-decoration:none;border:1px solid var(--line);padding:6px 10px;white-space:nowrap}
+
+/* hero */
+.plates{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.plate{position:relative;margin:0}
+.plate+.plate{border-left:1px solid var(--line)}
+.plate img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.tag{position:absolute;left:0;bottom:0;background:var(--ink);color:#fff;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;padding:3px 8px}
+.hero{text-align:center;padding-block:36px 40px;display:grid;gap:18px;justify-items:center}
+.hero .mono{color:var(--text)}
+.hero .disp{font-size:68px}
+.hero h1{font-size:23px;font-weight:700;line-height:1.7;letter-spacing:.08em}
+.lead{font-size:13.5px;color:var(--text);max-width:34em}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:11.5px;font-weight:500}
+.chips span.on{background:var(--ink);color:#fff}
+.proof{display:flex;justify-content:center;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--mute)}
+.proof b{font-family:var(--f-display);font-size:26px;font-weight:400;color:var(--ink);letter-spacing:.02em}
+
+.btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:56px;padding:0 20px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;letter-spacing:.08em;border:1px solid var(--ink);transition:background .15s,color .15s}
+.btn:hover{background:var(--green);border-color:var(--green)}
+.btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.btn svg{width:16px;height:16px;flex:none}
+.note{font-size:11px;color:var(--mute);margin-top:10px;text-align:center}
+.cta-box{width:100%}
+
+/* for you */
+.fit{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.fit li{display:grid;grid-template-columns:34px 1fr;gap:6px;padding:14px 0;border-bottom:1px solid var(--soft);font-size:14px;font-weight:500}
+.fit li::before{content:"✓";font-family:var(--f-mono);color:var(--green);font-weight:700}
+
+/* lookbook */
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 18px;padding:2px 0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff}
+.rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;padding:0 20px 4px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.look{flex:0 0 80%;margin:0;scroll-snap-align:start;border:1px solid var(--line);background:var(--paper)}
+.look[hidden]{display:none!important}
+.look .frame{position:relative;border-bottom:1px solid var(--line)}
+.look img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.look figcaption{padding:14px 14px 16px;display:grid;gap:4px}
+.look .disp{font-size:30px}
+.look .jp{font-size:13px;font-weight:700}
+.look .spec{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;color:var(--green);text-transform:uppercase}
+.rail-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.count{font-family:var(--f-display);font-size:26px;font-variant-numeric:tabular-nums}
+.count span{color:var(--mute)}
+.arrows{display:flex}
+.arrows button{width:44px;height:44px;border:1px solid var(--line);background:var(--paper);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.arrows button+button{border-left:0}
+.arrows button:hover{background:var(--ink);color:#fff}
+.arrows svg{width:16px;height:16px}
+.tab:focus-visible,.arrows button:focus-visible,.rail:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.tip{margin-top:18px;border-left:3px solid var(--green);background:var(--green-tint);padding:12px 14px;font-size:12.5px;color:var(--text);line-height:1.8}
+
+/* stylist */
+.st-name{display:grid;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.st-name .disp{font-size:72px}
+.st-id{display:flex;align-items:flex-end;gap:14px}
+.st-photo{width:86px;height:98px;object-fit:cover;border:1px solid var(--line);filter:grayscale(.15)}
+.st-name .mono{color:var(--mute)}
+.st-lead{margin-top:18px;font-size:14px;color:var(--text)}
+.ways{display:grid;gap:0;margin-top:22px;border-top:1px solid var(--line)}
+.way{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--soft)}
+.way .disp{font-size:30px;color:var(--green)}
+.way strong{display:block;font-size:14.5px}
+.way span{display:block;font-size:12.5px;color:var(--text);line-height:1.8;margin-top:2px}
+
+/* reviews */
+.reviews{display:grid;gap:12px}
+.rv{background:var(--paper);border:1px solid var(--line);padding:18px;display:grid;gap:8px}
+.rv-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+.rv-head b{font-size:14px}
+.rv-head span{font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--mute)}
+.stars{color:var(--green);letter-spacing:2px;font-size:12px}
+.rv p{font-size:13.5px;line-height:1.9;color:var(--text)}
+.rv .menu{font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--mute);border-top:1px solid var(--soft);padding-top:8px}
+.source{font-size:11px;color:var(--mute);margin-top:12px;line-height:1.7}
+
+/* menu */
+.prices{display:grid;gap:10px}
+.price{border:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:4px 12px;background:var(--paper)}
+.price .mono{grid-column:1 / -1;color:var(--green)}
+.price .jp{font-size:12.5px;color:var(--text)}
+.price .disp{font-size:44px;font-variant-numeric:tabular-nums;grid-row:2 / span 1;grid-column:2}
+.price.main{background:var(--ink);color:#fff}
+.price.main .jp{color:#D9D8D3}
+.price.main .mono{color:#6FD39F}
+.small{font-size:11px;color:var(--mute);margin-top:14px;line-height:1.75}
+
+/* flow + faq + access */
+.flow{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.flow li{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--soft)}
+.flow .disp{font-size:30px;color:var(--mute)}
+.flow strong{display:block}
+.flow span{display:block;font-size:12.5px;color:var(--text);line-height:1.8}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--soft)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 30px 16px 0;font-weight:700;position:relative;line-height:1.6;font-size:13.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:2px;top:10px;font-family:var(--f-display);font-size:28px;color:var(--green)}
+.faq details[open] summary::after{content:"−"}
+.faq summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.faq details p{padding:0 0 16px;font-size:12.5px;color:var(--text)}
+.access{margin:0;border-top:1px solid var(--line)}
+.access div{display:grid;grid-template-columns:86px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--soft);font-size:13.5px}
+.access dt{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:var(--mute);padding-top:3px}
+.access dd{margin:0}
+.maplink{display:inline-block;margin-top:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em}
+
+/* final */
+.final{background:var(--ink);color:#fff;padding-block:56px;text-align:center}
+.final .disp{font-size:64px}
+.final h2{font-size:17px;font-weight:700;margin:14px 0 26px;line-height:1.7}
+.final .btn{background:#fff;color:var(--ink);border-color:#fff}
+.final .btn:hover{background:var(--green);color:#fff;border-color:var(--green)}
+.final .note{color:#AFAEA9}
+footer{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 6px}
+footer img{width:40px;height:40px}
+footer .mono{font-size:9px;color:var(--mute)}
+
+/* sticky */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:10;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+.sticky-in{max-width:448px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.who{display:grid;line-height:1.1}
+.who .disp{font-size:24px}
+.who .mono{font-size:8.5px;color:var(--mute)}
+.sticky .btn{min-height:48px;font-size:13.5px}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+.cta-pair{display:grid;gap:8px}
+.btn-sub{background:var(--paper);color:var(--ink);min-height:48px;font-size:13px}
+.btn-sub:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.final .btn-sub{background:transparent;color:#fff;border-color:#fff}
+.final .btn-sub:hover{background:#fff;color:var(--ink)}
+.sticky-in{grid-template-columns:1.5fr 1fr !important;gap:8px !important}
+.sticky .btn{padding:0 14px;font-size:13px}
+.sticky .btn-sub{justify-content:center;min-height:48px}
+.reel{padding-block:48px 56px;border-top:1px solid var(--line)}
+.reels{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.reel-frame{position:relative;border:1px solid var(--line);margin:0;background:var(--ink);min-width:0}
+.reel-frame video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover}
+.reel .head{text-align:center;justify-items:center}
+
+</style>
+
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <img src="images/logo.png" alt="HACO+" width="34" height="34">
+    <span class="mono">Hair — Omotesando / Shibuya</span>
+    <a class="cta" data-pos="header" data-dest="stekina" href="https://stekina.com/profile/8BNH-7AYM?stype=lp&amp;route=ig_cSCSorm+CG+a3Mn47XTSig%3D%3D" target="_blank" rel="noopener">BOOK →</a>
+  </header>
+
+  <!-- 1. First view -->
+  <div class="plates">
+    <figure class="plate"><img src="images/n3.jpg" alt="ブロンドのラフなメンズショート" width="720" height="960"><span class="tag">LOOK 01 — MEN'S</span></figure>
+    <figure class="plate"><img src="images/n1.jpg" alt="ピンクにブラックのデザインを入れたロングヘア" width="720" height="960"><span class="tag">LOOK 02 — WOMEN'S</span></figure>
+  </div>
+  <div class="wrap hero">
+    <span class="mono">MAKOTO / Top Stylist</span>
+    <p class="disp">HAIR AS<br><span class="g">FASHION.</span></p>
+    <h1>髪まで、<br>ファッションの一部に。</h1>
+    <p class="lead">カット、パーマ、デザインカラーまで。あなたのファッションや雰囲気に合わせて、似合うスタイルをご提案します。</p>
+    <div class="chips"><span class="on">Men's &amp; Women's</span><span>Cut</span><span>Perm</span><span>Design Color</span><span>Bleach</span></div>
+    <div class="proof"><span class="stars" aria-hidden="true">★★★★★</span><b>4.90</b><span>サロン口コミ 321件（ホットペッパービューティー）</span></div>
+    <div class="cta-box">
+      <div class="cta-pair"><a class="btn cta" data-pos="hero" data-dest="stekina" href="https://stekina.com/profile/8BNH-7AYM?stype=lp&amp;route=ig_cSCSorm+CG+a3Mn47XTSig%3D%3D" target="_blank" rel="noopener">MAKOTOを指名して予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-sub cta" data-pos="hero" data-dest="hotpepper" href="https://beauty.hotpepper.jp/slnH000690910/stylist/T001000675/" target="_blank" rel="noopener">ホットペッパービューティーで予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <p class="note">「こうしたい」が決まっていなくても、相談しながら決められます</p>
+    </div>
+  </div>
+
+  <!-- 1b. Video -->
+  <section class="reel">
+    <div class="wrap">
+      <div class="head"><span class="mono">In motion — 30 sec each</span><p class="disp">HIT HAIR,<br><span class="g">IN MOTION.</span></p><h2>MAKOTOのメンズ・レディーススタイルを動画で</h2></div>
+      <div class="reels">
+        <figure class="reel-frame"><video src="images/reel-mens.mp4" poster="images/reel-mens.jpg" autoplay muted loop playsinline preload="metadata" aria-label="MAKOTOが手がけたメンズスタイルの動画"></video><span class="tag">MEN'S</span></figure>
+        <figure class="reel-frame"><video src="images/reel-womens.mp4" poster="images/reel-womens.jpg" autoplay muted loop playsinline preload="metadata" aria-label="MAKOTOが手がけたレディーススタイルの動画"></video><span class="tag">WOMEN'S</span></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. For you -->
+  <section class="stone">
+    <div class="wrap">
+      <div class="head"><span class="mono">For you</span><p class="disp">IS THIS YOU?</p><h2>こんな方におすすめです</h2></div>
+      <ul class="fit">
+        <li>定番のヘアスタイルでは、少し物足りない</li>
+        <li>自分に似合う髪型・カラー・パーマを相談したい</li>
+        <li>ファッションに合うヘアにしたい</li>
+        <li>ブリーチやデザインカラーに挑戦してみたい</li>
+        <li>パーマで雰囲気を変えたい</li>
+        <li>毎日のスタイリングで、ちゃんと再現できる髪にしたい</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Lookbook -->
+  <section class="looks">
+    <div class="wrap">
+      <div class="head"><span class="mono">Lookbook</span><p class="disp">THE LOOKS.</p><h2>MAKOTOのスタイル</h2></div>
+      <div class="tabs" aria-label="スタイルの種類">
+        <button type="button" class="tab" data-f="all" aria-pressed="true">ALL</button>
+        <button type="button" class="tab" data-f="men" aria-pressed="false">MEN'S</button>
+        <button type="button" class="tab" data-f="women" aria-pressed="false">WOMEN'S</button>
+        <button type="button" class="tab" data-f="cut" aria-pressed="false">CUT</button>
+        <button type="button" class="tab" data-f="color" aria-pressed="false">COLOR</button>
+        <button type="button" class="tab" data-f="bleach" aria-pressed="false">BLEACH</button>
+      </div>
+    </div>
+    <div class="rail" id="rail" tabindex="0" aria-label="スタイル写真。横にスワイプできます">
+      <figure class="look" data-cat="men bleach"><div class="frame"><img loading="lazy" src="images/n3.jpg" alt="ブロンド × ラフなショート"><span class="tag">LOOK 01</span></div><figcaption><span class="spec">Men's / Bleach</span><span class="disp">BLONDE ROUGH</span><span class="jp">ブロンド × ラフなショート</span></figcaption></figure>
+      <figure class="look" data-cat="women bleach"><div class="frame"><img loading="lazy" src="images/n7.jpg" alt="ペールイエロー × ウルフ"><span class="tag">LOOK 02</span></div><figcaption><span class="spec">Women's / Bleach</span><span class="disp">YELLOW WOLF</span><span class="jp">ペールイエロー × ウルフ</span></figcaption></figure>
+      <figure class="look" data-cat="men bleach"><div class="frame"><img loading="lazy" src="images/n4.jpg" alt="シルバーハイライト × マッシュウルフ"><span class="tag">LOOK 03</span></div><figcaption><span class="spec">Men's / Highlight</span><span class="disp">SILVER MULLET</span><span class="jp">シルバーハイライト × マッシュウルフ</span></figcaption></figure>
+      <figure class="look" data-cat="women color"><div class="frame"><img loading="lazy" src="images/n1.jpg" alt="ピンク × ブラックのデザインカラー"><span class="tag">LOOK 04</span></div><figcaption><span class="spec">Women's / Design Color</span><span class="disp">PINK GRAPHIC</span><span class="jp">ピンク × ブラックのデザインカラー</span></figcaption></figure>
+      <figure class="look" data-cat="men color"><div class="frame"><img loading="lazy" src="images/n2.jpg" alt="毛先オレンジ × ショートレイヤー"><span class="tag">LOOK 05</span></div><figcaption><span class="spec">Men's / Point Color</span><span class="disp">ORANGE TIPS</span><span class="jp">毛先オレンジ × ショートレイヤー</span></figcaption></figure>
+      <figure class="look" data-cat="women color bleach"><div class="frame"><img loading="lazy" src="images/m2.jpg" alt="ミントグリーン × 裾ブラック"><span class="tag">LOOK 06</span></div><figcaption><span class="spec">Women's / Design Color</span><span class="disp">MINT GREEN</span><span class="jp">ミントグリーン × 裾ブラック</span></figcaption></figure>
+      <figure class="look" data-cat="cut"><div class="frame"><img loading="lazy" src="images/m5.jpg" alt="黒髪 × 動きのあるショート"><span class="tag">LOOK 07</span></div><figcaption><span class="spec">Cut / Texture</span><span class="disp">BLACK SPIKE</span><span class="jp">黒髪 × 動きのあるショート</span></figcaption></figure>
+      <figure class="look" data-cat="women bleach"><div class="frame"><img loading="lazy" src="images/m3.jpg" alt="ホワイトブロンド × レイヤーショート"><span class="tag">LOOK 08</span></div><figcaption><span class="spec">Women's / Double Bleach</span><span class="disp">WHITE SHORT</span><span class="jp">ホワイトブロンド × レイヤーショート</span></figcaption></figure>
+      <figure class="look" data-cat="women color bleach"><div class="frame"><img loading="lazy" src="images/n8.jpg" alt="ライムグリーン × ロングレイヤー"><span class="tag">LOOK 09</span></div><figcaption><span class="spec">Women's / Vivid Color</span><span class="disp">LIME GREEN</span><span class="jp">ライムグリーン × ロングレイヤー</span></figcaption></figure>
+      <figure class="look" data-cat="women cut"><div class="frame"><img loading="lazy" src="images/m4.jpg" alt="ロングウルフ × 重めバング"><span class="tag">LOOK 10</span></div><figcaption><span class="spec">Women's / Layer</span><span class="disp">LONG WOLF</span><span class="jp">ロングウルフ × 重めバング</span></figcaption></figure>
+      <figure class="look" data-cat="women cut"><div class="frame"><img loading="lazy" src="images/n5.jpg" alt="黒髪 × ロングレイヤー"><span class="tag">LOOK 11</span></div><figcaption><span class="spec">Women's / Layer</span><span class="disp">BLACK LAYER</span><span class="jp">黒髪 × ロングレイヤー</span></figcaption></figure>
+      <figure class="look" data-cat="women cut"><div class="frame"><img loading="lazy" src="images/n6.jpg" alt="ダークブラウン × 顔まわりレイヤー"><span class="tag">LOOK 12</span></div><figcaption><span class="spec">Women's / Layer</span><span class="disp">SOFT LAYER</span><span class="jp">ダークブラウン × 顔まわりレイヤー</span></figcaption></figure>
+    </div>
+    <div class="wrap">
+      <div class="rail-foot">
+        <span class="count"><b id="cur">01</b><span> / <span id="tot">12</span></span></span>
+        <div class="arrows">
+          <button type="button" id="prev" aria-label="前のスタイル"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" id="next" aria-label="次のスタイル"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <p class="tip">気になるLOOKはスクリーンショットして、カウンセリングで見せてください。そのままではなく、あなたの服や雰囲気に合わせて調整します。</p>
+    </div>
+  </section>
+
+  <!-- 4. Stylist -->
+  <section class="stone">
+    <div class="wrap">
+      <div class="st-name"><div class="st-id"><img class="st-photo" src="images/me.jpg" alt="スタイリストMAKOTO" width="400" height="458"><p class="disp">MAKOTO</p></div><span class="mono">Top Stylist — Men's &amp; Women's / Cut / Perm / Design Color / Bleach</span></div>
+      <p class="st-lead">髪だけを見て決めるのではなく、服や雰囲気、普段の過ごし方まで見て、その人に似合うスタイルを一緒に考えます。</p>
+      <div class="ways">
+        <div class="way"><span class="disp">FIT</span><div><strong>ファッションまで見て似合わせる</strong><span>好きな服やよく着るテイストから、髪の方向性を提案します。</span></div></div>
+        <div class="way"><span class="disp">TALK</span><div><strong>決まっていなくても相談できる</strong><span>「今できる髪型」と「したい髪型」をはっきりお伝えしてから進めます。</span></div></div>
+        <div class="way"><span class="disp">DAILY</span><div><strong>自宅で再現できるところまで</strong><span>スタイリングしやすい切り方と、毎日のセット方法までお伝えします。</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Reviews -->
+  <section>
+    <div class="wrap">
+      <div class="head"><span class="mono">Review</span><p class="disp">REAL VOICES.</p><h2>MAKOTOを指名したお客様の声</h2></div>
+      <div class="reviews">
+        <article class="rv"><div class="rv-head"><b>mさん</b><span>女性 / 20代前半 / 2026.5.23</span></div><div class="stars" aria-label="総合評価5">★★★★★</div><p>自分のしたい髪型と、今できる髪型をはっきりと言ってくれて、理想の髪型にしてくれていつもありがとうございます。またよろしくお願いします！</p><div class="menu">MENU: カット</div></article>
+        <article class="rv"><div class="rv-head"><b>Coffeeさん</b><span>男性 / 10代後半 / 2026.8.17</span></div><div class="stars" aria-label="総合評価5">★★★★★</div><p>要望をとても真剣に聞いてくださり、的確なアドバイスをたくさんいただけました。ありがとうございました！</p><div class="menu">MENU: カット</div></article>
+        <article class="rv"><div class="rv-head"><b>mikuさん</b><span>女性 / 10代後半 / 2026.7.30</span></div><div class="stars" aria-label="総合評価5">★★★★★</div><p>今回も理想通りにカットしていただきありがとうございました！カットがとても気に入っていて、毎回安心してお任せできるのでリピートしています。今回は髪が伸びて酸性ストレートがかかっていない部分（特に襟足）のうねりが気になっていて少し心配でしたが、その部分も収まりやすいようにカットしていただき、とても扱いやすくなりました。今回の仕上がりも大満足です！またよろしくお願いします。</p><div class="menu">MENU: カット</div></article>
+        <article class="rv"><div class="rv-head"><b>ミさん</b><span>女性 / 10代後半 / 2026.5.31</span></div><div class="stars" aria-label="総合評価5">★★★★★</div><p>いつもありがとうございます。今回もかわいい髪型にしてくれて最高でした。楽しく過ごせました！また来ます</p><div class="menu">MENU: カット</div></article>
+      </div>
+      <p class="source">ホットペッパービューティーに投稿された口コミより（原文のまま掲載）</p>
+    </div>
+  </section>
+
+  <!-- 6. Menu -->
+  <section class="stone" id="menu">
+    <div class="wrap">
+      <div class="head"><span class="mono">Menu</span><p class="disp">THE PRICE,<br>STRAIGHT UP.</p><h2>MAKOTO指名メニュー</h2></div>
+      <div class="prices">
+        <div class="price main"><span class="mono">Start here</span><span class="jp">カット</span><span class="disp">¥7,600</span></div>
+        <div class="price"><span class="mono">Color</span><span class="jp">カラー</span><span class="disp">¥11,100</span></div>
+        <div class="price"><span class="mono">Design color</span><span class="jp">ダブルブリーチ＋カラー</span><span class="disp">¥29,000</span></div>
+        <div class="price"><span class="mono">Full look</span><span class="jp">カット＋ダブルブリーチ＋カラー</span><span class="disp">¥32,000</span></div>
+      </div>
+      <p class="small">表示価格はすべて税込です。髪の長さ・毛量・履歴により、料金や所要時間が変わる場合があります。当日のカウンセリングで事前にご説明します。</p>
+      <div style="margin-top:22px"><div class="cta-pair"><a class="btn cta" data-pos="menu" data-dest="stekina" href="https://stekina.com/profile/8BNH-7AYM?stype=lp&amp;route=ig_cSCSorm+CG+a3Mn47XTSig%3D%3D" target="_blank" rel="noopener">空き状況を見て予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-sub cta" data-pos="menu" data-dest="hotpepper" href="https://beauty.hotpepper.jp/slnH000690910/stylist/T001000675/" target="_blank" rel="noopener">ホットペッパービューティーで予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+    </div>
+  </section>
+
+  <!-- 7. Flow -->
+  <section>
+    <div class="wrap">
+      <div class="head"><span class="mono">Flow</span><p class="disp">HOW IT GOES.</p><h2>ご来店から仕上がりまで</h2></div>
+      <ol class="flow">
+        <li><span class="disp">01</span><div><strong>カウンセリング</strong><span>好きな服やテイスト、普段のスタイリング、これまでのカラー履歴を伺います。</span></div></li>
+        <li><span class="disp">02</span><div><strong>スタイルのご提案</strong><span>今できるスタイルと、目指せるスタイルをはっきりお伝えしてから決めます。</span></div></li>
+        <li><span class="disp">03</span><div><strong>施術</strong><span>カット・パーマ・カラーを、全体のバランスを見ながら仕上げます。</span></div></li>
+        <li><span class="disp">04</span><div><strong>スタイリングの共有</strong><span>自宅で再現するためのセット方法と、次回のおすすめをお伝えします。</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section class="stone">
+    <div class="wrap">
+      <div class="head"><span class="mono">FAQ</span><p class="disp">QUESTIONS.</p><h2>よくあるご質問</h2></div>
+      <div class="faq">
+        <details><summary>どんな髪型にしたいか決まっていなくても大丈夫ですか？</summary><p>大丈夫です。好きな服やよく着るテイスト、気になっている雰囲気からでも、相談しながら決めていきます。</p></details>
+        <details><summary>ブリーチは初めてです。</summary><p>今の髪の状態と履歴を見て、できることとできないことを事前にお伝えします。</p></details>
+        <details><summary>パーマをかけるとセットが大変になりませんか？</summary><p>普段のスタイリングの仕方を伺ったうえで、朝のセットが楽になるかけ方をご提案します。</p></details>
+        <details><summary>予約の変更やキャンセルはどうすればいいですか？</summary><p>予約ページから変更・キャンセルの方法をご確認いただけます。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Access -->
+  <section>
+    <div class="wrap">
+      <div class="head"><span class="mono">Access</span><p class="disp">FIND US.</p><h2>HACO+ 表参道／渋谷</h2></div>
+      <dl class="access">
+        <div><dt>ADDRESS</dt><dd>東京都港区南青山6-13-9 ANISE B1F-B</dd></div>
+        <div><dt>STATION</dt><dd>表参道駅より徒歩7分／渋谷駅より徒歩15分</dd></div>
+        <div><dt>HOURS</dt><dd>平日 11:00–20:00／土日祝 10:00–19:00</dd></div>
+        <div><dt>CLOSED</dt><dd>火曜日</dd></div>
+      </dl>
+      <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%8D%97%E9%9D%92%E5%B1%B16-13-9" target="_blank" rel="noopener">OPEN IN GOOGLE MAPS →</a>
+    </div>
+  </section>
+
+  <!-- 10. Final CTA -->
+  <div class="final">
+    <div class="wrap">
+      <span class="mono">Book MAKOTO</span>
+      <p class="disp" style="margin-top:10px">WEAR YOUR<br><span class="g">HAIR.</span></p>
+      <h2>服も雰囲気も含めて、<br>あなたに似合う髪を一緒に。</h2>
+      <div class="cta-pair"><a class="btn cta" data-pos="final" data-dest="stekina" href="https://stekina.com/profile/8BNH-7AYM?stype=lp&amp;route=ig_cSCSorm+CG+a3Mn47XTSig%3D%3D" target="_blank" rel="noopener">MAKOTOを指名して予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-sub cta" data-pos="final" data-dest="hotpepper" href="https://beauty.hotpepper.jp/slnH000690910/stylist/T001000675/" target="_blank" rel="noopener">ホットペッパービューティーで予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <p class="note">どちらの予約ページからでも、MAKOTOの空き状況を確認できます</p>
+    </div>
+  </div>
+  <footer><img src="images/logo.png" alt="HACO+" width="40" height="40"><span class="mono">© HACO Group Co Ltd.</span></footer>
+</div>
+
+<div class="sticky">
+  <div class="sticky-in">
+    <a class="btn cta" data-pos="sticky" data-dest="stekina" href="https://stekina.com/profile/8BNH-7AYM?stype=lp&amp;route=ig_cSCSorm+CG+a3Mn47XTSig%3D%3D" target="_blank" rel="noopener">MAKOTOを指名予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn btn-sub cta" data-pos="sticky" data-dest="hotpepper" href="https://beauty.hotpepper.jp/slnH000690910/stylist/T001000675/" target="_blank" rel="noopener">HPBで予約</a>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.cta').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(typeof window.fbq==='function'){window.fbq('track','Lead',{content_name:'MAKOTO',content_category:a.getAttribute('data-pos'),destination:a.getAttribute('data-dest')});}
+  });
+});
+(function(){
+  var rail=document.getElementById('rail'); if(!rail) return;
+  var cards=[].slice.call(rail.querySelectorAll('.look'));
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var cur=document.getElementById('cur'), tot=document.getElementById('tot');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function vis(){return cards.filter(function(c){return !c.hidden});}
+  function pad(n){return (n<10?'0':'')+n;}
+  function active(){var v=vis(),x=rail.scrollLeft,best=0,d=1e9;v.forEach(function(c,i){var dd=Math.abs(c.offsetLeft-rail.offsetLeft-20-x);if(dd<d){d=dd;best=i}});return best;}
+  function update(){cur.textContent=pad(active()+1);tot.textContent=pad(vis().length);}
+  function go(i){var v=vis();i=Math.max(0,Math.min(v.length-1,i));rail.scrollTo({left:v[i].offsetLeft-rail.offsetLeft-20,behavior:reduce?'auto':'smooth'});}
+  tabs.forEach(function(tb){tb.addEventListener('click',function(){var f=tb.dataset.f;tabs.forEach(function(x){x.setAttribute('aria-pressed',x===tb?'true':'false')});cards.forEach(function(c){c.hidden=!(f==='all'||c.dataset.cat.split(' ').indexOf(f)>-1)});rail.scrollLeft=0;update();});});
+  document.getElementById('prev').addEventListener('click',function(){go(active()-1)});
+  document.getElementById('next').addEventListener('click',function(){go(active()+1)});
+  var tm;rail.addEventListener('scroll',function(){clearTimeout(tm);tm=setTimeout(update,60)},{passive:true});
+  update();
+})();
+(function(){if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches))return;document.querySelectorAll('.reel video').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});})();
+</script>
+
+</body>
+</html>
