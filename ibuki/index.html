@@ -174,6 +174,11 @@ footer b{display:block;font-weight:400;font-size:22px;letter-spacing:0;color:var
 .sticky-in .who b{display:block;font-family:var(--f-display);font-size:15px;font-weight:400;color:var(--ink)}
 .sticky .btn{min-height:46px;font-size:13.5px}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
+.reel{padding-block:8px 0}
+.reel .sec-head{margin-bottom:20px}
+.reel-frame{max-width:300px;margin:0 auto;border-radius:18px;overflow:hidden;background:var(--ink)}
+.reel-frame video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover}
+
 /* logo */
 .logo{width:34px;height:34px}
 .logo-f{width:48px;height:48px;margin-bottom:10px}
@@ -213,7 +218,7 @@ footer b{display:block;font-weight:400;font-size:22px;letter-spacing:0;color:var
 <body>
 <div class="page">
   <!-- 1. First view -->
-  <header class="top"><img class="logo" src="images/logo.png" alt="HACO+" width="34" height="34"><a class="cta" data-pos="header" href="https://stekina.com/profile/5BJH-7AZD?stype=lp&amp;route=ig_2HR2Lnq7aAZdMPeK7dTl3w%3D%3D" target="_blank" rel="noopener">予約する</a></header>
+  <header class="top"><img class="logo" src="images/logo.png" alt="HACO+" width="34" height="34"><a class="cta" data-pos="header" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">予約する</a></header>
   <div class="top-wrap">
     <img class="hero-img" src="images/s1.jpg" alt="IBUKIが手がけたホワイトブロンドのボブ" width="720" height="960">
     <div class="hero-over">
@@ -229,11 +234,19 @@ footer b{display:block;font-weight:400;font-size:22px;letter-spacing:0;color:var
       <p class="lead">複雑なカラー履歴も、初めてのブリーチも。<br>今の髪の状態を見ながら、その先まで考えたデザインをご提案します。</p>
       <div class="proof"><span class="stars" aria-hidden="true">★★★★★</span><b>4.90</b><span>サロン口コミ 321件（ホットペッパービューティー）</span></div>
       <div>
-        <a class="btn cta" data-pos="hero" href="https://stekina.com/profile/5BJH-7AZD?stype=lp&amp;route=ig_2HR2Lnq7aAZdMPeK7dTl3w%3D%3D" target="_blank" rel="noopener">IBUKIを指名して予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn cta" data-pos="hero" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">IBUKIを指名して予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <p class="cta-note">色が決まっていなくても、カウンセリングから一緒に決められます</p>
       </div>
     </div>
   </div>
+
+  <!-- 1b. Video -->
+  <section class="reel">
+    <div class="wrap">
+      <div class="sec-head"><span class="en">In motion</span><p class="big">in motion.</p><h2>IBUKIの施術と仕上がりを動画で</h2></div>
+      <div class="reel-frame"><video src="images/reel.mp4" poster="images/reel-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="IBUKIが前髪をカットして仕上げるまでの動画"></video></div>
+    </div>
+  </section>
 
   <!-- 2. For you -->
   <section class="wrap">
@@ -395,7 +408,7 @@ footer b{display:block;font-weight:400;font-size:22px;letter-spacing:0;color:var
     </ul>
     <p class="small">表示価格はすべて税込です。髪の長さ・毛量・履歴により、料金や所要時間が変わる場合があります。当日のカウンセリングで事前にご説明します。</p>
     <div style="margin-top:22px">
-      <a class="btn cta" data-pos="menu" href="https://stekina.com/profile/5BJH-7AZD?stype=lp&amp;route=ig_2HR2Lnq7aAZdMPeK7dTl3w%3D%3D" target="_blank" rel="noopener">空き状況を見て予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn cta" data-pos="menu" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">空き状況を見て予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </section>
 
@@ -439,7 +452,7 @@ footer b{display:block;font-weight:400;font-size:22px;letter-spacing:0;color:var
     <div class="wrap">
       <span class="en">Book IBUKI</span><p style="font-family:var(--f-display);font-size:30px;font-weight:400;line-height:1.2;margin-top:4px">see you soon.</p>
       <h2>あなたの髪の履歴から、<br>理想のハイトーンを一緒に。</h2>
-      <a class="btn cta" data-pos="final" href="https://stekina.com/profile/5BJH-7AZD?stype=lp&amp;route=ig_2HR2Lnq7aAZdMPeK7dTl3w%3D%3D" target="_blank" rel="noopener">IBUKIを指名して予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn cta" data-pos="final" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">IBUKIを指名して予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="cta-note">予約ページでIBUKIの空き状況を確認できます</p>
     </div>
   </div>
@@ -450,7 +463,7 @@ footer b{display:block;font-weight:400;font-size:22px;letter-spacing:0;color:var
 <div class="sticky">
   <div class="sticky-in">
     <div class="who"><b>IBUKI</b>指名予約</div>
-    <a class="btn cta" data-pos="sticky" href="https://stekina.com/profile/5BJH-7AZD?stype=lp&amp;route=ig_2HR2Lnq7aAZdMPeK7dTl3w%3D%3D" target="_blank" rel="noopener">空き状況を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn cta" data-pos="sticky" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">空き状況を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
 </div>
 
@@ -484,6 +497,7 @@ document.querySelectorAll('.cta').forEach(function(a){
   var tm;rail.addEventListener('scroll',function(){clearTimeout(tm);tm=setTimeout(update,60)},{passive:true});
   update();
 })();
+(function(){if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches))return;document.querySelectorAll('.reel video').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});})();
 </script>
 
 </body>
