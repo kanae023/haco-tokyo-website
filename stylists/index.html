@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>STYLISTS｜HACO+ 表参道 スタイリストから選んで予約</title>
+<meta property="og:title" content="STYLISTS｜HACO+ 表参道">
+<meta property="og:description" content="スタイルを見て、気になるスタイリストにそのまま予約。">
+<meta property="og:type" content="website">
+<script>
+var PIXEL_ID='1328304228377935';
+if(PIXEL_ID){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',PIXEL_ID);fbq('track','PageView');}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: one phone column; a sticky row of story-ring avatars jumps to each stylist; each stylist = profile + swipeable square posts + booking buttons */
+:root{
+  --paper:#FFFFFF; --ground:#F2F2F2; --ink:#0A0A0A; --text:#4A4A4A; --mute:#8A8A8A; --line:#E8E8E8; --tint:#F6F6F6;
+  --ring:conic-gradient(from 210deg,#F9CE34,#EE2A7B,#6228D7,#EE2A7B,#F9CE34);
+  --f-en:"Barlow","Zen Kaku Gothic New",system-ui,sans-serif;
+  --f-jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-jp);font-size:14px;line-height:1.8;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+.page{max-width:480px;margin:0 auto;background:var(--paper);min-height:100vh}
+.wrap{padding-inline:18px}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2{margin:0;text-wrap:balance}
+p{margin:0}
+
+/* top */
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 18px}
+.top img{width:32px;height:32px}
+.top span{font-family:var(--f-en);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--mute)}
+.intro{padding:6px 18px 14px}
+.intro .en{font-family:var(--f-en);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--mute)}
+.intro h1{font-size:22px;font-weight:700;line-height:1.5;margin-top:4px}
+.intro p{font-size:13px;color:var(--text);margin-top:6px}
+
+/* sticky stories */
+.stories-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.stories{display:flex;gap:14px;overflow-x:auto;padding:10px 18px 8px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.story{flex:none;display:grid;justify-items:center;gap:3px;text-decoration:none;width:64px}
+.sname{font-family:var(--f-en);font-size:11px;font-weight:600;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:64px}
+.story.todo .sname{color:var(--mute)}
+.ring{display:block;width:58px;height:58px;border-radius:50%;padding:2.5px;background:var(--ring)}
+.ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2.5px solid var(--paper)}
+.ring.empty,.mini.empty{background:var(--line);display:grid;place-items:center}
+.ring.empty span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;border:2.5px solid var(--paper);background:var(--tint);font-family:var(--f-en);font-size:8px;letter-spacing:.1em;color:var(--mute)}
+.story.on .ring{outline:2px solid var(--ink);outline-offset:2px}
+.story:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:8px}
+
+/* staff */
+.staff{padding-block:28px 32px;border-bottom:8px solid var(--ground);scroll-margin-top:96px}
+.profile{display:flex;align-items:center;gap:16px}
+.ring.big{width:84px;height:84px;padding:3px}
+.ring.big img,.ring.big span{border-width:3px}
+.ring.big.empty span{font-size:10px}
+.pinfo{display:grid;gap:0;min-width:0;flex:1}
+.quick{flex:none;align-self:center;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.08em;border-radius:999px;padding:8px 18px}
+.quick:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.quick.off{background:var(--tint);color:var(--mute);font-weight:500;font-size:11.5px;padding:7px 12px}
+.idx{font-family:var(--f-en);font-size:11px;letter-spacing:.14em;color:var(--mute)}
+.pinfo h2{font-family:var(--f-en);font-size:30px;font-weight:600;letter-spacing:.04em;line-height:1.1}
+.role{font-family:var(--f-en);font-size:12px;color:var(--mute);letter-spacing:.06em}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tags span{font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:2px 11px;color:var(--text)}
+.pitch{font-size:13.5px;color:var(--text);margin-top:10px}
+
+/* posts */
+.rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:18px;padding:16px 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.rail:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.post{flex:0 0 82%;margin:0;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
+.post-head{display:flex;align-items:center;gap:9px;padding:9px 11px}
+.mini{display:block;width:30px;height:30px;border-radius:50%;padding:1.5px;background:var(--ring);flex:none}
+.mini img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:1.5px solid var(--paper)}
+.mini.empty{background:var(--line)}
+.mini.empty span{display:none}
+.who{display:grid;line-height:1.25;min-width:0;flex:1}
+.who b{font-family:var(--f-en);font-size:12.5px;font-weight:600}
+.who small{font-size:10.5px;color:var(--mute)}
+.dots{font-size:9px;letter-spacing:1px;color:var(--ink)}
+.media img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.ph{aspect-ratio:1/1;display:grid;place-items:center;background:var(--tint);border-block:1px dashed #C9C9C9;text-align:center;font-family:var(--f-en);font-size:11px;letter-spacing:.16em;color:var(--mute);line-height:1.6}
+.post-icons{display:flex;gap:14px;padding:9px 11px 2px}
+.post-icons svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linejoin:round}
+.post-icons .save{margin-left:auto}
+.post figcaption{padding:2px 11px 11px;font-size:12.5px;line-height:1.6;color:var(--text)}
+.post figcaption b{font-family:var(--f-en);font-weight:600;color:var(--ink);margin-right:4px}
+
+.swipe{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-family:var(--f-en);font-size:11.5px;color:var(--mute);letter-spacing:.06em}
+.count b{color:var(--ink);font-weight:600}
+.actions{display:grid;gap:8px;margin-top:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:15px;letter-spacing:.06em;border:1.5px solid var(--ink);transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.btn svg{width:16px;height:16px}
+.btn.sub{background:var(--paper);color:var(--ink);min-height:46px;font-size:13.5px;font-weight:500}
+.btn.off{background:var(--tint);color:var(--mute);border:1.5px dashed #C9C9C9;font-weight:500;font-size:13px}
+.more{display:block;text-align:center;margin-top:12px;font-size:12.5px;color:var(--text);text-underline-offset:4px}
+
+/* info */
+.info{padding:28px 18px 36px}
+.info .en{font-family:var(--f-en);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--mute)}
+.info h2{font-size:17px;font-weight:700;margin:4px 0 12px}
+.info dl{margin:0;border-top:1px solid var(--line)}
+.info dl div{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.info dt{color:var(--mute);font-size:12px}
+.info dd{margin:0}
+.info .map{display:inline-block;margin-top:12px;font-size:12.5px;text-underline-offset:4px}
+footer{padding:0 18px 28px;display:flex;justify-content:space-between;align-items:center}
+footer img{width:36px;height:36px}
+footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="top"><img src="images/logo.png" alt="HACO+" width="32" height="32"><span>OMOTESANDO / SHIBUYA</span></header>
+  <div class="intro">
+    <span class="en">STYLISTS</span>
+    <h1>好きなスタイルから、<br>担当を選んで予約。</h1>
+    <p>スタイリストをタップすると、その人の作品へ移動します。</p>
+  </div>
+  <nav class="stories-bar" aria-label="スタイリスト一覧"><div class="stories">
+<a class="story" href="#ibuki"><span class="ring"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="sname">IBUKI</span></a>
+<a class="story" href="#makoto"><span class="ring"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="sname">MAKOTO</span></a>
+<a class="story" href="#leo"><span class="ring"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="sname">LEO</span></a>
+<a class="story" href="#joi"><span class="ring"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="sname">JOI</span></a>
+<a class="story" href="#rena"><span class="ring"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="sname">RENA</span></a>
+<a class="story" href="#nova"><span class="ring"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="sname">NOVA</span></a>
+<a class="story" href="#miina"><span class="ring"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="sname">MIINA</span></a>
+  </div></nav>
+
+    <section class="staff" id="ibuki">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">01 / 07</span>
+            <h2>IBUKI</h2>
+            <span class="role">Top Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="IBUKI" data-dest="stekina" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>ケアブリーチ</span><span>ハイトーン</span><span>デザインカラー</span></div>
+        <p class="pitch">複雑なカラー履歴も、初めてのブリーチも。今の髪を見ながら、理想のハイトーンを一緒に育てます。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="IBUKIのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ia2.jpg" alt="IBUKIのスタイル：ライムグリーン × ロングウェーブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ライムグリーン × ロングウェーブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ia3.jpg" alt="IBUKIのスタイル：ラベンダー × ショートウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ラベンダー × ショートウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ia1.jpg" alt="IBUKIのスタイル：ブロンド × レッドのデザインカラー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ブロンド × レッドのデザインカラー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ia4.jpg" alt="IBUKIのスタイル：オレンジ × レイヤーロング" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> オレンジ × レイヤーロング</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i1.jpg" alt="IBUKIのスタイル：ホワイトブロンド × 切りっぱなしボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ホワイトブロンド × 切りっぱなしボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i5.jpg" alt="IBUKIのスタイル：ペールブルー × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ペールブルー × ウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i3.jpg" alt="IBUKIのスタイル：ピンク × ブラックの裾カラー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ピンク × ブラックの裾カラー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i6.jpg" alt="IBUKIのスタイル：ブルーグレー × カーリー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ブルーグレー × カーリー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i2.jpg" alt="IBUKIのスタイル：ペールイエロー × ミニボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ペールイエロー × ミニボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i7.jpg" alt="IBUKIのスタイル：バイオレット × レイヤーカット" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> バイオレット × レイヤーカット</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i4.jpg" alt="IBUKIのスタイル：ミルキーピンク × ゆるウェーブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ミルキーピンク × ゆるウェーブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="who"><b>IBUKI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/i9.jpg" alt="IBUKIのスタイル：ミルクティーベージュ × ウェーブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>ibuki</b> ミルクティーベージュ × ウェーブ</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 12</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="IBUKI" data-dest="stekina" href="https://stekina.com/reserve/5BJH-7AZD/menu" target="_blank" rel="noopener">IBUKIを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+    <section class="staff" id="makoto">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">02 / 07</span>
+            <h2>MAKOTO</h2>
+            <span class="role">Top Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="MAKOTO" data-dest="stekina" href="https://stekina.com/reserve/8BNH-7AYM/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>Men&#x27;s</span><span>Women&#x27;s</span><span>カット</span><span>パーマ</span><span>デザインカラー</span></div>
+        <p class="pitch">服や雰囲気まで見て、今の気分に似合うスタイルを提案します。決まっていなくても相談しながら。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="MAKOTOのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/kc1.jpg" alt="MAKOTOのスタイル：セージグリーン × ロングレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> セージグリーン × ロングレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/kc2.jpg" alt="MAKOTOのスタイル：レッド × ブラックのウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> レッド × ブラックのウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/kc3.jpg" alt="MAKOTOのスタイル：黒髪 × レイヤーウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> 黒髪 × レイヤーウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/kc4.jpg" alt="MAKOTOのスタイル：ブロンド × メンズウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ブロンド × メンズウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_m1.jpg" alt="MAKOTOのスタイル：ディープレッド × ウェーブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ディープレッド × ウェーブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_m2.jpg" alt="MAKOTOのスタイル：ミントグリーン × 裾ブラック" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ミントグリーン × 裾ブラック</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_m3.jpg" alt="MAKOTOのスタイル：ホワイトブロンド × レイヤーショート" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ホワイトブロンド × レイヤーショート</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_m4.jpg" alt="MAKOTOのスタイル：ロングウルフ × 重めバング" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ロングウルフ × 重めバング</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_m5.jpg" alt="MAKOTOのスタイル：黒髪 × 動きのあるショート" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> 黒髪 × 動きのあるショート</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_n3.jpg" alt="MAKOTOのスタイル：ブロンド × ラフなショート" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ブロンド × ラフなショート</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_n1.jpg" alt="MAKOTOのスタイル：ピンク × ブラックのデザインカラー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ピンク × ブラックのデザインカラー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_n4.jpg" alt="MAKOTOのスタイル：シルバーハイライト × マッシュウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> シルバーハイライト × マッシュウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="who"><b>MAKOTO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/k_n7.jpg" alt="MAKOTOのスタイル：ペールイエロー × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>makoto</b> ペールイエロー × ウルフ</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 13</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="MAKOTO" data-dest="stekina" href="https://stekina.com/reserve/8BNH-7AYM/menu" target="_blank" rel="noopener">MAKOTOを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+    <section class="staff" id="leo">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">03 / 07</span>
+            <h2>LEO</h2>
+            <span class="role">Top Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="LEO" data-dest="stekina" href="https://stekina.com/reserve/STE8-LMNS/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>ハイトーン</span><span>デザインカラー</span><span>レイヤーカット</span></div>
+        <p class="pitch">大胆なカラーも、エッジの効いたシルエットも。ブリーチを活かした自由なデザインで、好きなスタイルを思いきり楽しめるヘアに。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="LEOのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/lc1.jpg" alt="LEOのスタイル：ブロンド × ピンクのメッシュ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ブロンド × ピンクのメッシュ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/lc2.jpg" alt="LEOのスタイル：ブルー × ブラックのウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ブルー × ブラックのウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/lc3.jpg" alt="LEOのスタイル：グレージュ × クリンプウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> グレージュ × クリンプウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/la4.jpg" alt="LEOのスタイル：ミント × パープルのデザインカラー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ミント × パープルのデザインカラー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/lc5.jpg" alt="LEOのスタイル：ピンク × ブラックのレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ピンク × ブラックのレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/lc6.jpg" alt="LEOのスタイル：黒髪 × ロングウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> 黒髪 × ロングウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/le1.jpg" alt="LEOのスタイル：アイスブルー × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> アイスブルー × ウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/le2.jpg" alt="LEOのスタイル：ピンクパープル × ブロンドのレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ピンクパープル × ブロンドのレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/le3.jpg" alt="LEOのスタイル：ミントグリーン × ショートウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ミントグリーン × ショートウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/le6.jpg" alt="LEOのスタイル：ブロンド × ブラックのハイライトボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ブロンド × ブラックのハイライトボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/le4.jpg" alt="LEOのスタイル：ペールラベンダー × レイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ペールラベンダー × レイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="who"><b>LEO</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/le5.jpg" alt="LEOのスタイル：ブリーチ × ブラックのメンズウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>leo</b> ブリーチ × ブラックのメンズウルフ</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 12</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="LEO" data-dest="stekina" href="https://stekina.com/reserve/STE8-LMNS/menu" target="_blank" rel="noopener">LEOを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+    <section class="staff" id="joi">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">04 / 07</span>
+            <h2>JOI</h2>
+            <span class="role">Top Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="JOI" data-dest="stekina" href="https://stekina.com/reserve/FQ4Z-52GM/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>ウルフ・レイヤー</span><span>デザインカラー</span><span>UKカルチャー</span></div>
+        <p class="pitch">ロックやUKカルチャーから着想を得た、自由なヘアデザイン。海外のお客様からも支持される独自の感性で、「おまかせ」から生まれる新しいスタイルも楽しんで。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="JOIのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ja1.jpg" alt="JOIのスタイル：黒髪 × メンズウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> 黒髪 × メンズウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ja3.jpg" alt="JOIのスタイル：ピンク × ブラックのスパイキーウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ピンク × ブラックのスパイキーウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ja4.jpg" alt="JOIのスタイル：ベージュブロンド × ショートウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ベージュブロンド × ショートウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo1.jpg" alt="JOIのスタイル：ボルドー × ストレート" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ボルドー × ストレート</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo2.jpg" alt="JOIのスタイル：ライムイエロー × ロングウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ライムイエロー × ロングウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo5.jpg" alt="JOIのスタイル：ネイビーブルー × ロングレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ネイビーブルー × ロングレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo3.jpg" alt="JOIのスタイル：ウェットなパーマウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ウェットなパーマウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo7.jpg" alt="JOIのスタイル：オレンジのポイントカラー × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> オレンジのポイントカラー × ウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo6.jpg" alt="JOIのスタイル：ゴールドブロンド × ロングウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ゴールドブロンド × ロングウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo4.jpg" alt="JOIのスタイル：ブラウン × レイヤーウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> ブラウン × レイヤーウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_joi.jpg" alt="" width="200" height="200"></span><span class="who"><b>JOI</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/jo8.jpg" alt="JOIのスタイル：シルバーグレー × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>joi</b> シルバーグレー × ウルフ</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 11</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="JOI" data-dest="stekina" href="https://stekina.com/reserve/FQ4Z-52GM/menu" target="_blank" rel="noopener">JOIを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+    <section class="staff" id="rena">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">05 / 07</span>
+            <h2>RENA</h2>
+            <span class="role">Senior Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="RENA" data-dest="stekina" href="https://stekina.com/reserve/T8E4-HZY4/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>POPデザイン</span><span>デザインカラー</span><span>オールラウンド</span></div>
+        <p class="pitch">遊び心のあるカラーも、日常になじむスタイルも。幅広い経験と技術を活かして、今の気分にぴったりのヘアを提案します。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="RENAのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="who"><b>RENA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/rc1.jpg" alt="RENAのスタイル：ブラック × ブルーのフェイスフレーミング" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>rena</b> ブラック × ブルーのフェイスフレーミング</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="who"><b>RENA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/rc2.jpg" alt="RENAのスタイル：イエロー × グリーンのグラデーション" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>rena</b> イエロー × グリーンのグラデーション</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="who"><b>RENA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/rc3.jpg" alt="RENAのスタイル：ブロンドハイライト × レイヤーウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>rena</b> ブロンドハイライト × レイヤーウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="who"><b>RENA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/rc4.jpg" alt="RENAのスタイル：マルチカラー × レイヤーカット" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>rena</b> マルチカラー × レイヤーカット</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="who"><b>RENA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/rc5.jpg" alt="RENAのスタイル：プラチナブロンド × ロングレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>rena</b> プラチナブロンド × ロングレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_rena.jpg" alt="" width="200" height="200"></span><span class="who"><b>RENA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/rc6.jpg" alt="RENAのスタイル：パープル × ショートボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>rena</b> パープル × ショートボブ</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 6</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="RENA" data-dest="stekina" href="https://stekina.com/reserve/T8E4-HZY4/menu" target="_blank" rel="noopener">RENAを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+    <section class="staff" id="nova">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">06 / 07</span>
+            <h2>NOVA</h2>
+            <span class="role">Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="NOVA" data-dest="stekina" href="https://stekina.com/reserve/6FKL-A2J8/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>丁寧なカウンセリング</span><span>似合わせ</span><span>スタイル提案</span></div>
+        <p class="pitch">小さなこだわりや言葉にしにくいイメージも、丁寧に汲み取ります。じっくり相談しながら、納得できるスタイルを一緒につくります。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="NOVAのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/nc1.jpg" alt="NOVAのスタイル：ブルーグレー × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ブルーグレー × ウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/nc2.jpg" alt="NOVAのスタイル：オレンジ × ショートボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> オレンジ × ショートボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/nc3.jpg" alt="NOVAのスタイル：ライムグリーン × 前髪ポイントカラー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ライムグリーン × 前髪ポイントカラー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/nc4.jpg" alt="NOVAのスタイル：ペールブロンド × ショートボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ペールブロンド × ショートボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no2.jpg" alt="NOVAのスタイル：黒髪 × レイヤーロング" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> 黒髪 × レイヤーロング</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no7.jpg" alt="NOVAのスタイル：ラベンダーブラウン × ウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ラベンダーブラウン × ウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no3.jpg" alt="NOVAのスタイル：ぱっつんバング × ロングレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ぱっつんバング × ロングレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no5.jpg" alt="NOVAのスタイル：ダークブラウン × 顔まわりレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ダークブラウン × 顔まわりレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no6.jpg" alt="NOVAのスタイル：ミディアムウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ミディアムウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no9.jpg" alt="NOVAのスタイル：ショートウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ショートウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no4.jpg" alt="NOVAのスタイル：ラフレイヤー × ロング" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ラフレイヤー × ロング</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="who"><b>NOVA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/no8.jpg" alt="NOVAのスタイル：ミディアムレイヤー × 流し前髪" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>nova</b> ミディアムレイヤー × 流し前髪</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 12</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="NOVA" data-dest="stekina" href="https://stekina.com/reserve/6FKL-A2J8/menu" target="_blank" rel="noopener">NOVAを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+    <section class="staff" id="miina">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span>
+          <div class="pinfo">
+            <span class="idx">07 / 07</span>
+            <h2>MIINA</h2>
+            <span class="role">Jr. Stylist</span>
+          </div>
+          <a class="quick cta" data-staff="MIINA" data-dest="stekina" href="https://stekina.com/reserve/QGBZ-7ATZ/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>モード</span><span>デザインカット</span><span>ニュアンス</span></div>
+        <p class="pitch">シルエットや質感、少しの違和感までデザインに。モードな空気感をまといながら、その人らしさが際立つヘアをつくります。</p>
+      </div>
+      <div class="rail" tabindex="0" aria-label="MIINAのスタイル。横にスワイプできます">
+        <figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ma1.jpg" alt="MIINAのスタイル：ブロンド × ブラックのコントラスト" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ブロンド × ブラックのコントラスト</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ma2.jpg" alt="MIINAのスタイル：ボルドー × ロングスパイラル" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ボルドー × ロングスパイラル</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ma3.jpg" alt="MIINAのスタイル：黒髪 × ぱっつんロング" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> 黒髪 × ぱっつんロング</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/ma4.jpg" alt="MIINAのスタイル：グリーン × ブラックのショートウルフ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> グリーン × ブラックのショートウルフ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi2.jpg" alt="MIINAのスタイル：ボルドー × ミディアムレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ボルドー × ミディアムレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi3.jpg" alt="MIINAのスタイル：ぱっつんボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ぱっつんボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi4.jpg" alt="MIINAのスタイル：ペールブロンド × ウェーブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ペールブロンド × ウェーブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi5.jpg" alt="MIINAのスタイル：ロングストレート" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ロングストレート</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi9.jpg" alt="MIINAのスタイル：レッド × ロングレイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> レッド × ロングレイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi6.jpg" alt="MIINAのスタイル：ブラック × ワンレンボブ" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ブラック × ワンレンボブ</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi10.jpg" alt="MIINAのスタイル：マゼンタピンク × レイヤー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> マゼンタピンク × レイヤー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi7.jpg" alt="MIINAのスタイル：ブラック × オレンジのインナーカラー" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> ブラック × オレンジのインナーカラー</figcaption>
+        </figure><figure class="post">
+          <div class="post-head"><span class="mini"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="who"><b>MIINA</b><small>HACO+ 表参道</small></span><span class="dots" aria-hidden="true">•••</span></div>
+          <div class="media"><img src="images/mi8.jpg" alt="MIINAのスタイル：チェリーレッド × ストレート" width="600" height="600" loading="lazy"></div>
+          <div class="post-icons" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-.8 4A8 8 0 0 1 20 12z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></svg><svg class="save" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></div>
+          <figcaption><b>miina</b> チェリーレッド × ストレート</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <div class="swipe"><span class="count"><b>1</b> / 13</span><span class="hint">← スワイプ →</span></div>
+        <div class="actions"><a class="btn cta" data-staff="MIINA" data-dest="stekina" href="https://stekina.com/reserve/QGBZ-7ATZ/menu" target="_blank" rel="noopener">MIINAを指名して予約<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        
+      </div>
+    </section>
+  <section class="info">
+    <span class="en">ACCESS</span>
+    <h2>HACO+ 表参道／渋谷</h2>
+    <dl>
+      <div><dt>住所</dt><dd>東京都港区南青山6-13-9 ANISE B1F-B</dd></div>
+      <div><dt>最寄駅</dt><dd>表参道駅より徒歩7分／渋谷駅より徒歩15分</dd></div>
+      <div><dt>営業時間</dt><dd>平日 11:00–20:00／土日祝 10:00–19:00</dd></div>
+      <div><dt>定休日</dt><dd>火曜日</dd></div>
+    </dl>
+    <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%8D%97%E9%9D%92%E5%B1%B16-13-9" target="_blank" rel="noopener">Googleマップで見る →</a>
+  </section>
+  <footer><img src="images/logo.png" alt="HACO+" width="36" height="36"><span>© HACO Group Co Ltd.</span></footer>
+</div>
+<script>
+document.querySelectorAll('.cta').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(typeof window.fbq==='function'){window.fbq('track','Lead',{content_name:a.dataset.staff,content_category:'stylists',destination:a.dataset.dest});}
+  });
+});
+document.querySelectorAll('.staff').forEach(function(sec){
+  var rail=sec.querySelector('.rail'),b=sec.querySelector('.count b');
+  if(!rail||!b)return;
+  var posts=rail.querySelectorAll('.post'),t;
+  rail.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){
+    var x=rail.scrollLeft,best=0,d=1e9;posts.forEach(function(p,i){var dd=Math.abs(p.offsetLeft-rail.offsetLeft-18-x);if(dd<d){d=dd;best=i}});b.textContent=best+1;
+  },60)},{passive:true});
+});
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.story')),bar=document.querySelector('.stories');
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;
+    links.forEach(function(l){var on=l.getAttribute('href')==='#'+e.target.id;l.classList.toggle('on',on);if(on&&bar)bar.scrollTo({left:l.offsetLeft-60,behavior:'smooth'});});
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('.staff').forEach(function(s){io.observe(s)});
+})();
+</script>
+</body>
+</html>
