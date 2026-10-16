@@ -7,6 +7,9 @@
 <meta property="og:title" content="STYLISTS｜HACO+ 表参道">
 <meta property="og:description" content="スタイルを見て、気になるスタイリストにそのまま予約。">
 <meta property="og:type" content="website">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HB3T4GK5S1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-HB3T4GK5S1');</script>
 <script>
 var PIXEL_ID='1328304228377935';
 if(PIXEL_ID){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',PIXEL_ID);fbq('track','PageView');}
@@ -732,6 +735,7 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
 <script>
 document.querySelectorAll('.cta').forEach(function(a){
   a.addEventListener('click',function(){
+    if(typeof window.gtag==='function'){window.gtag('event','book_click',{stylist:a.dataset.staff,link_url:a.href,transport_type:'beacon'});}
     if(typeof window.fbq!=='function')return;
     var id=(a.dataset.staff||'').toLowerCase(),orig=location.pathname+location.search+location.hash;
     try{history.replaceState(null,'',location.pathname+'?book='+id+location.hash);}catch(e){}
