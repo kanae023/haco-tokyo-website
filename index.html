@@ -9,6 +9,12 @@
   gtag('js', new Date());
 
   gtag('config', 'G-HB3T4GK5S1');
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1328304228377935');fbq('track','PageView');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="表参道・渋谷（南青山）のデザイン美容室 HACO+。ブリーチ・デザインカラー・レイヤーカットが得意で、英語対応スタッフが在籍。ロンドン発のHACOグループ、カミカリスマ受賞・海外コレクション参加。An English-friendly hair salon in Omotesando, Tokyo.">
@@ -1891,23 +1897,23 @@ behold-widget {
       </p>
 
       <div class="booking-list">
-        <a href="https://beauty.hotpepper.jp/slnH000690910/" target="_blank" rel="noopener" class="booking-item">
+        <a href="/stylists/" class="booking-item">
           <span class="booking-item-number">01</span>
           <span class="booking-item-label">
-            First visit
-            <span class="jp">初めての方</span>
+            Choose your stylist
+            <span class="jp">スタイリストから選んで予約</span>
           </span>
-          <span class="booking-item-target">via Hot Pepper Beauty</span>
+          <span class="booking-item-target">via Stekina  ·  English supported</span>
           <span class="booking-item-arrow">→</span>
         </a>
 
-        <a href="#artists" class="booking-item">
+        <a href="https://beauty.hotpepper.jp/slnH000690910/" target="_blank" rel="noopener" class="booking-item">
           <span class="booking-item-number">02</span>
           <span class="booking-item-label">
-            Book by artist
-            <span class="jp">アーティスト指名</span>
+            Hot Pepper Beauty
+            <span class="jp">ホットペッパーで予約</span>
           </span>
-          <span class="booking-item-target">via Stekina  ·  English supported</span>
+          <span class="booking-item-target">via Hot Pepper Beauty</span>
           <span class="booking-item-arrow">→</span>
         </a>
 
@@ -2177,6 +2183,22 @@ langToggle.addEventListener('click', (e) => {
 
 
 
+</script>
+<script>
+/* Outbound click tracking (GA4 events + Meta Lead for bookings) */
+document.addEventListener('click',function(ev){
+  var a=ev.target.closest&&ev.target.closest('a[href]'); if(!a)return;
+  var h=a.href||'', name=null, params={link_url:h, page:'top', transport_type:'beacon'};
+  if(/stekina\.com/.test(h)){name='book_click';var m=(typeof artists!=='undefined'?artists:[]).filter(function(x){return x.booking===h;})[0];params.stylist=m?m.name:'';}
+  else if(/beauty\.hotpepper\.jp/.test(h)){name='hpb_click';}
+  else if(/lin\.ee|line\.me/.test(h)){name='line_click';}
+  else if(/wa\.me|whatsapp/.test(h)){name='whatsapp_click';}
+  else if(/instagram\.com/.test(h)){name='instagram_click';}
+  else if(/\/stylists\/?$/.test(a.pathname||'')&&a.host===location.host){name='stylists_click';}
+  if(!name)return;
+  if(typeof window.gtag==='function'){window.gtag('event',name,params);}
+  if(typeof window.fbq==='function'&&(name==='book_click'||name==='hpb_click')){window.fbq('track','Lead',{content_category:name});}
+},true);
 </script>
 </body>
 </html>
