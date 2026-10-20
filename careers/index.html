@@ -104,9 +104,24 @@ ul.people li{padding:.85rem 0;border-bottom:1px solid var(--g100);font-size:.9re
 .ctag i{font-style:normal;font-size:3.2rem;font-weight:400;color:transparent;-webkit-text-stroke:1.5px #fff;letter-spacing:.02em}
 .ccard h3{font-size:1.1rem;line-height:1.6;font-weight:500;margin:1.25rem 0 .6rem}
 .ccard p{color:var(--g700);font-size:.85rem;line-height:1.95}
-@media(max-width:1100px){.ccards{grid-template-columns:1fr 1fr}}
-@media(max-width:900px){.tabs{grid-template-columns:1fr 1fr}.tab{border-bottom:1px solid var(--black)}.tab:nth-child(2n){border-right:none}.panels{padding:1.5rem}.panel .job-img{position:static}}
-@media(max-width:600px){.ccards{grid-template-columns:1fr}.tabs{grid-template-columns:1fr}.tab{border-right:none}.panels{padding:1.25rem 1rem}}
+@media(max-width:1100px) and (min-width:901px){.ccards{grid-template-columns:1fr 1fr}}
+.swipe-hint{display:none;text-align:right;font-size:var(--txs);letter-spacing:.08em;color:var(--g500);margin-top:.75rem}
+@media(max-width:900px){
+.tabs{display:flex;gap:.5rem;overflow-x:auto;border:none;padding:0 0 .75rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1px solid var(--black);border-radius:999px;padding:.45rem .9rem;scroll-snap-align:start}
+.tab:last-child{border-right:1px solid var(--black)}
+.tab .c{display:inline;font-size:10px;margin-right:.35rem}
+.tab .t{display:inline;font-size:.8rem;margin-top:0}
+.panels{border-top:1px solid var(--black);padding:1.25rem 1rem}
+.panel .job-img{position:static}
+.ccards{display:flex;overflow-x:auto;gap:1rem;scroll-snap-type:x mandatory;padding:0 0 .5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ccards::-webkit-scrollbar{display:none}
+.ccard{flex:0 0 78%;scroll-snap-align:start}
+.career-head{margin-bottom:2rem}
+.swipe-hint{display:block}
+}
+
 .grad-head{text-align:center}
 .grad-head h2{font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:500;letter-spacing:0;margin:.4rem 0 1.5rem}
 .grad-btn{padding:1rem 2rem;border:1px solid var(--g300);background:#f1f1f1;color:var(--g500);font-size:.9rem;letter-spacing:.04em;cursor:not-allowed}
@@ -127,9 +142,18 @@ ul.people li{padding:.85rem 0;border-bottom:1px solid var(--g100);font-size:.9re
 .future-b{max-width:42rem;margin-top:1.5rem;color:var(--g700);font-size:.9rem;line-height:2.05}
 .future-b p+p{margin-top:1rem}
 .section-inner .label .k{display:block}
+@media(max-width:768px){
+.panels .spec .row{grid-template-columns:4.75rem 1fr;gap:.75rem;padding:.55rem 0}
+.panels .spec dt{font-size:11px;line-height:1.7}
+.panels .spec dd{font-size:.8rem;line-height:1.7}
+.panels .apply{margin-top:1rem;gap:.4rem 1rem}
+.panels .apply p{display:none}
+.panels .apply-btn{padding:.7rem 1.2rem;font-size:.8rem}
+.panels .note{font-size:10.5px}
+}
 hr.sep{border:none;border-top:8px solid #f4f4f4;margin:0}
 @media(max-width:900px){.why,.flow{grid-template-columns:1fr 1fr}.job-grid{grid-template-columns:1fr;gap:1.5rem}.job-img{aspect-ratio:16/10}}
-@media(max-width:768px){.hero{padding:3.5rem var(--pad) 2.5rem}.jobs-nav{grid-template-columns:1fr}.jobs-nav a+a{border-left:none;border-top:1px solid var(--g100)}.why,.flow{grid-template-columns:1fr}.spec .row{grid-template-columns:1fr;gap:.2rem}}
+@media(max-width:768px){.hero{padding:3.5rem var(--pad) 2.5rem}.jobs-nav{grid-template-columns:1fr}.jobs-nav a+a{border-left:none;border-top:1px solid var(--g100)}.why,.flow{grid-template-columns:1fr}}
 </style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -287,8 +311,7 @@ main{padding-top:var(--nav)}
       <div class="job-grid">
         
         <div>
-<p class="lead">自分のスタイルを持つスタイリストを募集しています。</p>
-<dl class="spec"><div class="row"><dt>雇用形態</dt><dd>業務委託（最初の6ヶ月）→ その後、正社員か業務委託かを相談</dd></div><div class="row"><dt>報酬</dt><dd>業務委託：歩合 40〜45%<br>正社員：月給22万〜25万円＋歩合</dd></div><div class="row"><dt>勤務地</dt><dd>東京都港区南青山6-13-9 ANISE B1F-B（表参道駅 徒歩7分／渋谷駅 徒歩15分）</dd></div><div class="row"><dt>勤務時間</dt><dd>平日 11:00〜20:00／土日祝 10:00〜19:00（火曜定休）</dd></div><div class="row"><dt>応募資格</dt><dd>スタイリスト経験者</dd></div><div class="row"><dt>待遇</dt><dd>四半期ごとのランク見直し／役職手当／ロンドン研修</dd></div></dl>
+<dl class="spec"><div class="row"><dt>雇用形態</dt><dd>業務委託（最初の6ヶ月）→ その後、正社員か業務委託かを相談</dd></div><div class="row"><dt>報酬</dt><dd>業務委託：歩合 40〜45%<br>正社員：月給22万〜25万円＋歩合</dd></div><div class="row"><dt>勤務地</dt><dd>南青山6-13-9（表参道駅 徒歩7分）</dd></div><div class="row"><dt>勤務時間</dt><dd>平日 11:00〜20:00／土日祝 10:00〜19:00（火曜定休）</dd></div><div class="row"><dt>応募資格</dt><dd>スタイリスト経験者</dd></div><div class="row"><dt>待遇</dt><dd>四半期ごとのランク見直し／役職手当／ロンドン研修</dd></div></dl>
 <div class="apply"><p>履歴書とInstagramアカウントを添えて、メールでご応募ください。</p>
       <a class="apply-btn" href="mailto:teiji@hacohairsalon.com?subject=【応募】HACO+%20中途スタイリスト" data-ev="recruit_apply_click">メールで応募する →</a>
       <span class="mail">teiji@hacohairsalon.com</span></div>
@@ -299,8 +322,7 @@ main{padding-top:var(--nav)}
       <div class="job-grid">
         
         <div>
-<p class="lead">育成プログラムで、スタイリストデビューを目指せます。</p>
-<dl class="spec"><div class="row"><dt>雇用形態</dt><dd>契約正社員（6ヶ月）→ 正社員</dd></div><div class="row"><dt>給与</dt><dd>月給20万円＋手当（モデル代バック・技術手当など）</dd></div><div class="row"><dt>勤務地</dt><dd>東京都港区南青山6-13-9 ANISE B1F-B（表参道駅 徒歩7分／渋谷駅 徒歩15分）</dd></div><div class="row"><dt>勤務時間</dt><dd>平日 11:00〜20:00／土日祝 10:00〜19:00（火曜定休）</dd></div><div class="row"><dt>休日</dt><dd>週休2日／有給休暇</dd></div><div class="row"><dt>応募資格</dt><dd><strong>ブリーチの塗布ができる方</strong></dd></div><div class="row"><dt>待遇</dt><dd>社会保険完備／交通費支給（月1.5万円まで）／ロンドン研修</dd></div></dl>
+<dl class="spec"><div class="row"><dt>雇用形態</dt><dd>契約正社員（6ヶ月）→ 正社員</dd></div><div class="row"><dt>給与</dt><dd>月給20万円＋手当（モデル代バック・技術手当など）</dd></div><div class="row"><dt>勤務地</dt><dd>南青山6-13-9（表参道駅 徒歩7分）</dd></div><div class="row"><dt>勤務時間</dt><dd>平日 11:00〜20:00／土日祝 10:00〜19:00（火曜定休）</dd></div><div class="row"><dt>休日</dt><dd>週休2日／有給休暇</dd></div><div class="row"><dt>応募資格</dt><dd><strong>ブリーチの塗布ができる方</strong></dd></div><div class="row"><dt>待遇</dt><dd>社会保険完備／交通費支給（月1.5万円まで）／ロンドン研修</dd></div></dl>
 <div class="apply"><p>履歴書とInstagramアカウントを添えて、メールでご応募ください。</p>
       <a class="apply-btn" href="mailto:teiji@hacohairsalon.com?subject=【応募】HACO+%20中途アシスタント" data-ev="recruit_apply_click">メールで応募する →</a>
       <span class="mail">teiji@hacohairsalon.com</span></div>
@@ -311,8 +333,7 @@ main{padding-top:var(--nav)}
       <div class="job-grid">
         
         <div>
-<p class="lead">表参道のHACO+Nailsで、一緒に働くネイリストを募集しています。</p>
-<dl class="spec"><div class="row"><dt>雇用形態</dt><dd>業務委託（3ヶ月のトライアル）→ 正規雇用へステップアップ</dd></div><div class="row"><dt>報酬</dt><dd>歩合 45%〜</dd></div><div class="row"><dt>勤務地</dt><dd>HACO+Nails　東京都港区南青山6-13-9 ANISE B1F-B（表参道駅 徒歩7分／渋谷駅 徒歩15分）</dd></div><div class="row"><dt>勤務時間</dt><dd>予約に合わせて出勤・退勤できる柔軟な働き方</dd></div><div class="row"><dt>応募資格</dt><dd>ネイリスト経験者</dd></div><div class="row"><dt>待遇</dt><dd>ロンドン研修の機会／材料・道具の一部支給</dd></div></dl>
+<dl class="spec"><div class="row"><dt>雇用形態</dt><dd>業務委託（3ヶ月のトライアル）→ 正規雇用へステップアップ</dd></div><div class="row"><dt>報酬</dt><dd>歩合 45%〜</dd></div><div class="row"><dt>勤務地</dt><dd>HACO+Nails　南青山6-13-9（表参道駅 徒歩7分）</dd></div><div class="row"><dt>勤務時間</dt><dd>予約に合わせて出勤・退勤できる柔軟な働き方</dd></div><div class="row"><dt>応募資格</dt><dd>ネイリスト経験者</dd></div><div class="row"><dt>待遇</dt><dd>ロンドン研修の機会／材料・道具の一部支給</dd></div></dl>
 <div class="apply"><p>履歴書とInstagramアカウントを添えて、メールでご応募ください。</p>
       <a class="apply-btn" href="mailto:teiji@hacohairsalon.com?subject=【応募】HACO+Nails%20ネイリスト" data-ev="recruit_apply_click">メールで応募する →</a>
       <span class="mail">teiji@hacohairsalon.com</span></div>
@@ -322,7 +343,6 @@ main{padding-top:var(--nav)}
     <div class="panel" role="tabpanel" id="london-stylist" aria-labelledby="tab-london-stylist" hidden>
       <div class="job-grid">
         <div>
-<p class="lead"><span class="jp">HACO HAIR+NAILS ロンドン店で、正社員のヘアスタイリスト／カラーリストを募集しています。</span><span class="en">We are hiring full-time hair stylists and colourists for HACO HAIR+NAILS in London.</span></p>
 <dl class="spec"><div class="row"><dt><span class="jp">雇用形態</span><span class="en">Contract</span></dt><dd><span class="jp">正社員（試用期間3ヶ月）</span><span class="en">Permanent (3-month probation)</span></dd></div><div class="row"><dt><span class="jp">給与</span><span class="en">Pay</span></dt><dd><span class="jp">月 約55万〜105万円（目安）<br><span class="note">基本給＋コミッション＋チップ／£2,600〜£5,000を1ポンド約210円で換算（為替により変動）</span></span><span class="en">Approx. £2,600–£5,000 / month<br><span class="note">Base + commission + tips</span></span></dd></div><div class="row"><dt><span class="jp">勤務地</span><span class="en">Location</span></dt><dd>SHOREDITCH・HOXTON, London</dd></div><div class="row"><dt><span class="jp">勤務時間</span><span class="en">Hours</span></dt><dd><span class="jp">週5日 10:00〜20:00</span><span class="en">5 days a week, 10:00–20:00</span></dd></div><div class="row"><dt><span class="jp">休暇</span><span class="en">Holiday</span></dt><dd><span class="jp">年28日の有給休暇</span><span class="en">28 days paid holiday</span></dd></div><div class="row"><dt><span class="jp">応募資格</span><span class="en">Requirements</span></dt><dd><span class="jp">スタイリスト経験3年以上／英国での就労資格（YMS・就労ビザ）</span><span class="en">3+ years' experience / right to work in the UK</span></dd></div></dl>
 <div class="apply"><p><span class="jp">履歴書とInstagramアカウントを添えて、メールでご応募ください。</span><span class="en">Send your CV and Instagram account by email.</span></p>
       <a class="apply-btn" href="mailto:teiji@hacohairsalon.com?subject=Application%20-%20HACO%20London%20Hair%20Stylist" data-ev="recruit_apply_click"><span class="jp">メールで応募する</span><span class="en">Apply by email</span> →</a>
@@ -335,7 +355,6 @@ main{padding-top:var(--nav)}
       <div class="job-grid">
         
         <div>
-<p class="lead"><span class="jp">ロンドンで、ネイルを本気で続けたい人へ。海外が初めてでも大丈夫です。</span><span class="en">For nail artists who want to build a career in London — with relocation support and real creative work.</span></p>
 <dl class="spec"><div class="row"><dt><span class="jp">雇用形態</span><span class="en">Contract</span></dt><dd><span class="jp">正社員（試用期間3ヶ月）</span><span class="en">Permanent (3-month probation)</span></dd></div><div class="row"><dt><span class="jp">給与</span><span class="en">Pay</span></dt><dd><span class="jp">基本給＋コミッション＋チップ<br><span class="note">平均手取り 日本円で約50万円前後</span></span><span class="en">Base + commission + tips</span></dd></div><div class="row"><dt><span class="jp">勤務地</span><span class="en">Location</span></dt><dd>HACO Nails London</dd></div><div class="row"><dt><span class="jp">ビザ・渡航</span><span class="en">Visa</span></dt><dd><span class="jp">YMSでの渡航サポート／家探しなど生活の立ち上げもお手伝い</span><span class="en">YMS support and help settling in</span></dd></div><div class="row"><dt><span class="jp">英語</span><span class="en">English</span></dt><dd><span class="jp">不安でもOK。スタッフがサポートします</span><span class="en">No need to be fluent</span></dd></div><div class="row"><dt><span class="jp">休暇</span><span class="en">Holiday</span></dt><dd><span class="jp">年28日の有給休暇</span><span class="en">28 days paid holiday</span></dd></div></dl>
 
 <div class="apply"><p><span class="jp">履歴書とInstagramアカウントを添えて、メールでご応募ください。</span><span class="en">Send your CV and Instagram account by email.</span></p>
@@ -356,6 +375,7 @@ main{padding-top:var(--nav)}
     <p>自分だけの武器を、一緒に磨いていこう。<br>技術も、センスも、その先のキャリアも。</p>
   </div>
   <div class="ccards"><article class="ccard"><div class="cimg"><img src="/assets/careers/career-1.jpg" alt="" loading="lazy"><span class="ctag"><b>RANK UP</b><i>01</i></span></div><h3>売上が、そのまま<br>キャリアになる。</h3><p>3ヶ月ごとにランクを見直し。がんばりが、そのまま肩書きと報酬に返ってきます。</p></article><article class="ccard"><div class="cimg"><img src="/assets/careers/career-2.jpg" alt="" loading="lazy"><span class="ctag"><b>LONDON</b><i>02</i></span></div><h3>年に一度、<br>ロンドンへ。</h3><p>ロンドンの姉妹店で働く研修制度があります。現地のお客様を担当しながら、海外の感覚や英語での接客が自然と身につきます。ロンドン店で働く道もあります。</p></article><article class="ccard"><div class="cimg"><img src="/assets/careers/career-3.jpg" alt="" loading="lazy"><span class="ctag"><b>CREATIVE</b><i>03</i></span></div><h3>サロンの外でも、<br>表現できる。</h3><p>雑誌や広告の撮影、ファッションウィークのバックステージ。サロンワークを大切にしながら、クリエイティブな現場にも挑戦できます。</p></article><article class="ccard"><div class="cimg"><img src="/assets/careers/career-4.jpg" alt="" loading="lazy"><span class="ctag"><b>YOUR OWN</b><i>04</i></span></div><h3>いつかは、<br>自分のお店を。</h3><p>技術だけでなく、審美眼・世界観・人間力、そして経営まで学べます。将来の独立やお店づくりも、一緒に考えていきます。</p></article></div>
+  <span class="swipe-hint">SWIPE →</span>
 </section>
 <hr class="sep">
 
@@ -407,7 +427,7 @@ main{padding-top:var(--nav)}
     panels.forEach(function(p){p.hidden=p.id!==id});
     if(scroll)document.getElementById('jobs').scrollIntoView({behavior:'smooth'});
   }
-  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.target);try{history.replaceState(null,'','#'+t.dataset.target)}catch(e){}
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.target);t.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});try{history.replaceState(null,'','#'+t.dataset.target)}catch(e){}
     if(typeof gtag==='function')gtag('event','recruit_tab',{position:t.dataset.target});})});
   if(location.hash)show(location.hash.slice(1),true);
   var g=document.getElementById('graduates');
