@@ -1,0 +1,56 @@
+# 毎朝（日本時間 6:00頃）Instagram の #hacojournal 投稿をチェックし、
+# 新しい記事があればプルリクエストを作成します。マージすると公開されます。
+name: Instagram → Journal
+
+on:
+  schedule:
+    - cron: "47 20 * * *"   # UTC 20:47 = JST 5:47
+  workflow_dispatch: {}      # Actions タブから手動実行も可能
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install markdown pyyaml pillow
+      - name: Fetch #hacojournal posts
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REPORT_FILE: ${{ runner.temp }}/report.md
+        run: python3 scripts/instagram_sync.py
+      - name: Build journal pages
+        run: python3 scripts/build_journal.py
+      - name: Read report
+        id: report
+        run: |
+          {
+            echo 'body<<EOF'
+            cat "${{ runner.temp }}/report.md" 2>/dev/null || true
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: journal/instagram-sync
+          delete-branch: true
+          commit-message: "Journal: Instagramから新しい記事を追加"
+          title: "Journal：新しい記事の確認をお願いします"
+          body: |
+            Instagram の #hacojournal 投稿から記事を作成しました。
+
+            ${{ steps.report.outputs.body }}
+
+            **確認のしかた**
+            1. 「Files changed」で `_journal/` の文章を確認（直したい箇所は ✏️ から編集できます）
+            2. 問題なければ「Merge pull request」→ 数分でサイトに公開されます
+            3. 公開したくない場合は「Close pull request」
+          labels: journal
