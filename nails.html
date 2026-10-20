@@ -1455,6 +1455,19 @@ behold-widget {
   background: var(--color-black);
   color: var(--color-white);
 }
+
+/* RECRUIT BANNER */
+.recruit-banner{position:relative;display:block;aspect-ratio:2/1;max-height:560px;width:100%;overflow:hidden;color:#fff;text-decoration:none}
+.recruit-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(0.16,1,0.3,1)}
+.recruit-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,.05) 60%)}
+.recruit-banner:hover{opacity:1}
+.recruit-banner:hover img{transform:scale(1.03)}
+.recruit-banner-text{position:absolute;left:2.5rem;right:2.5rem;bottom:2.25rem;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap}
+.recruit-banner-k{display:block;font-size:.6875rem;letter-spacing:.2em}
+.recruit-banner-h{display:block;font-size:clamp(1.3rem,3vw,2.4rem);line-height:1.35;margin-top:.5rem;font-weight:500}
+.recruit-banner-btn{border:1px solid #fff;padding:.8rem 1.4rem;font-size:.8125rem;letter-spacing:.06em;white-space:nowrap}
+.recruit-banner:hover .recruit-banner-btn{background:#fff;color:#0a0a0a}
+@media(max-width:768px){.recruit-banner{aspect-ratio:4/3}.recruit-banner-text{left:1rem;right:1rem;bottom:1.25rem}}
 </style>
 </head>
 <body>
@@ -1466,7 +1479,6 @@ behold-widget {
     <li><a href="index.html">Hair</a></li>
     <li><a href="nails.html" class="current">Nail</a></li>
     <li><a href="journal/">Journal</a></li>
-    <li><a href="about/">About</a></li>
     <li><a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a></li>
       </ul>
   <div class="nav-right">
@@ -1489,7 +1501,6 @@ behold-widget {
   <a href="index.html" class="mobile-menu-link">Hair</a>
   <a href="nails.html" class="mobile-menu-link">Nail</a>
   <a href="journal/" class="mobile-menu-link">Journal</a>
-  <a href="about/" class="mobile-menu-link">About</a>
   <a href="https://www.hacomanagement.com" target="_blank" rel="noopener" class="mobile-menu-link">Management</a>
   <a href="#booking" class="mobile-menu-link">Book</a>
 </div>
@@ -1813,6 +1824,16 @@ behold-widget {
     </div>
   </div>
 </section>
+
+<!-- RECRUIT BANNER -->
+<a class="recruit-banner" href="careers/" data-ev="recruit_banner_click">
+  <img src="assets/careers/tokyo-salon-2.jpg" alt="HACO+ 表参道の店内" loading="lazy">
+  <span class="recruit-banner-text">
+    <span><span class="recruit-banner-k">RECRUIT</span>
+      <span class="recruit-banner-h"><span class="jp">東京とロンドンで、<br>一緒に働く仲間を募集しています。</span><span class="en">Join us in<br>Tokyo and London.</span></span></span>
+    <span class="recruit-banner-btn"><span class="jp">採用情報を見る →</span><span class="en">Careers →</span></span>
+  </span>
+</a>
 
 <!-- FOOTER -->
 <footer class="footer">

@@ -273,7 +273,6 @@ def head(title, desc, url, image, extra=""):
     <li><a href="/index.html">Hair</a></li>
     <li><a href="/nails.html">Nail</a></li>
     <li><a href="/journal/" class="current">Journal</a></li>
-    <li><a href="/about/">About</a></li>
     <li><a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a></li>
   </ul>
   <div class="nav-right">
@@ -283,7 +282,7 @@ def head(title, desc, url, image, extra=""):
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/index.html">Hair</a><a href="/nails.html">Nail</a><a href="/journal/">Journal</a><a href="/about/">About</a>
+  <a href="/index.html">Hair</a><a href="/nails.html">Nail</a><a href="/journal/">Journal</a>
   <a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a><a href="/index.html#booking">Book</a>
 </div>
 <main>
