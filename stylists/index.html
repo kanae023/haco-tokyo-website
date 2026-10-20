@@ -122,6 +122,15 @@ footer{padding:0 18px 28px;display:flex;justify-content:space-between;align-item
 footer img{width:36px;height:36px}
 footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:var(--mute)}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
+.ring.omk{background:var(--ink)}
+.ring.omk span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;border:2.5px solid var(--paper);background:var(--ink);color:#fff;font-family:var(--f-jp);font-weight:700;font-size:9.5px;letter-spacing:0;line-height:1.2;text-align:center;white-space:nowrap}
+.ring.big.omk span{border-width:3px;font-size:14px}
+.omakase .tags span{background:var(--ink);border-color:var(--ink);color:#fff}
+.omakase-end{background:var(--paper);margin:0 0 8px;padding:30px 18px 32px;text-align:center}
+.omakase-end .en{font-family:var(--f-en);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--mute)}
+.omakase-end h2{font-size:18px;line-height:1.5;margin:4px 0 0}
+.omakase-end p{font-size:13px;color:var(--text);margin:6px 0 16px}
+.omakase-end .quick{display:inline-block;padding:10px 28px}
 </style>
 </head>
 <body>
@@ -131,9 +140,10 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
   <div class="intro">
     <span class="en">STYLISTS</span>
     <h1>好きなスタイルから、<br>担当を選んで予約。</h1>
-    <p>スタイリストをタップすると、その人の作品へ移動します。</p>
+    <p>スタイリストをタップすると、その人の作品へ移動します。誰にするか迷ったら「おまかせ」で予約できます。</p>
   </div>
   <nav class="stories-bar" aria-label="スタイリスト一覧"><div class="stories">
+<a class="story" href="#omakase"><span class="ring omk"><span>おまかせ</span></span><span class="sname">FREE</span></a>
 <a class="story" href="#ibuki"><span class="ring"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="sname">IBUKI</span></a>
 <a class="story" href="#makoto"><span class="ring"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="sname">MAKOTO</span></a>
 <a class="story" href="#leo"><span class="ring"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="sname">LEO</span></a>
@@ -142,6 +152,22 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
 <a class="story" href="#nova"><span class="ring"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="sname">NOVA</span></a>
 <a class="story" href="#miina"><span class="ring"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="sname">MIINA</span></a>
   </div></nav>
+
+    <section class="staff omakase" id="omakase">
+      <div class="wrap">
+        <div class="profile">
+          <span class="ring big omk"><span>おまかせ</span></span>
+          <div class="pinfo">
+            <span class="idx">FOR FIRST VISIT</span>
+            <h2>おまかせ</h2>
+            <span class="role">No preference</span>
+          </div>
+          <a class="quick cta" data-staff="OMAKASE" data-dest="stekina" href="https://stekina.com/reserve/F6LV-XR8K/menu" target="_blank" rel="noopener">予約</a>
+        </div>
+        <div class="tags"><span>初めての方</span><span>担当に迷ったら</span></div>
+        <p class="pitch">誰にお願いするか迷ったら、おまかせで予約を。ご希望のメニューと日時に合わせて、サロンが担当スタイリストを決めます。</p>
+      </div>
+    </section>
 
     <section class="staff" id="ibuki">
       <div class="wrap">
@@ -729,6 +755,12 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
       <div><dt>定休日</dt><dd>火曜日</dd></div>
     </dl>
     <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%8D%97%E9%9D%92%E5%B1%B16-13-9" target="_blank" rel="noopener">Googleマップで見る →</a>
+  </section>
+  <section class="omakase-end">
+    <span class="en">STILL DECIDING?</span>
+    <h2>迷ったら、おまかせで。</h2>
+    <p>担当はサロンが決めます。初めての方もお気軽に。</p>
+    <a class="quick cta" data-staff="OMAKASE" data-dest="stekina" href="https://stekina.com/reserve/F6LV-XR8K/menu" target="_blank" rel="noopener">おまかせで予約</a>
   </section>
   <footer><img src="images/logo.png" alt="HACO+" width="36" height="36"><span>© HACO Group Co Ltd.</span></footer>
 </div>
