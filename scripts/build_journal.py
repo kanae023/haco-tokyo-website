@@ -48,7 +48,7 @@ import yaml
 # ======================================================================
 SITE_URL = "https://hacoplus.jp"
 WORK_EMAIL = "s@hacohairsalon.com"   # 撮影・講師・ヘアメイク依頼の窓口
-RECRUIT_URL = "https://www.hacogroup.online/post/rqruit-アシスタント募集のお知らせ"  # 新しい採用ページができたら差し替え
+RECRUIT_URL = "/careers/"  # 採用ページ
 INSTAGRAM_URL = "https://www.instagram.com/hacohairnailstokyo/"
 GA_ID = "G-HB3T4GK5S1"
 
@@ -273,6 +273,7 @@ def head(title, desc, url, image, extra=""):
     <li><a href="/index.html">Hair</a></li>
     <li><a href="/nails.html">Nail</a></li>
     <li><a href="/journal/" class="current">Journal</a></li>
+    <li><a href="/about/">About</a></li>
     <li><a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a></li>
   </ul>
   <div class="nav-right">
@@ -282,7 +283,7 @@ def head(title, desc, url, image, extra=""):
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/index.html">Hair</a><a href="/nails.html">Nail</a><a href="/journal/">Journal</a>
+  <a href="/index.html">Hair</a><a href="/nails.html">Nail</a><a href="/journal/">Journal</a><a href="/about/">About</a>
   <a href="https://www.hacomanagement.com" target="_blank" rel="noopener">Management</a><a href="/index.html#booking">Book</a>
 </div>
 <main>
