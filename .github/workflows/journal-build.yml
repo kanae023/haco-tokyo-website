@@ -1,0 +1,30 @@
+# _journal/ の記事を GitHub 上で直接編集・追加したときに、ページを作り直します。
+name: Build journal
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_journal/**"
+      - "scripts/build_journal.py"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install markdown pyyaml
+      - run: python3 scripts/build_journal.py
+      - name: Commit generated pages
+        run: |
+          git config user.name "haco-journal-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add journal
+          git diff --cached --quiet || (git commit -m "Journal: ページを再生成" && git push)
