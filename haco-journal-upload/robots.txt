@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hacoplus.jp/sitemap.xml
+Sitemap: https://hacoplus.jp/journal/sitemap-journal.xml
