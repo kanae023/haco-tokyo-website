@@ -27,7 +27,7 @@ from pathlib import Path
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from build_journal import CATEGORIES, STAFF  # noqa: E402
+from build_journal import CATEGORIES, CATEGORY_ALIASES, STAFF  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "_journal"
@@ -136,7 +136,7 @@ Instagramのキャプションから、サイト用の記事を日本語と英�
 - キャプションに書かれていない事実（日付、媒体名、人数、場所、役割、受賞歴など）を絶対に作らない。わからないことは書かない。
 - 誇張表現・絵文字・ハッシュタグは使わない。落ち着いた、ファッション誌のクレジットのような文体。
 - 本文は2〜4段落。誰が・何を・どこで担当したかを最初に書く。
-- category は次から1つ：{", ".join(CATEGORIES)}（講師・セミナー・ワークショップ=EDUCATION、海外出張=GLOBAL、ファッションウィーク=SHOW、雑誌表紙・誌面=EDITORIAL）
+- category は次から1つ：{", ".join(CATEGORIES)}（雑誌表紙・誌面・インタビュー=EDITORIAL、広告・ブランド・商品撮影=CAMPAIGN、ファッションウィーク・ショー・イベント・セミナー講師・海外出張=SHOW、受賞・その他のお知らせ=NEWS）
 - staff はこの名前リストに含まれる人だけ：{", ".join(STAFF)}
 - credits は「役割: 名前」の形（例「ヘア: Wataro」）。キャプションに無ければ空配列。
 - slug は英小文字とハイフンのみ、40文字以内。
@@ -195,6 +195,7 @@ def main():
             except Exception as ex:
                 print(f"image failed: {ex}")
         cat = str(a.get("category", "NEWS")).upper()
+        cat = CATEGORY_ALIASES.get(cat, cat)
         if cat not in CATEGORIES:
             cat = "NEWS"
         staff = [s for s in (a.get("staff") or []) if s in STAFF]
