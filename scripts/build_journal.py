@@ -179,16 +179,20 @@ main{padding-top:var(--nav)}
 .card-title{font-size:var(--t);line-height:1.55}
 .card[hidden]{display:none}
 @media(max-width:768px){.grid{grid-template-columns:1fr 1fr;gap:2rem .75rem}}
-/* index rail: 2段の横スクロール（新しい順に左上から） */
+/* index rows: 2段、それぞれ独立して横スクロール（新しい順に左上から） */
 .section-inner>*{min-width:0}
-.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:clamp(200px,22vw,300px);gap:2.5rem 1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:0;padding-bottom:1rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
-.rail .card{scroll-snap-align:start}
-.rail-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:-1rem 0 1.25rem}
+.rail-nav{margin:-1rem 0 1.25rem}
 .rail-count{font-size:var(--txs);letter-spacing:.06em;color:var(--g500)}
-.rail-btns{display:flex;gap:.5rem}
-.rail-btns button{width:2.25rem;height:2.25rem;border:1px solid var(--g100);font-size:1rem;line-height:1;transition:all .2s}
-.rail-btns button:hover{background:var(--black);color:var(--white);border-color:var(--black)}
-@media(max-width:768px){.rail{grid-auto-columns:42vw;gap:1.75rem .75rem;margin-right:calc(var(--pad)*-1);padding-right:var(--pad);scrollbar-width:none}.rail::-webkit-scrollbar{display:none}}
+.rows{display:grid;grid-template-columns:minmax(0,1fr);gap:2.5rem}
+.row-wrap{position:relative}
+.rail{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.rail .card{flex:0 0 clamp(200px,22vw,300px);scroll-snap-align:start}
+.rail .card[hidden]{display:none}
+.row-btn{position:absolute;top:calc(clamp(200px,22vw,300px)*0.625);transform:translateY(-50%);width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid var(--g100);font-size:1rem;line-height:1;z-index:2;transition:opacity .2s}
+.row-btn.prev{left:-1.25rem}.row-btn.next{right:-1.25rem}
+.row-btn[disabled]{opacity:0;pointer-events:none}
+@media(max-width:768px){.rows{gap:2rem}.rail{gap:.75rem;margin-right:calc(var(--pad)*-1);padding-right:var(--pad)}.rail .card{flex-basis:42vw}.row-btn{display:none}}
 /* article */
 .crumb{font-size:var(--txs);letter-spacing:.06em;text-transform:uppercase;color:var(--g500);margin-bottom:2rem}
 .article-head{max-width:46rem;margin-bottom:2.5rem}
@@ -241,13 +245,23 @@ JS = """
     fb.forEach(function(x){x.classList.toggle('active',x===b)});
     var c=b.dataset.cat;
     document.querySelectorAll('.card').forEach(function(card){card.hidden=!(c==='ALL'||card.dataset.cat===c)});
-    var r=document.querySelector('.rail'); if(r){r.scrollLeft=0; count();}
+    layout(c);
   })});
-  var rail=document.querySelector('.rail'), cnt=document.querySelector('.rail-count');
-  function count(){ if(cnt&&rail) cnt.textContent=rail.querySelectorAll('.card:not([hidden])').length+' posts'; }
-  count();
-  document.querySelectorAll('.rail-btns button').forEach(function(b){b.addEventListener('click',function(){
-    if(rail) rail.scrollBy({left:(b.dataset.dir==='next'?1:-1)*rail.clientWidth*0.9,behavior:'smooth'});
+  var rows=document.querySelectorAll('.rows .rail'), all=[].slice.call(document.querySelectorAll('.rows .card')), cnt=document.querySelector('.rail-count');
+  function layout(c){ var n=0;
+    all.forEach(function(card){ var on=(c==='ALL'||card.dataset.cat===c); card.hidden=!on; if(on){rows[n%2].appendChild(card);n++} else {rows[1].appendChild(card)} });
+    rows.forEach(function(r){r.scrollLeft=0; btns(r)}); if(cnt) cnt.textContent=n+' posts'; }
+  function btns(r){ var w=r.parentNode, p=w.querySelector('.prev'), x=w.querySelector('.next'); if(!p)return;
+    p.disabled=r.scrollLeft<4; x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4; }
+  rows.forEach(function(r){ r.addEventListener('scroll',function(){btns(r)},{passive:true});
+    r.parentNode.querySelectorAll('.row-btn').forEach(function(b){b.addEventListener('click',function(){
+      r.scrollBy({left:(b.classList.contains('next')?1:-1)*r.clientWidth*0.85,behavior:'smooth'})})}); });
+  if(rows.length) layout('ALL');
+  document.querySelectorAll('.press-rail').forEach(function(r){ var w=r.parentNode;
+    function pb(){var p=w.querySelector('.prev'),x=w.querySelector('.next'); if(!p)return; p.disabled=r.scrollLeft<4; x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4;}
+    r.addEventListener('scroll',pb,{passive:true}); pb();
+    w.querySelectorAll('.row-btn').forEach(function(b){b.addEventListener('click',function(){r.scrollBy({left:(b.classList.contains('next')?1:-1)*r.clientWidth*0.85,behavior:'smooth'})})});
+  });
   })});
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('a[data-ev]'); if(!a||typeof gtag!=='function')return;
@@ -380,8 +394,12 @@ def build_index(posts):
         <span class="en">Notes from beyond the chair — backstage at fashion weeks, editorial and campaign work, education, and projects across Tokyo, London and Asia.</span>
       </p>
       <div class="filters">{chips}</div>
-      <div class="rail-nav"><span class="rail-count"></span><span class="rail-btns"><button type="button" data-dir="prev" aria-label="Previous">←</button><button type="button" data-dir="next" aria-label="Next">→</button></span></div>
-      <div class="rail">{''.join(cards)}
+      <div class="rail-nav"><span class="rail-count">{len(posts)} posts</span></div>
+      <div class="rows">
+        <div class="row-wrap"><button type="button" class="row-btn prev" aria-label="Previous">←</button><div class="rail">{''.join(cards[0::2])}
+        </div><button type="button" class="row-btn next" aria-label="Next">→</button></div>
+        <div class="row-wrap"><button type="button" class="row-btn prev" aria-label="Previous">←</button><div class="rail">{''.join(cards[1::2])}
+        </div><button type="button" class="row-btn next" aria-label="Next">→</button></div>
       </div>
     </div>
   </div>
@@ -487,6 +505,71 @@ def build_feed(posts):
     (OUT_DIR / "sitemap-journal.xml").write_text(sm, encoding="utf-8")
 
 
+HOME_PAGE = ROOT / "index.html"
+HOME_COUNT = 5   # トップページの Press に出す件数（それ以上は「すべての掲載を見る」へ）
+
+
+def build_home_press(posts):
+    """トップページ index.html の <!-- PRESS:START --> 〜 <!-- PRESS:END --> を最新記事で書き換える"""
+    if not HOME_PAGE.exists():
+        return
+    page = HOME_PAGE.read_text(encoding="utf-8")
+    m = re.search(r"<!-- PRESS:START -->.*?<!-- PRESS:END -->", page, re.S)
+    if not m:
+        print("index.html: PRESS markers not found, skipped", file=sys.stderr)
+        return
+    cards = []
+    for p in posts[:HOME_COUNT]:
+        en, ja = CATEGORIES.get(p["category"], (p["category"].title(), p["category"]))
+        cards.append(f"""
+        <a href="/journal/{p['slug']}/" class="press-card hp-card" data-ev="home_press_click">
+          <div class="press-card-media hp-media"><img src="{e(p.get('cover'))}" alt="{e(p.get('title'))}" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">{e(en)}</span><span class="press-card-year">{p['date'].strftime('%Y.%m.%d')}</span></div>
+            <span class="press-card-title">{bi(p.get('title'), p.get('title_en'))}</span>
+          </div>
+        </a>""")
+    block = f"""<!-- PRESS:START -->
+      <!-- この部分は scripts/build_journal.py が自動で書き換えます（直接編集しないでください） -->
+      <style>
+      #press .section-inner>*{{min-width:0}}
+      .hp-wrap{{position:relative}}
+      .press-rail{{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}}
+      .press-rail::-webkit-scrollbar{{display:none}}
+      .press-rail .hp-card{{flex:0 0 clamp(200px,21vw,300px);scroll-snap-align:start}}
+      .hp-media{{aspect-ratio:4/5!important}}
+      .hp-all{{flex:0 0 clamp(200px,21vw,300px);scroll-snap-align:start;aspect-ratio:4/5;border:1px solid var(--color-gray-100,#ececec);display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;padding:1.25rem;text-decoration:none;color:inherit;transition:background .3s,color .3s}}
+      .hp-all:hover{{background:#0a0a0a;color:#fff}}
+      .hp-all-k{{font-size:var(--text-xs,.6875rem);letter-spacing:.15em;text-transform:uppercase;opacity:.6}}
+      .hp-all-h{{font-size:var(--text-base,.875rem);line-height:1.5}}
+      .hp-wrap .row-btn{{position:absolute;top:calc(clamp(200px,21vw,300px)*0.625);transform:translateY(-50%);width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid #ececec;font-size:1rem;line-height:1;z-index:2;cursor:pointer;transition:opacity .2s}}
+      .hp-wrap .row-btn.prev{{left:-1.25rem}}.hp-wrap .row-btn.next{{right:-1.25rem}}
+      .hp-wrap .row-btn[disabled]{{opacity:0;pointer-events:none}}
+      @media(max-width:768px){{.press-rail{{gap:.75rem;margin-right:calc(var(--page-padding,1.5rem)*-1);padding-right:var(--page-padding,1.5rem)}}.press-rail .hp-card,.hp-all{{flex-basis:44vw}}.hp-wrap .row-btn{{display:none}}}}
+      </style>
+      <div class="hp-wrap">
+        <button type="button" class="row-btn prev" aria-label="Previous">←</button>
+        <div class="press-rail">{''.join(cards)}
+        <a href="/journal/" class="hp-all" data-ev="home_press_all">
+          <span class="hp-all-k">Journal</span>
+          <span class="hp-all-h"><span class="jp">すべての掲載を見る →</span><span class="en">View all press →</span></span>
+        </a>
+        </div>
+        <button type="button" class="row-btn next" aria-label="Next">→</button>
+      </div>
+      <script>
+      (function(){{var w=document.currentScript.previousElementSibling,r=w.querySelector('.press-rail'),p=w.querySelector('.prev'),x=w.querySelector('.next');
+        function u(){{p.disabled=r.scrollLeft<4;x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4}}
+        r.addEventListener('scroll',u,{{passive:true}});window.addEventListener('resize',u);u();
+        [p,x].forEach(function(b){{b.addEventListener('click',function(){{r.scrollBy({{left:(b===x?1:-1)*r.clientWidth*0.85,behavior:'smooth'}})}})}});
+      }})();
+      </script>
+      <!-- PRESS:END -->"""
+    new = page[:m.start()] + block + page[m.end():]
+    if new != page:
+        HOME_PAGE.write_text(new, encoding="utf-8")
+
+
 def main():
     posts = load_posts()
     # remove article folders whose post was deleted / set to draft
@@ -498,6 +581,7 @@ def main():
     for p in posts:
         build_post(p, posts)
     build_feed(posts)
+    build_home_press(posts)
     print(f"built {len(posts)} posts")
 
 
