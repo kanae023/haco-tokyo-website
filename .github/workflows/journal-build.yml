@@ -26,5 +26,5 @@ jobs:
         run: |
           git config user.name "haco-journal-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add journal
+          git add journal index.html
           git diff --cached --quiet || (git commit -m "Journal: ページを再生成" && git push)
