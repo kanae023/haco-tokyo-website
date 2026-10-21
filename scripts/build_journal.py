@@ -54,14 +54,15 @@ GA_ID = "G-HB3T4GK5S1"
 
 CATEGORIES = {
     "EDITORIAL": ("Editorial", "誌面・撮影"),
-    "SHOW": ("Show / Fashion Week", "ショー・ファッションウィーク"),
-    "CAMPAIGN": ("Campaign", "広告・キャンペーン"),
-    "INTERVIEW": ("Interview", "インタビュー"),
-    "EDUCATION": ("Education", "講師・ワークショップ"),
-    "GLOBAL": ("Global", "海外の仕事"),
-    "EVENT": ("Event", "イベント"),
-    "PRODUCT": ("Product", "プロダクト"),
+    "CAMPAIGN": ("Campaign", "広告・コラボ"),
+    "SHOW": ("Show / Event", "ショー・イベント・講師"),
     "NEWS": ("News", "お知らせ"),
+}
+# 以前のカテゴリ名は自動でまとめます（記事ファイルを書き換える必要はありません）
+CATEGORY_ALIASES = {
+    "INTERVIEW": "EDITORIAL",
+    "PRODUCT": "CAMPAIGN",
+    "EVENT": "SHOW", "EDUCATION": "SHOW", "GLOBAL": "SHOW",
 }
 
 # スタッフ情報：記事の staff に名前を入れると、写真・肩書き・予約リンクが出ます
@@ -114,7 +115,7 @@ def load_posts():
             **meta,
             "slug": slug,
             "date": d,
-            "category": str(meta.get("category", "NEWS")).upper(),
+            "category": CATEGORY_ALIASES.get(str(meta.get("category", "NEWS")).upper(), str(meta.get("category", "NEWS")).upper()),
             "staff": meta.get("staff") or [],
             "credits": meta.get("credits") or [],
             "images": meta.get("images") or [],
@@ -178,6 +179,16 @@ main{padding-top:var(--nav)}
 .card-title{font-size:var(--t);line-height:1.55}
 .card[hidden]{display:none}
 @media(max-width:768px){.grid{grid-template-columns:1fr 1fr;gap:2rem .75rem}}
+/* index rail: 2段の横スクロール（新しい順に左上から） */
+.section-inner>*{min-width:0}
+.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:clamp(200px,22vw,300px);gap:2.5rem 1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:0;padding-bottom:1rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.rail .card{scroll-snap-align:start}
+.rail-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:-1rem 0 1.25rem}
+.rail-count{font-size:var(--txs);letter-spacing:.06em;color:var(--g500)}
+.rail-btns{display:flex;gap:.5rem}
+.rail-btns button{width:2.25rem;height:2.25rem;border:1px solid var(--g100);font-size:1rem;line-height:1;transition:all .2s}
+.rail-btns button:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+@media(max-width:768px){.rail{grid-auto-columns:42vw;gap:1.75rem .75rem;margin-right:calc(var(--pad)*-1);padding-right:var(--pad);scrollbar-width:none}.rail::-webkit-scrollbar{display:none}}
 /* article */
 .crumb{font-size:var(--txs);letter-spacing:.06em;text-transform:uppercase;color:var(--g500);margin-bottom:2rem}
 .article-head{max-width:46rem;margin-bottom:2.5rem}
@@ -230,6 +241,13 @@ JS = """
     fb.forEach(function(x){x.classList.toggle('active',x===b)});
     var c=b.dataset.cat;
     document.querySelectorAll('.card').forEach(function(card){card.hidden=!(c==='ALL'||card.dataset.cat===c)});
+    var r=document.querySelector('.rail'); if(r){r.scrollLeft=0; count();}
+  })});
+  var rail=document.querySelector('.rail'), cnt=document.querySelector('.rail-count');
+  function count(){ if(cnt&&rail) cnt.textContent=rail.querySelectorAll('.card:not([hidden])').length+' posts'; }
+  count();
+  document.querySelectorAll('.rail-btns button').forEach(function(b){b.addEventListener('click',function(){
+    if(rail) rail.scrollBy({left:(b.dataset.dir==='next'?1:-1)*rail.clientWidth*0.9,behavior:'smooth'});
   })});
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('a[data-ev]'); if(!a||typeof gtag!=='function')return;
@@ -362,7 +380,8 @@ def build_index(posts):
         <span class="en">Notes from beyond the chair — backstage at fashion weeks, editorial and campaign work, education, and projects across Tokyo, London and Asia.</span>
       </p>
       <div class="filters">{chips}</div>
-      <div class="grid">{''.join(cards)}
+      <div class="rail-nav"><span class="rail-count"></span><span class="rail-btns"><button type="button" data-dir="prev" aria-label="Previous">←</button><button type="button" data-dir="next" aria-label="Next">→</button></span></div>
+      <div class="rail">{''.join(cards)}
       </div>
     </div>
   </div>
