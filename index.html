@@ -1779,6 +1779,75 @@ behold-widget {
       </p>
 
       <!-- PRESS:START -->
+      <!-- この部分は scripts/build_journal.py が自動で書き換えます（直接編集しないでください） -->
+      <style>
+      #press .section-inner>*{min-width:0}
+      .hp-wrap{position:relative}
+      .press-rail{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+      .press-rail::-webkit-scrollbar{display:none}
+      .press-rail .hp-card{flex:0 0 clamp(200px,21vw,300px);scroll-snap-align:start}
+      .hp-media{aspect-ratio:4/5!important}
+      .hp-all{flex:0 0 clamp(200px,21vw,300px);scroll-snap-align:start;aspect-ratio:4/5;border:1px solid var(--color-gray-100,#ececec);display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;padding:1.25rem;text-decoration:none;color:inherit;transition:background .3s,color .3s}
+      .hp-all:hover{background:#0a0a0a;color:#fff}
+      .hp-all-k{font-size:var(--text-xs,.6875rem);letter-spacing:.15em;text-transform:uppercase;opacity:.6}
+      .hp-all-h{font-size:var(--text-base,.875rem);line-height:1.5}
+      .hp-wrap .row-btn{position:absolute;top:calc(clamp(200px,21vw,300px)*0.625);transform:translateY(-50%);width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid #ececec;font-size:1rem;line-height:1;z-index:2;cursor:pointer;transition:opacity .2s}
+      .hp-wrap .row-btn.prev{left:-1.25rem}.hp-wrap .row-btn.next{right:-1.25rem}
+      .hp-wrap .row-btn[disabled]{opacity:0;pointer-events:none}
+      @media(max-width:768px){.press-rail{gap:.75rem;margin-right:calc(var(--page-padding,1.5rem)*-1);padding-right:var(--page-padding,1.5rem)}.press-rail .hp-card,.hp-all{flex-basis:44vw}.hp-wrap .row-btn{display:none}}
+      </style>
+      <div class="hp-wrap">
+        <button type="button" class="row-btn prev" aria-label="Previous">←</button>
+        <div class="press-rail">
+        <a href="/journal/wataro-hairmode-cover/" class="press-card hp-card" data-ev="home_press_click">
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-30396475.jpg" alt="HAIR MODE カバー ― Hair by Wataro" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2026.05.27</span></div>
+            <span class="press-card-title"><span class="jp">HAIR MODE カバー ― Hair by Wataro</span><span class="en">HAIR MODE cover — Hair by Wataro</span></span>
+          </div>
+        </a>
+        <a href="/journal/schwarzkopf-fibreplex/" class="press-card hp-card" data-ev="home_press_click">
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-03865876.jpg" alt="Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Campaign</span><span class="press-card-year">2026.01.25</span></div>
+            <span class="press-card-title"><span class="jp">Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena</span><span class="en">Schwarzkopf Professional FIBREPLEX — Hair by Makoto &amp; Rena</span></span>
+          </div>
+        </a>
+        <a href="/journal/makoto-preppy/" class="press-card hp-card" data-ev="home_press_click">
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-87639125.jpg" alt="PREPPY ― Hair by Makoto" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2026.01.02</span></div>
+            <span class="press-card-title"><span class="jp">PREPPY ― Hair by Makoto</span><span class="en">PREPPY — Hair by Makoto</span></span>
+          </div>
+        </a>
+        <a href="/journal/wataro-kamikarisma-2026/" class="press-card hp-card" data-ev="home_press_click">
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-31158971.jpg" alt="Wataro、カミカリスマ2026 二つ星を受賞" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">News</span><span class="press-card-year">2025.12.10</span></div>
+            <span class="press-card-title"><span class="jp">Wataro、カミカリスマ2026 二つ星を受賞</span><span class="en">Wataro awarded two stars at Kami Charisma 2026</span></span>
+          </div>
+        </a>
+        <a href="/journal/makoto-choki-choki/" class="press-card hp-card" data-ev="home_press_click">
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-33187665.jpg" alt="CHOKi CHOKi ― Hair by Makoto" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2025.09.09</span></div>
+            <span class="press-card-title"><span class="jp">CHOKi CHOKi ― Hair by Makoto</span><span class="en">CHOKi CHOKi — Hair by Makoto</span></span>
+          </div>
+        </a>
+        <a href="/journal/" class="hp-all" data-ev="home_press_all">
+          <span class="hp-all-k">Journal</span>
+          <span class="hp-all-h"><span class="jp">すべての掲載を見る →</span><span class="en">View all press →</span></span>
+        </a>
+        </div>
+        <button type="button" class="row-btn next" aria-label="Next">→</button>
+      </div>
+      <script>
+      (function(){var w=document.currentScript.previousElementSibling,r=w.querySelector('.press-rail'),p=w.querySelector('.prev'),x=w.querySelector('.next');
+        function u(){p.disabled=r.scrollLeft<4;x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4}
+        r.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();
+        [p,x].forEach(function(b){b.addEventListener('click',function(){r.scrollBy({left:(b===x?1:-1)*r.clientWidth*0.85,behavior:'smooth'})})});
+      })();
+      </script>
       <!-- PRESS:END -->
     </div>
   </div>
