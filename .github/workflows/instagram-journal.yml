@@ -35,6 +35,7 @@ jobs:
           {
             echo 'body<<EOF'
             cat "${{ runner.temp }}/report.md" 2>/dev/null || true
+            echo
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
       - name: Open pull request
