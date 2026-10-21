@@ -64,7 +64,7 @@ def refresh_token():
         TOKEN = new
 
 
-def fetch_media(limit=100):
+def fetch_media(limit=1000):
     fields = "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,children{media_type,media_url,thumbnail_url}"
     url = f"{GRAPH}/me/media"
     params = {"fields": fields, "limit": 50, "access_token": TOKEN}
