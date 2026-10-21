@@ -72,6 +72,16 @@ main{padding-top:var(--nav)}
 .card-title{font-size:var(--t);line-height:1.55}
 .card[hidden]{display:none}
 @media(max-width:768px){.grid{grid-template-columns:1fr 1fr;gap:2rem .75rem}}
+/* index rail: 2段の横スクロール（新しい順に左上から） */
+.section-inner>*{min-width:0}
+.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:clamp(200px,22vw,300px);gap:2.5rem 1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:0;padding-bottom:1rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.rail .card{scroll-snap-align:start}
+.rail-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:-1rem 0 1.25rem}
+.rail-count{font-size:var(--txs);letter-spacing:.06em;color:var(--g500)}
+.rail-btns{display:flex;gap:.5rem}
+.rail-btns button{width:2.25rem;height:2.25rem;border:1px solid var(--g100);font-size:1rem;line-height:1;transition:all .2s}
+.rail-btns button:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+@media(max-width:768px){.rail{grid-auto-columns:42vw;gap:1.75rem .75rem;margin-right:calc(var(--pad)*-1);padding-right:var(--pad);scrollbar-width:none}.rail::-webkit-scrollbar{display:none}}
 /* article */
 .crumb{font-size:var(--txs);letter-spacing:.06em;text-transform:uppercase;color:var(--g500);margin-bottom:2rem}
 .article-head{max-width:46rem;margin-bottom:2.5rem}
@@ -130,9 +140,9 @@ main{padding-top:var(--nav)}
 <main>
 
 <article class="section">
-  <div class="crumb"><a href="/journal/">Journal</a> / <span class="jp">インタビュー</span><span class="en">Interview</span></div>
+  <div class="crumb"><a href="/journal/">Journal</a> / <span class="jp">誌面・撮影</span><span class="en">Editorial</span></div>
   <header class="article-head">
-    <div class="meta-row" style="justify-content:flex-start;gap:1.5rem"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time datetime="2024-05-20">2024.05.20</time></div>
+    <div class="meta-row" style="justify-content:flex-start;gap:1.5rem"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-05-20">2024.05.20</time></div>
     <h1 class="article-title"><span class="jp">Request QJ に代表 Teiji の特集が掲載</span><span class="en">Request QJ features founder Teiji Utsumi</span></h1>
     <p class="lede"><span class="jp">Request QJにて、代表Teiji Utsumiの特集記事が掲載されました。</span><span class="en">Request QJ published a feature on HACO founder Teiji Utsumi.</span></p>
   </header>
@@ -168,18 +178,18 @@ main{padding-top:var(--nav)}
   <div class="section-inner">
     <h2 class="label">More</h2>
     <div class="grid">
-      <a class="card" href="/journal/snip-style-june/">
-        <div class="card-media"><img src="/assets/journal/snip-style-june.jpg" alt="SNIP STYLE 6月号「海外から見た日本人美容師」特集に掲載" loading="lazy"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time>2024.06.26</time></div>
-        <div class="card-title"><span class="jp">SNIP STYLE 6月号「海外から見た日本人美容師」特集に掲載</span><span class="en">SNIP STYLE June issue — Japanese hairdressers through global eyes</span></div></a>
-      <a class="card" href="/journal/request-qj-wataro/">
-        <div class="card-media"><img src="/assets/journal/request-qj-wataro.jpg" alt="Request QJ にアートディレクター Wataro のインタビューが掲載" loading="lazy"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time>2024.05.20</time></div>
-        <div class="card-title"><span class="jp">Request QJ にアートディレクター Wataro のインタビューが掲載</span><span class="en">Request QJ interviews art director Wataro</span></div></a>
-      <a class="card" href="/journal/wwd-beauty/">
-        <div class="card-media"><img src="/assets/journal/wwd-beauty.jpg" alt="WWD BEAUTY「ニューカマーサロン」特集に掲載" loading="lazy"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time>2024.05.06</time></div>
-        <div class="card-title"><span class="jp">WWD BEAUTY「ニューカマーサロン」特集に掲載</span><span class="en">Featured as a newcomer salon in WWD BEAUTY</span></div></a></div>
+      <a class="card" href="/journal/wataro-hairmode-cover/">
+        <div class="card-media"><img src="/assets/journal/ig-30396475.jpg" alt="HAIR MODE カバー ― Hair by Wataro" loading="lazy"></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time>2026.05.27</time></div>
+        <div class="card-title"><span class="jp">HAIR MODE カバー ― Hair by Wataro</span><span class="en">HAIR MODE cover — Hair by Wataro</span></div></a>
+      <a class="card" href="/journal/makoto-preppy/">
+        <div class="card-media"><img src="/assets/journal/ig-87639125.jpg" alt="PREPPY ― Hair by Makoto" loading="lazy"></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time>2026.01.02</time></div>
+        <div class="card-title"><span class="jp">PREPPY ― Hair by Makoto</span><span class="en">PREPPY — Hair by Makoto</span></div></a>
+      <a class="card" href="/journal/makoto-choki-choki/">
+        <div class="card-media"><img src="/assets/journal/ig-33187665.jpg" alt="CHOKi CHOKi ― Hair by Makoto" loading="lazy"></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time>2025.09.09</time></div>
+        <div class="card-title"><span class="jp">CHOKi CHOKi ― Hair by Makoto</span><span class="en">CHOKi CHOKi — Hair by Makoto</span></div></a></div>
   </div>
 </section>
 
@@ -204,6 +214,13 @@ main{padding-top:var(--nav)}
     fb.forEach(function(x){x.classList.toggle('active',x===b)});
     var c=b.dataset.cat;
     document.querySelectorAll('.card').forEach(function(card){card.hidden=!(c==='ALL'||card.dataset.cat===c)});
+    var r=document.querySelector('.rail'); if(r){r.scrollLeft=0; count();}
+  })});
+  var rail=document.querySelector('.rail'), cnt=document.querySelector('.rail-count');
+  function count(){ if(cnt&&rail) cnt.textContent=rail.querySelectorAll('.card:not([hidden])').length+' posts'; }
+  count();
+  document.querySelectorAll('.rail-btns button').forEach(function(b){b.addEventListener('click',function(){
+    if(rail) rail.scrollBy({left:(b.dataset.dir==='next'?1:-1)*rail.clientWidth*0.9,behavior:'smooth'});
   })});
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('a[data-ev]'); if(!a||typeof gtag!=='function')return;

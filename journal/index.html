@@ -72,6 +72,16 @@ main{padding-top:var(--nav)}
 .card-title{font-size:var(--t);line-height:1.55}
 .card[hidden]{display:none}
 @media(max-width:768px){.grid{grid-template-columns:1fr 1fr;gap:2rem .75rem}}
+/* index rail: 2段の横スクロール（新しい順に左上から） */
+.section-inner>*{min-width:0}
+.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:clamp(200px,22vw,300px);gap:2.5rem 1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:0;padding-bottom:1rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.rail .card{scroll-snap-align:start}
+.rail-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:-1rem 0 1.25rem}
+.rail-count{font-size:var(--txs);letter-spacing:.06em;color:var(--g500)}
+.rail-btns{display:flex;gap:.5rem}
+.rail-btns button{width:2.25rem;height:2.25rem;border:1px solid var(--g100);font-size:1rem;line-height:1;transition:all .2s}
+.rail-btns button:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+@media(max-width:768px){.rail{grid-auto-columns:42vw;gap:1.75rem .75rem;margin-right:calc(var(--pad)*-1);padding-right:var(--pad);scrollbar-width:none}.rail::-webkit-scrollbar{display:none}}
 /* article */
 .crumb{font-size:var(--txs);letter-spacing:.06em;text-transform:uppercase;color:var(--g500);margin-bottom:2rem}
 .article-head{max-width:46rem;margin-bottom:2.5rem}
@@ -137,8 +147,9 @@ main{padding-top:var(--nav)}
         <span class="jp">サロンの外での仕事、学び、出会いの記録。ファッションウィークのバックステージ、雑誌や広告のヘアメイク、セミナー講師、東京・ロンドン・アジアでのプロジェクトをお届けします。</span>
         <span class="en">Notes from beyond the chair — backstage at fashion weeks, editorial and campaign work, education, and projects across Tokyo, London and Asia.</span>
       </p>
-      <div class="filters"><button class="active" data-cat="ALL">All</button><button data-cat="EDITORIAL">Editorial</button><button data-cat="SHOW">Show / Fashion Week</button><button data-cat="CAMPAIGN">Campaign</button><button data-cat="INTERVIEW">Interview</button><button data-cat="EVENT">Event</button><button data-cat="PRODUCT">Product</button><button data-cat="NEWS">News</button></div>
-      <div class="grid">
+      <div class="filters"><button class="active" data-cat="ALL">All</button><button data-cat="EDITORIAL">Editorial</button><button data-cat="CAMPAIGN">Campaign</button><button data-cat="SHOW">Show / Event</button><button data-cat="NEWS">News</button></div>
+      <div class="rail-nav"><span class="rail-count"></span><span class="rail-btns"><button type="button" data-dir="prev" aria-label="Previous">←</button><button type="button" data-dir="next" aria-label="Next">→</button></span></div>
+      <div class="rail">
       <a class="card" href="/journal/wataro-hairmode-cover/" data-cat="EDITORIAL">
         <div class="card-media"><img src="/assets/journal/ig-30396475.jpg" alt="HAIR MODE カバー ― Hair by Wataro" loading="lazy" decoding="async"></div>
         <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2026-05-27">2026.05.27</time></div>
@@ -146,7 +157,7 @@ main{padding-top:var(--nav)}
       </a>
       <a class="card" href="/journal/schwarzkopf-fibreplex/" data-cat="CAMPAIGN">
         <div class="card-media"><img src="/assets/journal/ig-03865876.jpg" alt="Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time datetime="2026-01-25">2026.01.25</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2026-01-25">2026.01.25</time></div>
         <div class="card-title"><span class="jp">Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena</span><span class="en">Schwarzkopf Professional FIBREPLEX — Hair by Makoto &amp; Rena</span></div>
       </a>
       <a class="card" href="/journal/makoto-preppy/" data-cat="EDITORIAL">
@@ -169,14 +180,14 @@ main{padding-top:var(--nav)}
         <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2025-08-29">2025.08.29</time></div>
         <div class="card-title"><span class="jp">Joi、@czczh_editors にて作品掲載</span><span class="en">Joi, featured by @czczh_editors</span></div>
       </a>
-      <a class="card" href="/journal/jun-yasui-zine/" data-cat="EVENT">
+      <a class="card" href="/journal/jun-yasui-zine/" data-cat="SHOW">
         <div class="card-media"><img src="/assets/journal/jun-yasui-zine.jpg" alt="フォトグラファー Jun Yasui とのコラボ企画 ZINE" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">イベント</span><span class="en">Event</span></span><time datetime="2024-09-18">2024.09.18</time></div>
+        <div class="meta-row"><span><span class="jp">ショー・イベント・講師</span><span class="en">Show / Event</span></span><time datetime="2024-09-18">2024.09.18</time></div>
         <div class="card-title"><span class="jp">フォトグラファー Jun Yasui とのコラボ企画 ZINE</span><span class="en">HACO+ × Jun Yasui — ZINE</span></div>
       </a>
-      <a class="card" href="/journal/snip-style-june/" data-cat="INTERVIEW">
+      <a class="card" href="/journal/snip-style-june/" data-cat="EDITORIAL">
         <div class="card-media"><img src="/assets/journal/snip-style-june.jpg" alt="SNIP STYLE 6月号「海外から見た日本人美容師」特集に掲載" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time datetime="2024-06-26">2024.06.26</time></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-06-26">2024.06.26</time></div>
         <div class="card-title"><span class="jp">SNIP STYLE 6月号「海外から見た日本人美容師」特集に掲載</span><span class="en">SNIP STYLE June issue — Japanese hairdressers through global eyes</span></div>
       </a>
       <a class="card" href="/journal/year-of-the-dragon/" data-cat="EDITORIAL">
@@ -186,17 +197,17 @@ main{padding-top:var(--nav)}
       </a>
       <a class="card" href="/journal/shibuya-parco/" data-cat="CAMPAIGN">
         <div class="card-media"><img src="/assets/journal/shibuya-parco.jpg" alt="渋谷PARCO ビジュアルでメイクを担当" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time datetime="2024-05-20">2024.05.20</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2024-05-20">2024.05.20</time></div>
         <div class="card-title"><span class="jp">渋谷PARCO ビジュアルでメイクを担当</span><span class="en">Make-up for Shibuya PARCO</span></div>
       </a>
-      <a class="card" href="/journal/request-qj-wataro/" data-cat="INTERVIEW">
+      <a class="card" href="/journal/request-qj-wataro/" data-cat="EDITORIAL">
         <div class="card-media"><img src="/assets/journal/request-qj-wataro.jpg" alt="Request QJ にアートディレクター Wataro のインタビューが掲載" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time datetime="2024-05-20">2024.05.20</time></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-05-20">2024.05.20</time></div>
         <div class="card-title"><span class="jp">Request QJ にアートディレクター Wataro のインタビューが掲載</span><span class="en">Request QJ interviews art director Wataro</span></div>
       </a>
-      <a class="card" href="/journal/request-qj-teiji/" data-cat="INTERVIEW">
+      <a class="card" href="/journal/request-qj-teiji/" data-cat="EDITORIAL">
         <div class="card-media"><img src="/assets/journal/request-qj-teiji.jpg" alt="Request QJ に代表 Teiji の特集が掲載" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time datetime="2024-05-20">2024.05.20</time></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-05-20">2024.05.20</time></div>
         <div class="card-title"><span class="jp">Request QJ に代表 Teiji の特集が掲載</span><span class="en">Request QJ features founder Teiji Utsumi</span></div>
       </a>
       <a class="card" href="/journal/pop-magazine/" data-cat="EDITORIAL">
@@ -206,7 +217,7 @@ main{padding-top:var(--nav)}
       </a>
       <a class="card" href="/journal/paolina-russo-aw24/" data-cat="SHOW">
         <div class="card-media"><img src="/assets/journal/paolina-russo-aw24.jpg" alt="Paolina Russo AW24 ロンドンファッションウィークでリードヘア" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">ショー・ファッションウィーク</span><span class="en">Show / Fashion Week</span></span><time datetime="2024-05-20">2024.05.20</time></div>
+        <div class="meta-row"><span><span class="jp">ショー・イベント・講師</span><span class="en">Show / Event</span></span><time datetime="2024-05-20">2024.05.20</time></div>
         <div class="card-title"><span class="jp">Paolina Russo AW24 ロンドンファッションウィークでリードヘア</span><span class="en">Lead hair at Paolina Russo AW24, London Fashion Week</span></div>
       </a>
       <a class="card" href="/journal/more-or-less/" data-cat="EDITORIAL">
@@ -214,9 +225,9 @@ main{padding-top:var(--nav)}
         <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-05-20">2024.05.20</time></div>
         <div class="card-title"><span class="jp">More or Less Magazine でネイルを担当</span><span class="en">Nails for More or Less</span></div>
       </a>
-      <a class="card" href="/journal/instant-icon-vogue-japan/" data-cat="PRODUCT">
+      <a class="card" href="/journal/instant-icon-vogue-japan/" data-cat="CAMPAIGN">
         <div class="card-media"><img src="/assets/journal/instant-icon-vogue-japan.jpg" alt="VOGUE JAPAN 4月号の表紙撮影で INSTANT ICON を使用" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">プロダクト</span><span class="en">Product</span></span><time datetime="2024-05-20">2024.05.20</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2024-05-20">2024.05.20</time></div>
         <div class="card-title"><span class="jp">VOGUE JAPAN 4月号の表紙撮影で INSTANT ICON を使用</span><span class="en">INSTANT ICON on the cover shoot of VOGUE JAPAN April</span></div>
       </a>
       <a class="card" href="/journal/british-vogue/" data-cat="EDITORIAL">
@@ -226,12 +237,12 @@ main{padding-top:var(--nav)}
       </a>
       <a class="card" href="/journal/mulberry/" data-cat="CAMPAIGN">
         <div class="card-media"><img src="/assets/journal/mulberry.jpg" alt="Mulberry ビジュアルでネイルを担当" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time datetime="2024-05-16">2024.05.16</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2024-05-16">2024.05.16</time></div>
         <div class="card-title"><span class="jp">Mulberry ビジュアルでネイルを担当</span><span class="en">Nails for Mulberry</span></div>
       </a>
       <a class="card" href="/journal/donki-wego/" data-cat="CAMPAIGN">
         <div class="card-media"><img src="/assets/journal/donki-wego.jpg" alt="ドン・キホーテ × WEGO ビジュアルでヘアを担当" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time datetime="2024-05-16">2024.05.16</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2024-05-16">2024.05.16</time></div>
         <div class="card-title"><span class="jp">ドン・キホーテ × WEGO ビジュアルでヘアを担当</span><span class="en">Hair for Don Quijote × WEGO</span></div>
       </a>
       <a class="card" href="/journal/aroege-hove-ss22/" data-cat="EDITORIAL">
@@ -244,14 +255,14 @@ main{padding-top:var(--nav)}
         <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-05-08">2024.05.08</time></div>
         <div class="card-title"><span class="jp">カジカジH #02 にてヘアを担当</span><span class="en">Hair for KAJIKAJI H #02</span></div>
       </a>
-      <a class="card" href="/journal/wwd-beauty/" data-cat="INTERVIEW">
+      <a class="card" href="/journal/wwd-beauty/" data-cat="EDITORIAL">
         <div class="card-media"><img src="/assets/journal/wwd-beauty.jpg" alt="WWD BEAUTY「ニューカマーサロン」特集に掲載" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">インタビュー</span><span class="en">Interview</span></span><time datetime="2024-05-06">2024.05.06</time></div>
+        <div class="meta-row"><span><span class="jp">誌面・撮影</span><span class="en">Editorial</span></span><time datetime="2024-05-06">2024.05.06</time></div>
         <div class="card-title"><span class="jp">WWD BEAUTY「ニューカマーサロン」特集に掲載</span><span class="en">Featured as a newcomer salon in WWD BEAUTY</span></div>
       </a>
-      <a class="card" href="/journal/instant-icon-launch/" data-cat="PRODUCT">
+      <a class="card" href="/journal/instant-icon-launch/" data-cat="CAMPAIGN">
         <div class="card-media"><img src="/assets/journal/instant-icon-launch.jpg" alt="Haco オリジナルヘアオイル「INSTANT ICON」をリリース" loading="lazy" decoding="async"></div>
-        <div class="meta-row"><span><span class="jp">プロダクト</span><span class="en">Product</span></span><time datetime="2024-03-27">2024.03.27</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2024-03-27">2024.03.27</time></div>
         <div class="card-title"><span class="jp">Haco オリジナルヘアオイル「INSTANT ICON」をリリース</span><span class="en">HACO launches its original hair oil, INSTANT ICON</span></div>
       </a>
       </div>
@@ -295,6 +306,13 @@ main{padding-top:var(--nav)}
     fb.forEach(function(x){x.classList.toggle('active',x===b)});
     var c=b.dataset.cat;
     document.querySelectorAll('.card').forEach(function(card){card.hidden=!(c==='ALL'||card.dataset.cat===c)});
+    var r=document.querySelector('.rail'); if(r){r.scrollLeft=0; count();}
+  })});
+  var rail=document.querySelector('.rail'), cnt=document.querySelector('.rail-count');
+  function count(){ if(cnt&&rail) cnt.textContent=rail.querySelectorAll('.card:not([hidden])').length+' posts'; }
+  count();
+  document.querySelectorAll('.rail-btns button').forEach(function(b){b.addEventListener('click',function(){
+    if(rail) rail.scrollBy({left:(b.dataset.dir==='next'?1:-1)*rail.clientWidth*0.9,behavior:'smooth'});
   })});
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('a[data-ev]'); if(!a||typeof gtag!=='function')return;

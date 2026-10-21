@@ -72,6 +72,16 @@ main{padding-top:var(--nav)}
 .card-title{font-size:var(--t);line-height:1.55}
 .card[hidden]{display:none}
 @media(max-width:768px){.grid{grid-template-columns:1fr 1fr;gap:2rem .75rem}}
+/* index rail: 2段の横スクロール（新しい順に左上から） */
+.section-inner>*{min-width:0}
+.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:clamp(200px,22vw,300px);gap:2.5rem 1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:0;padding-bottom:1rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.rail .card{scroll-snap-align:start}
+.rail-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:-1rem 0 1.25rem}
+.rail-count{font-size:var(--txs);letter-spacing:.06em;color:var(--g500)}
+.rail-btns{display:flex;gap:.5rem}
+.rail-btns button{width:2.25rem;height:2.25rem;border:1px solid var(--g100);font-size:1rem;line-height:1;transition:all .2s}
+.rail-btns button:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+@media(max-width:768px){.rail{grid-auto-columns:42vw;gap:1.75rem .75rem;margin-right:calc(var(--pad)*-1);padding-right:var(--pad);scrollbar-width:none}.rail::-webkit-scrollbar{display:none}}
 /* article */
 .crumb{font-size:var(--txs);letter-spacing:.06em;text-transform:uppercase;color:var(--g500);margin-bottom:2rem}
 .article-head{max-width:46rem;margin-bottom:2.5rem}
@@ -130,9 +140,9 @@ main{padding-top:var(--nav)}
 <main>
 
 <article class="section">
-  <div class="crumb"><a href="/journal/">Journal</a> / <span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></div>
+  <div class="crumb"><a href="/journal/">Journal</a> / <span class="jp">広告・コラボ</span><span class="en">Campaign</span></div>
   <header class="article-head">
-    <div class="meta-row" style="justify-content:flex-start;gap:1.5rem"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time datetime="2024-05-16">2024.05.16</time></div>
+    <div class="meta-row" style="justify-content:flex-start;gap:1.5rem"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time datetime="2024-05-16">2024.05.16</time></div>
     <h1 class="article-title"><span class="jp">Mulberry ビジュアルでネイルを担当</span><span class="en">Nails for Mulberry</span></h1>
     <p class="lede"><span class="jp">MulberryのビジュアルでHaco Management所属のネイリストがネイルを担当しました。</span><span class="en">A nail artist from Haco Management created the nails for Mulberry.</span></p>
   </header>
@@ -167,16 +177,16 @@ main{padding-top:var(--nav)}
     <div class="grid">
       <a class="card" href="/journal/schwarzkopf-fibreplex/">
         <div class="card-media"><img src="/assets/journal/ig-03865876.jpg" alt="Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena" loading="lazy"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time>2026.01.25</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time>2026.01.25</time></div>
         <div class="card-title"><span class="jp">Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena</span><span class="en">Schwarzkopf Professional FIBREPLEX — Hair by Makoto &amp; Rena</span></div></a>
       <a class="card" href="/journal/shibuya-parco/">
         <div class="card-media"><img src="/assets/journal/shibuya-parco.jpg" alt="渋谷PARCO ビジュアルでメイクを担当" loading="lazy"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time>2024.05.20</time></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time>2024.05.20</time></div>
         <div class="card-title"><span class="jp">渋谷PARCO ビジュアルでメイクを担当</span><span class="en">Make-up for Shibuya PARCO</span></div></a>
-      <a class="card" href="/journal/donki-wego/">
-        <div class="card-media"><img src="/assets/journal/donki-wego.jpg" alt="ドン・キホーテ × WEGO ビジュアルでヘアを担当" loading="lazy"></div>
-        <div class="meta-row"><span><span class="jp">広告・キャンペーン</span><span class="en">Campaign</span></span><time>2024.05.16</time></div>
-        <div class="card-title"><span class="jp">ドン・キホーテ × WEGO ビジュアルでヘアを担当</span><span class="en">Hair for Don Quijote × WEGO</span></div></a></div>
+      <a class="card" href="/journal/instant-icon-vogue-japan/">
+        <div class="card-media"><img src="/assets/journal/instant-icon-vogue-japan.jpg" alt="VOGUE JAPAN 4月号の表紙撮影で INSTANT ICON を使用" loading="lazy"></div>
+        <div class="meta-row"><span><span class="jp">広告・コラボ</span><span class="en">Campaign</span></span><time>2024.05.20</time></div>
+        <div class="card-title"><span class="jp">VOGUE JAPAN 4月号の表紙撮影で INSTANT ICON を使用</span><span class="en">INSTANT ICON on the cover shoot of VOGUE JAPAN April</span></div></a></div>
   </div>
 </section>
 
@@ -201,6 +211,13 @@ main{padding-top:var(--nav)}
     fb.forEach(function(x){x.classList.toggle('active',x===b)});
     var c=b.dataset.cat;
     document.querySelectorAll('.card').forEach(function(card){card.hidden=!(c==='ALL'||card.dataset.cat===c)});
+    var r=document.querySelector('.rail'); if(r){r.scrollLeft=0; count();}
+  })});
+  var rail=document.querySelector('.rail'), cnt=document.querySelector('.rail-count');
+  function count(){ if(cnt&&rail) cnt.textContent=rail.querySelectorAll('.card:not([hidden])').length+' posts'; }
+  count();
+  document.querySelectorAll('.rail-btns button').forEach(function(b){b.addEventListener('click',function(){
+    if(rail) rail.scrollBy({left:(b.dataset.dir==='next'?1:-1)*rail.clientWidth*0.9,behavior:'smooth'});
   })});
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('a[data-ev]'); if(!a||typeof gtag!=='function')return;
