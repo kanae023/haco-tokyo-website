@@ -9,7 +9,8 @@ GitHub Actions（.github/workflows/instagram-journal.yml）から毎日実行さ
 新しい記事があれば「プルリクエスト」が作られます。内容を確認してマージ＝公開です。
 
 必要なシークレット（GitHub → Settings → Secrets and variables → Actions）
-  IG_ACCESS_TOKEN    Instagram の長期アクセストークン（必須）
+  IG_ACCESS_TOKEN         @hacohairnailstokyo の長期アクセストークン（必須）
+  IG_ACCESS_TOKEN_LONDON  @hacohairsalon（ロンドン）の長期アクセストークン（任意。無ければ東京のみ）
   ANTHROPIC_API_KEY  キャプションを記事文に整える（任意。無ければキャプションをそのまま使用）
   GH_PAT             トークンの自動延長を保存するため（任意。無いと60日ごとに再発行が必要）
 """
@@ -19,6 +20,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -33,7 +35,9 @@ ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "_journal"
 ASSETS = ROOT / "assets" / "journal"
 TAG = os.environ.get("JOURNAL_TAG", "hacojournal").lstrip("#").lower()
-TOKEN = os.environ.get("IG_ACCESS_TOKEN", "").strip()
+# 取り込むアカウント（シークレット名, 表示名）。トークンが未登録のアカウントは飛ばします
+ACCOUNTS = [("IG_ACCESS_TOKEN", "Tokyo"), ("IG_ACCESS_TOKEN_LONDON", "London")]
+TOKEN = ""
 ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
 MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
 GRAPH = "https://graph.instagram.com"
@@ -42,11 +46,15 @@ GRAPH = "https://graph.instagram.com"
 def get(url, params=None):
     if params:
         url += ("&" if "?" in url else "?") + urllib.parse.urlencode(params)
-    with urllib.request.urlopen(url, timeout=60) as r:
-        return json.loads(r.read().decode())
+    try:
+        with urllib.request.urlopen(url, timeout=60) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as ex:  # Instagram のエラー内容をログに出す（トークンは出さない）
+        detail = ex.read().decode(errors="replace")[:400]
+        raise RuntimeError(f"HTTP {ex.code}: {detail}") from None
 
 
-def refresh_token():
+def refresh_token(secret_name):
     """長期トークンを延長（60日）。GH_PAT があればシークレットも更新。"""
     global TOKEN
     try:
@@ -58,7 +66,7 @@ def refresh_token():
     days = int(res.get("expires_in", 0)) // 86400
     print(f"token refreshed, valid for ~{days} days")
     if new and new != TOKEN and os.environ.get("GH_PAT") and os.environ.get("GITHUB_REPOSITORY"):
-        subprocess.run(["gh", "secret", "set", "IG_ACCESS_TOKEN", "--repo", os.environ["GITHUB_REPOSITORY"], "--body", new],
+        subprocess.run(["gh", "secret", "set", secret_name, "--repo", os.environ["GITHUB_REPOSITORY"], "--body", new],
                        check=False, env={**os.environ, "GH_TOKEN": os.environ["GH_PAT"]})
     if new:
         TOKEN = new
@@ -168,13 +176,25 @@ def q(s):
 
 
 def main():
-    if not TOKEN:
-        print("IG_ACCESS_TOKEN が未設定のためスキップします（初回設定前）")
-        return
-    refresh_token()
+    global TOKEN
     seen = existing_ids()
-    new = [m for m in fetch_media() if has_tag(m.get("caption")) and m["id"] not in seen]
-    print(f"{len(new)} new #{TAG} post(s)")
+    new, errors = [], []
+    for secret_name, label in ACCOUNTS:
+        TOKEN = os.environ.get(secret_name, "").strip()
+        if not TOKEN:
+            print(f"[{label}] {secret_name} が未設定のためスキップします")
+            continue
+        refresh_token(secret_name)
+        try:
+            items = [m for m in fetch_media() if has_tag(m.get("caption")) and m["id"] not in seen]
+        except Exception as ex:
+            print(f"[{label}] 投稿の取得に失敗しました: {ex}")
+            errors.append(label)
+            continue
+        print(f"[{label}] {len(items)} new #{TAG} post(s)")
+        for m in items:
+            seen.add(m["id"])
+        new += items
     report = []
     for m in sorted(new, key=lambda x: x["timestamp"]):
         d = datetime.strptime(m["timestamp"][:10], "%Y-%m-%d").date()
@@ -215,6 +235,8 @@ def main():
         print(f"wrote {f.name}")
     Path(os.environ.get("REPORT_FILE", "journal-sync-report.md")).write_text(
         "\n".join(report) if report else "", encoding="utf-8")
+    if errors and not report:
+        sys.exit(f"取得に失敗したアカウント: {', '.join(errors)}（トークンの再発行が必要かもしれません）")
 
 
 if __name__ == "__main__":
