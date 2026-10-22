@@ -1,5 +1,14 @@
 [
  {
+  "slug": "ig-41290589",
+  "url": "/journal/ig-41290589/",
+  "date": "2026-09-10",
+  "category": "NEWS",
+  "title": "HACO＋ work design shop 🗺️",
+  "title_en": "",
+  "cover": "/assets/journal/ig-41290589.jpg"
+ },
+ {
   "slug": "wataro-hairmode-cover",
   "url": "/journal/wataro-hairmode-cover/",
   "date": "2026-05-27",
@@ -97,14 +106,5 @@
   "title": "Request QJ にアートディレクター Wataro のインタビューが掲載",
   "title_en": "Request QJ interviews art director Wataro",
   "cover": "/assets/journal/request-qj-wataro.jpg"
- },
- {
-  "slug": "request-qj-teiji",
-  "url": "/journal/request-qj-teiji/",
-  "date": "2024-05-20",
-  "category": "EDITORIAL",
-  "title": "Request QJ に代表 Teiji の特集が掲載",
-  "title_en": "Request QJ features founder Teiji Utsumi",
-  "cover": "/assets/journal/request-qj-teiji.jpg"
  }
 ]
