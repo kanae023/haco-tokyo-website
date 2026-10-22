@@ -1,5 +1,50 @@
 [
  {
+  "slug": "ig-51874854",
+  "url": "/journal/ig-51874854/",
+  "date": "2026-10-08",
+  "category": "NEWS",
+  "title": "Milano  Fashion Week ✨",
+  "title_en": "",
+  "cover": "/assets/journal/ig-51874854.jpg"
+ },
+ {
+  "slug": "ig-57261904",
+  "url": "/journal/ig-57261904/",
+  "date": "2026-10-01",
+  "category": "NEWS",
+  "title": "Paris Fashion Week ✨",
+  "title_en": "",
+  "cover": "/assets/journal/ig-57261904.jpg"
+ },
+ {
+  "slug": "ig-03200616",
+  "url": "/journal/ig-03200616/",
+  "date": "2026-09-23",
+  "category": "NEWS",
+  "title": "London Fashion Week ✨",
+  "title_en": "",
+  "cover": "/assets/journal/ig-03200616.jpg"
+ },
+ {
+  "slug": "ig-89634856",
+  "url": "/journal/ig-89634856/",
+  "date": "2026-09-22",
+  "category": "NEWS",
+  "title": "London Fashion Week ✨",
+  "title_en": "",
+  "cover": "/assets/journal/ig-89634856.jpg"
+ },
+ {
+  "slug": "ig-08684256",
+  "url": "/journal/ig-08684256/",
+  "date": "2026-09-21",
+  "category": "NEWS",
+  "title": "London Fashion Week ✨",
+  "title_en": "",
+  "cover": "/assets/journal/ig-08684256.jpg"
+ },
+ {
   "slug": "design-workshop-students",
   "url": "/journal/design-workshop-students/",
   "date": "2026-09-10",
@@ -7,6 +52,15 @@
   "title": "HACO+ デザインワークショップを開催",
   "title_en": "HACO+ Design Workshop for beauty students",
   "cover": "/assets/journal/ig-41290589.jpg"
+ },
+ {
+  "slug": "ig-81096719",
+  "url": "/journal/ig-81096719/",
+  "date": "2026-06-24",
+  "category": "NEWS",
+  "title": "Men’s Paris Fashion week kicked off ✨ our stylist Wataro @wa",
+  "title_en": "",
+  "cover": "/assets/journal/ig-81096719.jpg"
  },
  {
   "slug": "wataro-hairmode-cover",
@@ -18,93 +72,39 @@
   "cover": "/assets/journal/ig-30396475.jpg"
  },
  {
-  "slug": "vogue-netherlands",
-  "url": "/journal/vogue-netherlands/",
-  "date": "2026-02-19",
-  "category": "EDITORIAL",
-  "title": "Vogue Netherlands ― Manager Kanae（Haco Management）",
-  "title_en": "Vogue Netherlands — Manager Kanae (Haco Management)",
-  "cover": "/assets/press/vogue-netherlands.jpg"
- },
- {
-  "slug": "schwarzkopf-fibreplex",
-  "url": "/journal/schwarzkopf-fibreplex/",
-  "date": "2026-01-25",
-  "category": "CAMPAIGN",
-  "title": "Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto & Rena",
-  "title_en": "Schwarzkopf Professional FIBREPLEX — Hair by Makoto & Rena",
-  "cover": "/assets/journal/ig-03865876.jpg"
- },
- {
-  "slug": "makoto-preppy",
-  "url": "/journal/makoto-preppy/",
-  "date": "2026-01-02",
-  "category": "EDITORIAL",
-  "title": "PREPPY ― Hair by Makoto",
-  "title_en": "PREPPY — Hair by Makoto",
-  "cover": "/assets/journal/ig-87639125.jpg"
- },
- {
-  "slug": "wataro-kamikarisma-2026",
-  "url": "/journal/wataro-kamikarisma-2026/",
-  "date": "2025-12-10",
+  "slug": "ig-94990222",
+  "url": "/journal/ig-94990222/",
+  "date": "2026-02-28",
   "category": "NEWS",
-  "title": "Wataro、カミカリスマ2026 二つ星を受賞",
-  "title_en": "Wataro awarded two stars at Kami Charisma 2026",
-  "cover": "/assets/journal/ig-31158971.jpg"
+  "title": "Senior stylist Rio join Hair Team Holli Smith for @boss show",
+  "title_en": "",
+  "cover": "/assets/journal/ig-94990222.jpg"
  },
  {
-  "slug": "makoto-choki-choki",
-  "url": "/journal/makoto-choki-choki/",
-  "date": "2025-09-09",
-  "category": "EDITORIAL",
-  "title": "CHOKi CHOKi ― Hair by Makoto",
-  "title_en": "CHOKi CHOKi — Hair by Makoto",
-  "cover": "/assets/journal/ig-33187665.jpg"
+  "slug": "ig-28383301",
+  "url": "/journal/ig-28383301/",
+  "date": "2026-02-27",
+  "category": "NEWS",
+  "title": "Milano Fashion week kicked off.  Senior stylist Rio joined H",
+  "title_en": "",
+  "cover": "/assets/journal/ig-28383301.jpg"
  },
  {
-  "slug": "joi-czczh-editors",
-  "url": "/journal/joi-czczh-editors/",
-  "date": "2025-08-29",
-  "category": "EDITORIAL",
-  "title": "Joi、@czczh_editors にて作品掲載",
-  "title_en": "Joi, featured by @czczh_editors",
-  "cover": "/assets/journal/ig-17680444.jpg"
+  "slug": "ig-38434837",
+  "url": "/journal/ig-38434837/",
+  "date": "2026-02-26",
+  "category": "NEWS",
+  "title": "Senior stylist Rio join Hair Team Holie Smith for @burberry ",
+  "title_en": "",
+  "cover": "/assets/journal/ig-38434837.jpg"
  },
  {
-  "slug": "teen-vogue-cover",
-  "url": "/journal/teen-vogue-cover/",
-  "date": "2025-03-20",
-  "category": "EDITORIAL",
-  "title": "Teen Vogue カバー ― Make-up by Take／Nail by Kurumi",
-  "title_en": "Teen Vogue cover — Make-up by Take / Nail by Kurumi",
-  "cover": "/assets/press/teen-vogue.jpg"
- },
- {
-  "slug": "jun-yasui-zine",
-  "url": "/journal/jun-yasui-zine/",
-  "date": "2024-09-18",
-  "category": "SHOW",
-  "title": "フォトグラファー Jun Yasui とのコラボ企画 ZINE",
-  "title_en": "HACO+ × Jun Yasui — ZINE",
-  "cover": "/assets/journal/jun-yasui-zine.jpg"
- },
- {
-  "slug": "snip-style-june",
-  "url": "/journal/snip-style-june/",
-  "date": "2024-06-26",
-  "category": "EDITORIAL",
-  "title": "SNIP STYLE 6月号「海外から見た日本人美容師」特集に掲載",
-  "title_en": "SNIP STYLE June issue — Japanese hairdressers through global eyes",
-  "cover": "/assets/journal/snip-style-june.jpg"
- },
- {
-  "slug": "year-of-the-dragon",
-  "url": "/journal/year-of-the-dragon/",
-  "date": "2024-05-20",
-  "category": "EDITORIAL",
-  "title": "水原希子「Year of the Dragon」でネイルを担当",
-  "title_en": "Nails for Kiko Mizuhara — Year of the Dragon",
-  "cover": "/assets/journal/year-of-the-dragon.jpg"
+  "slug": "ig-60511084",
+  "url": "/journal/ig-60511084/",
+  "date": "2026-02-24",
+  "category": "NEWS",
+  "title": "London Fashion week.  Senior stylist Miki joined Team for @t",
+  "title_en": "",
+  "cover": "/assets/journal/ig-60511084.jpg"
  }
 ]
