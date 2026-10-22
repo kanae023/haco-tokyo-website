@@ -256,13 +256,11 @@ JS = """
   rows.forEach(function(r){ r.addEventListener('scroll',function(){btns(r)},{passive:true});
     r.parentNode.querySelectorAll('.row-btn').forEach(function(b){b.addEventListener('click',function(){
       r.scrollBy({left:(b.classList.contains('next')?1:-1)*r.clientWidth*0.85,behavior:'smooth'})})}); });
-  if(rows.length) layout('ALL');
-  document.querySelectorAll('.press-rail').forEach(function(r){ var w=r.parentNode;
-    function pb(){var p=w.querySelector('.prev'),x=w.querySelector('.next'); if(!p)return; p.disabled=r.scrollLeft<4; x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4;}
-    r.addEventListener('scroll',pb,{passive:true}); pb();
-    w.querySelectorAll('.row-btn').forEach(function(b){b.addEventListener('click',function(){r.scrollBy({left:(b.classList.contains('next')?1:-1)*r.clientWidth*0.85,behavior:'smooth'})})});
-  });
-  })});
+  if(rows.length){
+    var h=decodeURIComponent((location.hash||'').slice(1)).toUpperCase(), hb=null;
+    fb.forEach(function(b){ if(b.dataset.cat===h) hb=b; });
+    if(hb){ hb.click(); } else { layout('ALL'); }
+  }
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('a[data-ev]'); if(!a||typeof gtag!=='function')return;
     gtag('event',a.dataset.ev,{link_url:a.href,page:location.pathname,transport_type:'beacon'});
@@ -507,6 +505,7 @@ def build_feed(posts):
 
 HOME_PAGE = ROOT / "index.html"
 HOME_COUNT = 5   # トップページの Press に出す件数（それ以上は「すべての掲載を見る」へ）
+HOME_TABS = ["ALL", "EDITORIAL", "CAMPAIGN", "SHOW"]   # トップページの Press に出すカテゴリボタン
 
 
 def build_home_press(posts):
@@ -518,11 +517,22 @@ def build_home_press(posts):
     if not m:
         print("index.html: PRESS markers not found, skipped", file=sys.stderr)
         return
+    # 各タブ（ALL と各カテゴリ）の最新 HOME_COUNT 件を集め、1枚のカードにどのタブで出すかを持たせる
+    tabs = [t for t in HOME_TABS if t == "ALL" or any(p["category"] == t for p in posts)]
+    show_in = {}
+    for t in tabs:
+        for p in [q for q in posts if t == "ALL" or q["category"] == t][:HOME_COUNT]:
+            show_in.setdefault(p["slug"], []).append(t)
+    chips = "".join(
+        f'<button type="button" class="hp-tab{" active" if t == "ALL" else ""}" data-tab="{t}">'
+        f'{"All" if t == "ALL" else e(CATEGORIES[t][0])}</button>' for t in tabs)
     cards = []
-    for p in posts[:HOME_COUNT]:
+    for p in [q for q in posts if q["slug"] in show_in]:
         en, ja = CATEGORIES.get(p["category"], (p["category"].title(), p["category"]))
+        tabs_attr = " ".join(show_in[p["slug"]])
+        hidden = "" if "ALL" in show_in[p["slug"]] else " hidden"
         cards.append(f"""
-        <a href="/journal/{p['slug']}/" class="press-card hp-card" data-ev="home_press_click">
+        <a href="/journal/{p['slug']}/" class="press-card hp-card" data-tabs="{tabs_attr}" data-ev="home_press_click"{hidden}>
           <div class="press-card-media hp-media"><img src="{e(p.get('cover'))}" alt="{e(p.get('title'))}" loading="lazy" decoding="async"></div>
           <div class="press-card-info">
             <div class="press-card-meta-row"><span class="press-card-type">{e(en)}</span><span class="press-card-year">{p['date'].strftime('%Y.%m.%d')}</span></div>
@@ -534,6 +544,10 @@ def build_home_press(posts):
       <style>
       #press .section-inner>*{{min-width:0}}
       .hp-wrap{{position:relative}}
+      .hp-tabs{{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem}}
+      .hp-tab{{border:1px solid var(--color-gray-100,#ececec);background:none;padding:.4rem .85rem;font:inherit;font-size:var(--text-xs,.6875rem);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:inherit;transition:all .2s}}
+      .hp-tab.active,.hp-tab:hover{{background:#0a0a0a;color:#fff;border-color:#0a0a0a}}
+      .press-rail .hp-card[hidden]{{display:none}}
       .press-rail{{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}}
       .press-rail::-webkit-scrollbar{{display:none}}
       .press-rail .hp-card{{flex:0 0 clamp(200px,21vw,300px);scroll-snap-align:start}}
@@ -547,10 +561,11 @@ def build_home_press(posts):
       .hp-wrap .row-btn[disabled]{{opacity:0;pointer-events:none}}
       @media(max-width:768px){{.press-rail{{gap:.75rem;margin-right:calc(var(--page-padding,1.5rem)*-1);padding-right:var(--page-padding,1.5rem)}}.press-rail .hp-card,.hp-all{{flex-basis:44vw}}.hp-wrap .row-btn{{display:none}}}}
       </style>
+      <div class="hp-tabs">{chips}</div>
       <div class="hp-wrap">
         <button type="button" class="row-btn prev" aria-label="Previous">←</button>
         <div class="press-rail">{''.join(cards)}
-        <a href="/journal/" class="hp-all" data-ev="home_press_all">
+        <a href="/journal/" class="hp-all" data-base="/journal/" data-ev="home_press_all">
           <span class="hp-all-k">Journal</span>
           <span class="hp-all-h"><span class="jp">すべての掲載を見る →</span><span class="en">View all press →</span></span>
         </a>
@@ -561,6 +576,14 @@ def build_home_press(posts):
       (function(){{var w=document.currentScript.previousElementSibling,r=w.querySelector('.press-rail'),p=w.querySelector('.prev'),x=w.querySelector('.next');
         function u(){{p.disabled=r.scrollLeft<4;x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4}}
         r.addEventListener('scroll',u,{{passive:true}});window.addEventListener('resize',u);u();
+        var all=w.querySelector('.hp-all');
+        document.querySelectorAll('.hp-tab').forEach(function(b){{b.addEventListener('click',function(){{
+          var t=b.dataset.tab;
+          document.querySelectorAll('.hp-tab').forEach(function(x){{x.classList.toggle('active',x===b)}});
+          r.querySelectorAll('.hp-card').forEach(function(c){{c.hidden=(' '+c.dataset.tabs+' ').indexOf(' '+t+' ')<0;if(!c.hidden)c.classList.add('visible')}});
+          if(all) all.href=all.dataset.base+(t==='ALL'?'':'#'+t);
+          r.scrollLeft=0;u();
+        }})}});
         [p,x].forEach(function(b){{b.addEventListener('click',function(){{r.scrollBy({{left:(b===x?1:-1)*r.clientWidth*0.85,behavior:'smooth'}})}})}});
       }})();
       </script>
