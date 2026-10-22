@@ -63,6 +63,15 @@
   "cover": "/assets/journal/ig-17680444.jpg"
  },
  {
+  "slug": "teen-vogue-cover",
+  "url": "/journal/teen-vogue-cover/",
+  "date": "2025-03-20",
+  "category": "EDITORIAL",
+  "title": "Teen Vogue カバー ― Make-up by Take／Nail by Kurumi",
+  "title_en": "Teen Vogue cover — Make-up by Take / Nail by Kurumi",
+  "cover": "/assets/press/teen-vogue.jpg"
+ },
+ {
   "slug": "jun-yasui-zine",
   "url": "/journal/jun-yasui-zine/",
   "date": "2024-09-18",
@@ -97,14 +106,5 @@
   "title": "渋谷PARCO ビジュアルでメイクを担当",
   "title_en": "Make-up for Shibuya PARCO",
   "cover": "/assets/journal/shibuya-parco.jpg"
- },
- {
-  "slug": "request-qj-wataro",
-  "url": "/journal/request-qj-wataro/",
-  "date": "2024-05-20",
-  "category": "EDITORIAL",
-  "title": "Request QJ にアートディレクター Wataro のインタビューが掲載",
-  "title_en": "Request QJ interviews art director Wataro",
-  "cover": "/assets/journal/request-qj-wataro.jpg"
  }
 ]
