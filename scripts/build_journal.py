@@ -53,16 +53,24 @@ INSTAGRAM_URL = "https://www.instagram.com/hacohairnailstokyo/"
 GA_ID = "G-HB3T4GK5S1"
 
 CATEGORIES = {
-    "EDITORIAL": ("Editorial", "誌面・撮影"),
-    "CAMPAIGN": ("Campaign", "広告・コラボ"),
+    "BEAUTY": ("Beauty", "美容誌・メーカー"),
+    "FASHION": ("Fashion", "雑誌・キャンペーン"),
     "SHOW": ("Show / Event", "ショー・イベント・講師"),
     "NEWS": ("News", "お知らせ"),
 }
 # 以前のカテゴリ名は自動でまとめます（記事ファイルを書き換える必要はありません）
 CATEGORY_ALIASES = {
-    "INTERVIEW": "EDITORIAL",
-    "PRODUCT": "CAMPAIGN",
+    "EDITORIAL": "FASHION", "CAMPAIGN": "FASHION",
+    "INTERVIEW": "BEAUTY", "PRODUCT": "NEWS",
     "EVENT": "SHOW", "EDUCATION": "SHOW", "GLOBAL": "SHOW",
+}
+# 旧カテゴリのままの過去記事を、記事ごとに振り分け（記事ファイルで新カテゴリを指定すればそちらが優先）
+LEGACY_BY_SLUG = {
+    "wataro-hairmode-cover": "BEAUTY", "makoto-choki-choki": "BEAUTY", "makoto-preppy": "BEAUTY",
+    "snip-style-june": "BEAUTY", "kajikaji-h-02": "BEAUTY", "request-qj-teiji": "BEAUTY",
+    "request-qj-wataro": "BEAUTY", "wwd-beauty": "BEAUTY", "schwarzkopf-fibreplex": "BEAUTY",
+    "joi-czczh-editors": "BEAUTY",
+    "instant-icon-launch": "NEWS", "instant-icon-vogue-japan": "FASHION", "jun-yasui-zine": "FASHION",
 }
 
 # スタッフ情報：記事の staff に名前を入れると、写真・肩書き・予約リンクが出ます
@@ -93,6 +101,15 @@ e = lambda s: html.escape(str(s or ""), quote=True)
 # ======================================================================
 # Parsing
 # ======================================================================
+def resolve_category(meta, slug):
+    raw = str(meta.get("category", "NEWS")).upper()
+    if raw in CATEGORIES:
+        return raw
+    if slug in LEGACY_BY_SLUG:
+        return LEGACY_BY_SLUG[slug]
+    return CATEGORY_ALIASES.get(raw, "NEWS")
+
+
 def load_posts():
     posts = []
     for f in sorted(POSTS_DIR.glob("*.md")):
@@ -115,7 +132,7 @@ def load_posts():
             **meta,
             "slug": slug,
             "date": d,
-            "category": CATEGORY_ALIASES.get(str(meta.get("category", "NEWS")).upper(), str(meta.get("category", "NEWS")).upper()),
+            "category": resolve_category(meta, slug),
             "staff": meta.get("staff") or [],
             "credits": meta.get("credits") or [],
             "images": meta.get("images") or [],
@@ -505,7 +522,7 @@ def build_feed(posts):
 
 HOME_PAGE = ROOT / "index.html"
 HOME_COUNT = 5   # トップページの Press に出す件数（それ以上は「すべての掲載を見る」へ）
-HOME_TABS = ["ALL", "EDITORIAL", "CAMPAIGN", "SHOW"]   # トップページの Press に出すカテゴリボタン
+HOME_TABS = ["ALL", "BEAUTY", "FASHION", "SHOW", "NEWS"]   # トップページの Press に出すカテゴリボタン
 
 
 def build_home_press(posts):
