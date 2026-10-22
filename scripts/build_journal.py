@@ -85,7 +85,6 @@ STAFF = {
     "Nova":   {"role": "Stylist", "role_ja": "スタイリスト", "photo": "/assets/staff/nova.jpg", "url": "/stylists/#nova", "booking": "https://stekina.com/reserve/6FKL-A2J8/menu"},
     "Shiho":  {"role": "Stylist", "role_ja": "スタイリスト", "photo": "/assets/staff/shiho.jpg", "url": "https://www.instagram.com/siehoh/", "booking": "https://stekina.com/reserve/7XML-A2KU/menu"},
     "Miina":  {"role": "Jr Stylist", "role_ja": "ジュニアスタイリスト", "photo": "/assets/staff/miina.jpg", "url": "/stylists/#miina", "booking": "https://stekina.com/reserve/QGBZ-7ATZ/menu"},
-    "Moe":    {"role": "Assistant", "role_ja": "アシスタント", "photo": "/assets/staff/moe.jpg", "url": "https://www.instagram.com/mimg__e/"},
     "Yaya":   {"role": "Assistant", "role_ja": "アシスタント", "photo": "/assets/staff/yaya.jpg", "url": "https://www.instagram.com/xx_888y/"},
     "Kaito":  {"role": "Assistant", "role_ja": "アシスタント", "photo": "/assets/staff/kaito.jpg", "url": "https://www.instagram.com/ohnishi_kaito/"},
     "Shun":   {"role": "Stylist, HACO London", "role_ja": "スタイリスト（ロンドン店）", "photo": None, "url": None},
