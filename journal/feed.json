@@ -18,6 +18,15 @@
   "cover": "/assets/journal/ig-30396475.jpg"
  },
  {
+  "slug": "vogue-netherlands",
+  "url": "/journal/vogue-netherlands/",
+  "date": "2026-02-19",
+  "category": "EDITORIAL",
+  "title": "Vogue Netherlands ― Haco Management",
+  "title_en": "Vogue Netherlands — Haco Management",
+  "cover": "/assets/press/vogue-netherlands.jpg"
+ },
+ {
   "slug": "schwarzkopf-fibreplex",
   "url": "/journal/schwarzkopf-fibreplex/",
   "date": "2026-01-25",
@@ -97,14 +106,5 @@
   "title": "水原希子「Year of the Dragon」でネイルを担当",
   "title_en": "Nails for Kiko Mizuhara — Year of the Dragon",
   "cover": "/assets/journal/year-of-the-dragon.jpg"
- },
- {
-  "slug": "shibuya-parco",
-  "url": "/journal/shibuya-parco/",
-  "date": "2024-05-20",
-  "category": "CAMPAIGN",
-  "title": "渋谷PARCO ビジュアルでメイクを担当",
-  "title_en": "Make-up for Shibuya PARCO",
-  "cover": "/assets/journal/shibuya-parco.jpg"
  }
 ]
