@@ -1783,6 +1783,10 @@ behold-widget {
       <style>
       #press .section-inner>*{min-width:0}
       .hp-wrap{position:relative}
+      .hp-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem}
+      .hp-tab{border:1px solid var(--color-gray-100,#ececec);background:none;padding:.4rem .85rem;font:inherit;font-size:var(--text-xs,.6875rem);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:inherit;transition:all .2s}
+      .hp-tab.active,.hp-tab:hover{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+      .press-rail .hp-card[hidden]{display:none}
       .press-rail{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
       .press-rail::-webkit-scrollbar{display:none}
       .press-rail .hp-card{flex:0 0 clamp(200px,21vw,300px);scroll-snap-align:start}
@@ -1796,45 +1800,116 @@ behold-widget {
       .hp-wrap .row-btn[disabled]{opacity:0;pointer-events:none}
       @media(max-width:768px){.press-rail{gap:.75rem;margin-right:calc(var(--page-padding,1.5rem)*-1);padding-right:var(--page-padding,1.5rem)}.press-rail .hp-card,.hp-all{flex-basis:44vw}.hp-wrap .row-btn{display:none}}
       </style>
+      <div class="hp-tabs"><button type="button" class="hp-tab active" data-tab="ALL">All</button><button type="button" class="hp-tab" data-tab="EDITORIAL">Editorial</button><button type="button" class="hp-tab" data-tab="CAMPAIGN">Campaign</button><button type="button" class="hp-tab" data-tab="SHOW">Show / Event</button></div>
       <div class="hp-wrap">
         <button type="button" class="row-btn prev" aria-label="Previous">←</button>
         <div class="press-rail">
-        <a href="/journal/mfw-mm6-miki/" class="press-card hp-card" data-ev="home_press_click">
+        <a href="/journal/mfw-mm6-miki/" class="press-card hp-card" data-tabs="ALL SHOW" data-ev="home_press_click">
           <div class="press-card-media hp-media"><img src="/assets/journal/ig-51874854.jpg" alt="Milan Fashion Week ― MM6 Maison Margiela／Hair: Miki" loading="lazy" decoding="async"></div>
           <div class="press-card-info">
             <div class="press-card-meta-row"><span class="press-card-type">Show / Event</span><span class="press-card-year">2026.10.08</span></div>
             <span class="press-card-title"><span class="jp">Milan Fashion Week ― MM6 Maison Margiela／Hair: Miki</span><span class="en">Milan Fashion Week — MM6 Maison Margiela / Hair: Miki</span></span>
           </div>
         </a>
-        <a href="/journal/pfw-maison-margiela/" class="press-card hp-card" data-ev="home_press_click">
+        <a href="/journal/pfw-maison-margiela/" class="press-card hp-card" data-tabs="ALL SHOW" data-ev="home_press_click">
           <div class="press-card-media hp-media"><img src="/assets/journal/ig-57261904.jpg" alt="Paris Fashion Week ― Maison Margiela／Hair: Kenta, Miki" loading="lazy" decoding="async"></div>
           <div class="press-card-info">
             <div class="press-card-meta-row"><span class="press-card-type">Show / Event</span><span class="press-card-year">2026.10.01</span></div>
             <span class="press-card-title"><span class="jp">Paris Fashion Week ― Maison Margiela／Hair: Kenta, Miki</span><span class="en">Paris Fashion Week — Maison Margiela / Hair: Kenta, Miki</span></span>
           </div>
         </a>
-        <a href="/journal/lfw-chopova-lowena/" class="press-card hp-card" data-ev="home_press_click">
+        <a href="/journal/lfw-chopova-lowena/" class="press-card hp-card" data-tabs="ALL SHOW" data-ev="home_press_click">
           <div class="press-card-media hp-media"><img src="/assets/journal/ig-03200616.jpg" alt="London Fashion Week ― Chopova Lowena／Hair: Miki, Wataro" loading="lazy" decoding="async"></div>
           <div class="press-card-info">
             <div class="press-card-meta-row"><span class="press-card-type">Show / Event</span><span class="press-card-year">2026.09.23</span></div>
             <span class="press-card-title"><span class="jp">London Fashion Week ― Chopova Lowena／Hair: Miki, Wataro</span><span class="en">London Fashion Week — Chopova Lowena / Hair: Miki, Wataro</span></span>
           </div>
         </a>
-        <a href="/journal/lfw-toga-miki-ss/" class="press-card hp-card" data-ev="home_press_click">
+        <a href="/journal/lfw-toga-miki-ss/" class="press-card hp-card" data-tabs="ALL SHOW" data-ev="home_press_click">
           <div class="press-card-media hp-media"><img src="/assets/journal/ig-89634856.jpg" alt="London Fashion Week ― TOGA／Hair: Miki" loading="lazy" decoding="async"></div>
           <div class="press-card-info">
             <div class="press-card-meta-row"><span class="press-card-type">Show / Event</span><span class="press-card-year">2026.09.22</span></div>
             <span class="press-card-title"><span class="jp">London Fashion Week ― TOGA／Hair: Miki</span><span class="en">London Fashion Week — TOGA / Hair: Miki</span></span>
           </div>
         </a>
-        <a href="/journal/lfw-mulberry-miki/" class="press-card hp-card" data-ev="home_press_click">
+        <a href="/journal/lfw-mulberry-miki/" class="press-card hp-card" data-tabs="ALL SHOW" data-ev="home_press_click">
           <div class="press-card-media hp-media"><img src="/assets/journal/ig-08684256.jpg" alt="London Fashion Week ― Mulberry／Hair: Miki" loading="lazy" decoding="async"></div>
           <div class="press-card-info">
             <div class="press-card-meta-row"><span class="press-card-type">Show / Event</span><span class="press-card-year">2026.09.21</span></div>
             <span class="press-card-title"><span class="jp">London Fashion Week ― Mulberry／Hair: Miki</span><span class="en">London Fashion Week — Mulberry / Hair: Miki</span></span>
           </div>
         </a>
-        <a href="/journal/" class="hp-all" data-ev="home_press_all">
+        <a href="/journal/wataro-hairmode-cover/" class="press-card hp-card" data-tabs="EDITORIAL" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-30396475.jpg" alt="HAIR MODE カバー ― Hair by Wataro" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2026.05.27</span></div>
+            <span class="press-card-title"><span class="jp">HAIR MODE カバー ― Hair by Wataro</span><span class="en">HAIR MODE cover — Hair by Wataro</span></span>
+          </div>
+        </a>
+        <a href="/journal/vogue-netherlands/" class="press-card hp-card" data-tabs="EDITORIAL" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/press/vogue-netherlands.jpg" alt="Vogue Netherlands ― Manager Kanae（Haco Management）" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2026.02.19</span></div>
+            <span class="press-card-title"><span class="jp">Vogue Netherlands ― Manager Kanae（Haco Management）</span><span class="en">Vogue Netherlands — Manager Kanae (Haco Management)</span></span>
+          </div>
+        </a>
+        <a href="/journal/schwarzkopf-fibreplex/" class="press-card hp-card" data-tabs="CAMPAIGN" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-03865876.jpg" alt="Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Campaign</span><span class="press-card-year">2026.01.25</span></div>
+            <span class="press-card-title"><span class="jp">Schwarzkopf Professional「FIBREPLEX」― Hair by Makoto &amp; Rena</span><span class="en">Schwarzkopf Professional FIBREPLEX — Hair by Makoto &amp; Rena</span></span>
+          </div>
+        </a>
+        <a href="/journal/makoto-preppy/" class="press-card hp-card" data-tabs="EDITORIAL" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-87639125.jpg" alt="PREPPY ― Hair by Makoto" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2026.01.02</span></div>
+            <span class="press-card-title"><span class="jp">PREPPY ― Hair by Makoto</span><span class="en">PREPPY — Hair by Makoto</span></span>
+          </div>
+        </a>
+        <a href="/journal/makoto-choki-choki/" class="press-card hp-card" data-tabs="EDITORIAL" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-33187665.jpg" alt="CHOKi CHOKi ― Hair by Makoto" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2025.09.09</span></div>
+            <span class="press-card-title"><span class="jp">CHOKi CHOKi ― Hair by Makoto</span><span class="en">CHOKi CHOKi — Hair by Makoto</span></span>
+          </div>
+        </a>
+        <a href="/journal/joi-czczh-editors/" class="press-card hp-card" data-tabs="EDITORIAL" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/ig-17680444.jpg" alt="Joi、@czczh_editors にて作品掲載" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Editorial</span><span class="press-card-year">2025.08.29</span></div>
+            <span class="press-card-title"><span class="jp">Joi、@czczh_editors にて作品掲載</span><span class="en">Joi, featured by @czczh_editors</span></span>
+          </div>
+        </a>
+        <a href="/journal/shibuya-parco/" class="press-card hp-card" data-tabs="CAMPAIGN" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/shibuya-parco.jpg" alt="渋谷PARCO ビジュアルでメイクを担当" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Campaign</span><span class="press-card-year">2024.05.20</span></div>
+            <span class="press-card-title"><span class="jp">渋谷PARCO ビジュアルでメイクを担当</span><span class="en">Make-up for Shibuya PARCO</span></span>
+          </div>
+        </a>
+        <a href="/journal/instant-icon-vogue-japan/" class="press-card hp-card" data-tabs="CAMPAIGN" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/instant-icon-vogue-japan.jpg" alt="VOGUE JAPAN 4月号の表紙撮影で INSTANT ICON を使用" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Campaign</span><span class="press-card-year">2024.05.20</span></div>
+            <span class="press-card-title"><span class="jp">VOGUE JAPAN 4月号の表紙撮影で INSTANT ICON を使用</span><span class="en">INSTANT ICON on the cover shoot of VOGUE JAPAN April</span></span>
+          </div>
+        </a>
+        <a href="/journal/mulberry/" class="press-card hp-card" data-tabs="CAMPAIGN" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/mulberry.jpg" alt="Mulberry ビジュアルでネイルを担当" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Campaign</span><span class="press-card-year">2024.05.16</span></div>
+            <span class="press-card-title"><span class="jp">Mulberry ビジュアルでネイルを担当</span><span class="en">Nails for Mulberry</span></span>
+          </div>
+        </a>
+        <a href="/journal/donki-wego/" class="press-card hp-card" data-tabs="CAMPAIGN" data-ev="home_press_click" hidden>
+          <div class="press-card-media hp-media"><img src="/assets/journal/donki-wego.jpg" alt="ドン・キホーテ × WEGO ビジュアルでヘアを担当" loading="lazy" decoding="async"></div>
+          <div class="press-card-info">
+            <div class="press-card-meta-row"><span class="press-card-type">Campaign</span><span class="press-card-year">2024.05.16</span></div>
+            <span class="press-card-title"><span class="jp">ドン・キホーテ × WEGO ビジュアルでヘアを担当</span><span class="en">Hair for Don Quijote × WEGO</span></span>
+          </div>
+        </a>
+        <a href="/journal/" class="hp-all" data-base="/journal/" data-ev="home_press_all">
           <span class="hp-all-k">Journal</span>
           <span class="hp-all-h"><span class="jp">すべての掲載を見る →</span><span class="en">View all press →</span></span>
         </a>
@@ -1845,6 +1920,14 @@ behold-widget {
       (function(){var w=document.currentScript.previousElementSibling,r=w.querySelector('.press-rail'),p=w.querySelector('.prev'),x=w.querySelector('.next');
         function u(){p.disabled=r.scrollLeft<4;x.disabled=r.scrollLeft+r.clientWidth>=r.scrollWidth-4}
         r.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();
+        var all=w.querySelector('.hp-all');
+        document.querySelectorAll('.hp-tab').forEach(function(b){b.addEventListener('click',function(){
+          var t=b.dataset.tab;
+          document.querySelectorAll('.hp-tab').forEach(function(x){x.classList.toggle('active',x===b)});
+          r.querySelectorAll('.hp-card').forEach(function(c){c.hidden=(' '+c.dataset.tabs+' ').indexOf(' '+t+' ')<0;if(!c.hidden)c.classList.add('visible')});
+          if(all) all.href=all.dataset.base+(t==='ALL'?'':'#'+t);
+          r.scrollLeft=0;u();
+        })});
         [p,x].forEach(function(b){b.addEventListener('click',function(){r.scrollBy({left:(b===x?1:-1)*r.clientWidth*0.85,behavior:'smooth'})})});
       })();
       </script>
