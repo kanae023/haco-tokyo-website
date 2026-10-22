@@ -4,7 +4,7 @@ name: Instagram → Journal
 
 on:
   schedule:
-    - cron: "47 20 * * *"→ Runs at 20:47   # UTC 20:47 = JST 5:47
+    - cron: "47 20 * * *"   # UTC 20:47 = JST 5:47
   workflow_dispatch: {}      # Actions タブから手動実行も可能
 
 permissions:
@@ -35,3 +35,24 @@ jobs:
         run: |
           {
             echo 'body<<EOF'
+            cat "${{ runner.temp }}/report.md" 2>/dev/null || true
+            echo
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: journal/instagram-sync
+          delete-branch: true
+          commit-message: "Journal: Instagramから新しい記事を追加"
+          title: "Journal：新しい記事の確認をお願いします"
+          body: |
+            Instagram の #hacojournal 投稿から記事を作成しました。
+
+            ${{ steps.report.outputs.body }}
+
+            **確認のしかた**
+            1. 「Files changed」で `_journal/` の文章を確認（直したい箇所は ✏️ から編集できます）
+            2. 問題なければ「Merge pull request」→ 数分でサイトに公開されます
+            3. 公開したくない場合は「Close pull request」
+          labels: journal
