@@ -14,6 +14,8 @@
 var PIXEL_ID='1328304228377935';
 if(PIXEL_ID){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',PIXEL_ID);fbq('track','PageView');}
 </script>
+<!-- OpenAI Ads (ChatGPT) Pixel -->
+<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"RCJwjQFimdKceb2VAW7F2z",debug:true});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
@@ -122,15 +124,11 @@ footer{padding:0 18px 28px;display:flex;justify-content:space-between;align-item
 footer img{width:36px;height:36px}
 footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:var(--mute)}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
-.ring.omk{background:var(--ink)}
-.ring.omk span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;border:2.5px solid var(--paper);background:var(--ink);color:#fff;font-family:var(--f-jp);font-weight:700;font-size:9.5px;letter-spacing:0;line-height:1.2;text-align:center;white-space:nowrap}
-.ring.big.omk span{border-width:3px;font-size:14px}
-.omakase .tags span{background:var(--ink);border-color:var(--ink);color:#fff}
-.omakase-end{background:var(--paper);margin:0 0 8px;padding:30px 18px 32px;text-align:center}
-.omakase-end .en{font-family:var(--f-en);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--mute)}
-.omakase-end h2{font-size:18px;line-height:1.5;margin:4px 0 0}
-.omakase-end p{font-size:13px;color:var(--text);margin:6px 0 16px}
-.omakase-end .quick{display:inline-block;padding:10px 28px}
+.free-top{margin-top:16px}
+.free{margin:8px 18px 32px;padding:24px 18px;border-radius:20px;background:var(--tint);text-align:center}
+.free .en{font-family:var(--f-en);font-size:11px;letter-spacing:.2em;color:var(--mute)}
+.free h2{margin:6px 0 8px;font-size:19px}
+.free p{margin:0 0 16px;font-size:13px;color:var(--mute);line-height:1.7}
 </style>
 </head>
 <body>
@@ -140,10 +138,10 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
   <div class="intro">
     <span class="en">STYLISTS</span>
     <h1>好きなスタイルから、<br>担当を選んで予約。</h1>
-    <p>スタイリストをタップすると、その人の作品へ移動します。誰にするか迷ったら「おまかせ」で予約できます。</p>
+    <p>スタイリストをタップすると、その人の作品へ移動します。</p>
+    <a class="btn sub cta free-top" data-staff="FREE" data-dest="stekina" href="https://stekina.com/reserve/F6LV-XR8K/menu" target="_blank" rel="noopener">指名なし（フリー）で予約する</a>
   </div>
   <nav class="stories-bar" aria-label="スタイリスト一覧"><div class="stories">
-<a class="story" href="#omakase"><span class="ring omk"><span>おまかせ</span></span><span class="sname">FREE</span></a>
 <a class="story" href="#ibuki"><span class="ring"><img src="images/av_ibuki.jpg" alt="" width="200" height="200"></span><span class="sname">IBUKI</span></a>
 <a class="story" href="#makoto"><span class="ring"><img src="images/av_makoto.jpg" alt="" width="200" height="200"></span><span class="sname">MAKOTO</span></a>
 <a class="story" href="#leo"><span class="ring"><img src="images/av_leo.jpg" alt="" width="200" height="200"></span><span class="sname">LEO</span></a>
@@ -152,22 +150,6 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
 <a class="story" href="#nova"><span class="ring"><img src="images/av_nova.jpg" alt="" width="200" height="200"></span><span class="sname">NOVA</span></a>
 <a class="story" href="#miina"><span class="ring"><img src="images/av_miina.jpg" alt="" width="200" height="200"></span><span class="sname">MIINA</span></a>
   </div></nav>
-
-    <section class="staff omakase" id="omakase">
-      <div class="wrap">
-        <div class="profile">
-          <span class="ring big omk"><span>おまかせ</span></span>
-          <div class="pinfo">
-            <span class="idx">FOR FIRST VISIT</span>
-            <h2>おまかせ</h2>
-            <span class="role">No preference</span>
-          </div>
-          <a class="quick cta" data-staff="OMAKASE" data-dest="stekina" href="https://stekina.com/reserve/F6LV-XR8K/menu" target="_blank" rel="noopener">予約</a>
-        </div>
-        <div class="tags"><span>初めての方</span><span>担当に迷ったら</span></div>
-        <p class="pitch">誰にお願いするか迷ったら、おまかせで予約を。ご希望のメニューと日時に合わせて、サロンが担当スタイリストを決めます。</p>
-      </div>
-    </section>
 
     <section class="staff" id="ibuki">
       <div class="wrap">
@@ -745,6 +727,12 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
         
       </div>
     </section>
+  <section class="free">
+    <span class="en">FREE</span>
+    <h2>担当はおまかせでもOK</h2>
+    <p>指名なしでも、ご希望のスタイルに合うスタイリストが担当します。</p>
+    <a class="btn cta" data-staff="FREE" data-dest="stekina" href="https://stekina.com/reserve/F6LV-XR8K/menu" target="_blank" rel="noopener">指名なし（フリー）で予約する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </section>
   <section class="info">
     <span class="en">ACCESS</span>
     <h2>HACO+ 表参道／渋谷</h2>
@@ -756,18 +744,13 @@ footer span{font-family:var(--f-en);font-size:10px;letter-spacing:.14em;color:va
     </dl>
     <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%8D%97%E9%9D%92%E5%B1%B16-13-9" target="_blank" rel="noopener">Googleマップで見る →</a>
   </section>
-  <section class="omakase-end">
-    <span class="en">STILL DECIDING?</span>
-    <h2>迷ったら、おまかせで。</h2>
-    <p>担当はサロンが決めます。初めての方もお気軽に。</p>
-    <a class="quick cta" data-staff="OMAKASE" data-dest="stekina" href="https://stekina.com/reserve/F6LV-XR8K/menu" target="_blank" rel="noopener">おまかせで予約</a>
-  </section>
   <footer><img src="images/logo.png" alt="HACO+" width="36" height="36"><span>© HACO Group Co Ltd.</span></footer>
 </div>
 <script>
 document.querySelectorAll('.cta').forEach(function(a){
   a.addEventListener('click',function(){
     if(typeof window.gtag==='function'){window.gtag('event','book_click',{stylist:a.dataset.staff,link_url:a.href,transport_type:'beacon'});}
+    if(typeof window.oaiq==='function'){try{window.oaiq('measure','lead_created',{type:'customer_action'});}catch(e){}}
     if(typeof window.fbq!=='function')return;
     var id=(a.dataset.staff||'').toLowerCase(),orig=location.pathname+location.search+location.hash;
     try{history.replaceState(null,'',location.pathname+'?book='+id+location.hash);}catch(e){}
